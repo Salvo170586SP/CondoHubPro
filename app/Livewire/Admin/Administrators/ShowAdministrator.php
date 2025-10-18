@@ -15,14 +15,14 @@ class ShowAdministrator extends Component
     public $phone_number = '';
     public $img_user = null;
  
-    public function mount(User $administrator)
+    /* public function mount(User $administrator)
     {
         $this->administrator = $administrator;
         $this->name = $administrator->name;
         $this->surname = $administrator->surname;
         $this->phone_number = $administrator->phone_number;
         $this->img_user = $administrator->img_user;
-    }
+    } */
 
     public function render()
     {

@@ -83,6 +83,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Apartment::class, 'resident_id');
     }
+    
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 
     public function getDate($date)
     {
@@ -98,4 +103,5 @@ class User extends Authenticatable
             'UTF-8'
         );
     }
+    
 }

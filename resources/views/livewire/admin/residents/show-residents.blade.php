@@ -52,34 +52,56 @@
                             <div class="grid grid-cols-3">
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Nome Appartamento:</div>
-                                    {{ $resident->apartment->name ? $resident->apartment->name : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->name }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Piano:</div>
-                                    {{ $resident->apartment->floor ? $resident->apartment->floor : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->floor }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Interno:</div>
-                                    {{ $resident->apartment->unit_number ? $resident->apartment->unit_number : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->unit_number }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                             </div>
                             <div class="grid grid-cols-3">
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Metri Quadri:</div>
-                                    {{ $resident->apartment->square_metres ? $resident->apartment->square_metres : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->square_metres }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Numero Vani:</div>
-                                    {{ $resident->apartment->rooms ? $resident->apartment->rooms : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->rooms }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Data Creazione:</div>
-                                    {{ $resident->apartment->getDate($resident->created_at) }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->getDate($resident->created_at) }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -90,34 +112,56 @@
                             <div class="grid grid-cols-3">
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Nome Condominio:</div>
-                                    {{ $resident->apartment ? $resident->apartment->condominium->name : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->condominium->name }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Amministratore</div>
-                                    {{ $resident->apartment ? $resident->apartment->condominium->administrator->name . ' ' . $resident->apartment->condominium->administrator->surname : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->condominium->administrator->name . ' ' . $resident->apartment->condominium->administrator->surname }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Città:</div>
-                                    {{ $resident->apartment ? $resident->apartment->condominium->city->name_city : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->condominium->city->name_city }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                             </div>
                             <div class="grid grid-cols-3">
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Indirizzo:</div>
-                                    {{ $resident->apartment ? $resident->apartment->condominium->address : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->condominium->address }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Cap:</div>
-                                    {{ $resident->apartment ? $resident->apartment->condominium->cap : '-' }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->condominium->cap }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Data Creazione:</div>
-                                    {{ $resident->apartment->condominium->getDate($resident->apartment->condominium->created_at) }}
+                                    @isset($resident->apartment)
+                                        {{ $resident->apartment->condominium->getDate($resident->apartment->condominium->created_at) }}
+                                    @else
+                                        -
+                                    @endisset
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>

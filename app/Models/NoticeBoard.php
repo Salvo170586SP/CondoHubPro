@@ -12,7 +12,8 @@ class NoticeBoard extends Model
         'title',
         'description',
         'type',
-        'created_by'
+        'created_by',
+        'url_pdf'
     ];
 
     public function condominium()

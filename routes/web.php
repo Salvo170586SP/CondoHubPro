@@ -12,6 +12,8 @@ use App\Livewire\Admin\Cities\IndexCities;
 use App\Livewire\Admin\Condominiums\CreateCondominiums;
 use App\Livewire\Admin\Condominiums\EditCondominium;
 use App\Livewire\Admin\Condominiums\IndexCondominiums;
+use App\Livewire\Admin\Condominiums\ShowCondominium;
+use App\Livewire\Admin\NoticesBoard\FavoriteNotices;
 use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
 use App\Livewire\Admin\Residents\IndexResidents;
@@ -36,25 +38,26 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/administrators/create', CreateAdministrators::class)->name('amministrators.create');
     Route::get('/administrators/{administrator}/edit', EditAdministrator::class)->name('amministrators.edit');
     Route::get('/administrators/{administrator}/show', ShowAdministrator::class)->name('amministrators.show');
-    
+
     /* RESIDENTI */
     Route::get('/residents', IndexResidents::class)->name('residents');
     Route::get('/residents/create', CreateResidents::class)->name('residents.create');
     Route::get('/residents/{resident}/edit', EditResidents::class)->name('residents.edit');
     Route::get('/residents/{resident}/show', ShowResidents::class)->name('residents.show');
- 
+
 
     /* CONDOMINI */
     Route::get('/condominiums', IndexCondominiums::class)->name('condominiums');
     Route::get('/condominiums/create', CreateCondominiums::class)->name('condominiums.create');
     Route::get('/condominiums/{condominium}/edit', EditCondominium::class)->name('condominiums.edit');
-    
+    Route::get('/condominiums/{condominium}/show', ShowCondominium::class)->name('condominiums.show');
+
     /* APPARTAMENTI */
     Route::get('/apartments', IndexApartments::class)->name('apartments');
     Route::get('/apartments/create', CreateApartments::class)->name('apartments.create');
     Route::get('/apartments/{apartment}/edit', EditApartments::class)->name('apartments.edit');
-  /*   Route::get('/apartments/{apartment}/show', ShowApartments::class)->name('apartments.show'); */
-   
+    /*   Route::get('/apartments/{apartment}/show', ShowApartments::class)->name('apartments.show'); */
+
     Route::redirect('settings', 'settings/profile');
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
     Volt::route('settings/password', 'settings.password')->name('password.edit');
@@ -72,4 +75,4 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('two-factor.show');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

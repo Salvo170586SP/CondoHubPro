@@ -67,14 +67,18 @@
                                         {{ $resident->email }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        @if ($resident->apartment->condominium)
+                                        @isset ($resident->apartment->condominium)
                                             {{ $resident->apartment->condominium->name }}
                                         @else
                                             -
-                                        @endif
+                                        @endisset
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        @isset($resident->apartment->condominium)
                                         {{ $resident->apartment->name }}
+                                        @else
+                                            -
+                                        @endisset
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         {{ $resident->getDate($resident->created_at) }}

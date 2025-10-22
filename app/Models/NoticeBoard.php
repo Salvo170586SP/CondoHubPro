@@ -13,6 +13,8 @@ class NoticeBoard extends Model
         'description',
         'type',
         'created_by',
+        'is_active',
+        'is_important',
         'url_pdf'
     ];
 

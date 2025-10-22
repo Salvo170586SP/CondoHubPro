@@ -3,15 +3,18 @@
 namespace App\Livewire\Admin\Apartments;
 
 use App\Models\Apartment;
+use App\Models\Condominium;
 use Livewire\Component;
 
 class DeleteApartments extends Component
 {
+    public Condominium $condominium;
     public Apartment $apartment;
 
-    public function mount(Apartment $apartment)
+    public function mount(Apartment $apartment, Condominium $condominium)
     {
         $this->apartment =  $apartment;
+        $this->condominium =  $condominium;
     }
 
     public function deleteApartment()
@@ -21,11 +24,13 @@ class DeleteApartments extends Component
                 $this->apartment->delete();
             }
 
-            session()->flash('message', 'Elemento eliminato con successo!');
-            return $this->redirect('/apartments', navigate: true);
+            $condominium_id = $this->condominium->id;
+            session()->flash('messageApartment', 'Elemento eliminato con successo!');
+            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
-            session()->flash('message', 'Errore di eliminazione. Riprova.');
-            return $this->redirect('/apartments', navigate: true);
+            $condominium_id = $this->condominium->id;
+            session()->flash('errorApartment', 'Errore di eliminazione. Riprova.');
+            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
         }
     }
     public function render()

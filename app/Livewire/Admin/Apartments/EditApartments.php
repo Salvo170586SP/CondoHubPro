@@ -10,24 +10,24 @@ use Livewire\Component;
 class EditApartments extends Component
 {
     public Apartment $apartment;
+    public Condominium $condominium;
     public $name = '';
     public $unit_number = '';
     public $floor = '';
     public $square_metres;
     public $rooms;
     public $resident_id;
-    public $condominium_id;
 
-    public function mount(Apartment $apartment)
+    public function mount(Apartment $apartment, Condominium $condominium)
     {
         $this->apartment = $apartment;
+        $this->condominium = $condominium;
         $this->name = $apartment->name;
         $this->unit_number = $apartment->unit_number;
         $this->floor = $apartment->floor;
         $this->square_metres = $apartment->square_metres;
         $this->rooms = $apartment->rooms;
         $this->resident_id = $apartment->resident_id;
-        $this->condominium_id = $apartment->condominium_id;
     }
 
     public function submit()
@@ -38,7 +38,6 @@ class EditApartments extends Component
             'floor' => 'required|string',
             'square_metres' => 'required|numeric',
             'rooms' => 'required|numeric',
-            'condominium_id' => 'required',
             'resident_id' => 'nullable',
         ], [
             'name.required' => 'il campo è obbligatorio',
@@ -48,12 +47,10 @@ class EditApartments extends Component
             'square_metres.numeric' => 'il campo può contenere solo numeri',
             'rooms.required' => 'il campo è obbligatorio',
             'rooms.numeric' => 'il campo può contenere solo numeri',
-            'condominium_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {
             $this->apartment->update([
-                'condominium_id' => $this->condominium_id,
                 'resident_id' => $this->resident_id,
                 'name' => $this->name,
                 'floor' => $this->floor,
@@ -62,11 +59,13 @@ class EditApartments extends Component
                 'unit_number' => $this->unit_number
             ]);
 
-            session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/apartments', navigate: true);
+            $condominium_id = $this->condominium->id;
+            session()->flash('messageApartment', 'Elemento modificato con successo!');
+            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
-            session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/apartments', navigate: true);
+            $condominium_id = $this->condominium->id;
+            session()->flash('errorApartment', 'Errore di creazione. Riprova.');
+            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
         }
     }
 

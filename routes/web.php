@@ -6,14 +6,11 @@ use App\Livewire\Admin\Administrators\EditAdministrator;
 use App\Livewire\Admin\Administrators\ShowAdministrator;
 use App\Livewire\Admin\Apartments\CreateApartments;
 use App\Livewire\Admin\Apartments\EditApartments;
-use App\Livewire\Admin\Apartments\IndexApartments;
-use App\Livewire\Admin\Apartments\ShowApartments;
 use App\Livewire\Admin\Cities\IndexCities;
 use App\Livewire\Admin\Condominiums\CreateCondominiums;
 use App\Livewire\Admin\Condominiums\EditCondominium;
 use App\Livewire\Admin\Condominiums\IndexCondominiums;
 use App\Livewire\Admin\Condominiums\ShowCondominium;
-use App\Livewire\Admin\NoticesBoard\FavoriteNotices;
 use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
 use App\Livewire\Admin\Residents\IndexResidents;
@@ -45,18 +42,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/residents/{resident}/edit', EditResidents::class)->name('residents.edit');
     Route::get('/residents/{resident}/show', ShowResidents::class)->name('residents.show');
 
-
     /* CONDOMINI */
     Route::get('/condominiums', IndexCondominiums::class)->name('condominiums');
     Route::get('/condominiums/create', CreateCondominiums::class)->name('condominiums.create');
     Route::get('/condominiums/{condominium}/edit', EditCondominium::class)->name('condominiums.edit');
     Route::get('/condominiums/{condominium}/show', ShowCondominium::class)->name('condominiums.show');
-
     /* APPARTAMENTI */
-    Route::get('/apartments', IndexApartments::class)->name('apartments');
-    Route::get('/apartments/create', CreateApartments::class)->name('apartments.create');
-    Route::get('/apartments/{apartment}/edit', EditApartments::class)->name('apartments.edit');
-    /*   Route::get('/apartments/{apartment}/show', ShowApartments::class)->name('apartments.show'); */
+    Route::get('condominiums/{condominium}/apartments/create', CreateApartments::class)->name('condominums.apartments.create');
+    Route::get('condominiums/{condominium}/apartments/{apartment}/edit', EditApartments::class)->name('condominums.apartments.edit');
 
     Route::redirect('settings', 'settings/profile');
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');

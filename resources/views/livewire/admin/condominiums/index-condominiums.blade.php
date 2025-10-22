@@ -65,7 +65,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         @if($condominium->administrator)
-                                        {{ $condominium->administrator->name . $condominium->administrator->surname }}
+                                        {{ $condominium->administrator->getFullName() }}
                                         @else
                                         -
                                         @endif

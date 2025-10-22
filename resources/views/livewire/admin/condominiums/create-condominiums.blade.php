@@ -17,10 +17,17 @@
                 <flux:input wire:model="address" label="Indirizzo" />
                 <flux:input wire:model="cap" label="Cap" />
                 <flux:select wire:model="city_id" label="Città" placeholder="Seleziona una città...">
-                    <flux:select.option>Seleziona una città</flux:select.option>
+                    <flux:select.option>-</flux:select.option>
                     @foreach ($cities as $city)
                         <flux:select.option value="{{ $city->id }}" wire:key="{{ $city->id }}">
                             {{ $city->name_city }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+                <flux:select wire:model="administrator_id" label="Amministratore">
+                    <flux:select.option>-</flux:select.option>
+                    @foreach ($administrators as $administrator)
+                        <flux:select.option value="{{ $administrator->id }}" wire:key="{{ $administrator->id }}">
+                            {{ $administrator->getFullname()}}</flux:select.option>
                     @endforeach
                 </flux:select>
 

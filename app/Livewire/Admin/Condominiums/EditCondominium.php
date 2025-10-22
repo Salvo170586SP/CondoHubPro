@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Condominiums;
 
 use App\Models\City;
 use App\Models\Condominium;
+use App\Models\User;
 use Livewire\Component;
 
 class EditCondominium extends Component
@@ -13,8 +14,8 @@ class EditCondominium extends Component
     public $name = '';
     public $address = '';
     public $cap = '';
-    public $city_id = null;
-    public $administrator_id = null;
+    public $city_id;
+    public $administrator_id;
 
     public function mount(Condominium $condominium)
     {
@@ -23,6 +24,7 @@ class EditCondominium extends Component
         $this->address = $condominium->address;
         $this->cap = $condominium->cap;
         $this->city_id = $condominium->city_id;
+        $this->administrator_id = $condominium->administrator_id;
     }
 
     public function editCondominum()
@@ -32,7 +34,7 @@ class EditCondominium extends Component
             'address' => 'required|min:2|max:50|string',
             'cap' => 'required|numeric',
             'city_id' => 'required',
-            /* 'administrator_id' => 'required', */
+            'administrator_id' => 'required',
         ], [
             'name.required' => 'il campo è obbligatorio',
             'address.required' => 'il campo è obbligatorio',
@@ -42,16 +44,17 @@ class EditCondominium extends Component
             'cap.max' => 'il campo è obbligatorio',
             'cap.numeric' => 'il campo deve contenere numeri',
             'city_id.required' => 'il campo è obbligatorio',
-            /* 'administrator_id.required' => 'il campo è obbligatorio', */
+            'administrator_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {
 
             $this->condominium->update([
+                'administrator_id' => $this->administrator_id,
                 'city_id' => $this->city_id,
                 'name' => $this->name,
                 'address' => $this->address,
-                'cap' => $this->cap
+                'cap' => $this->cap,
             ]);
 
 
@@ -66,6 +69,7 @@ class EditCondominium extends Component
     public function render()
     {
         $cities = City::all();
-        return view('livewire.admin.condominiums.edit-condominium', compact('cities'));
+        $administrators = User::role('amministratore')->get();
+        return view('livewire.admin.condominiums.edit-condominium', compact('cities','administrators'));
     }
 }

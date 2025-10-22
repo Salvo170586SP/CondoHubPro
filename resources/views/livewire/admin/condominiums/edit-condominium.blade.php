@@ -23,6 +23,13 @@
                             {{ $city->name_city }}</flux:select.option>
                     @endforeach
                 </flux:select>
+                <flux:select wire:model="administrator_id" label="Amministratore">
+                    <flux:select.option>-</flux:select.option>
+                    @foreach ($administrators as $administrator)
+                        <flux:select.option value="{{ $administrator->id }}" wire:key="{{ $administrator->id }}">
+                            {{ $administrator->getFullname() }}</flux:select.option>
+                    @endforeach
+                </flux:select>
 
                 <div class="flex justify-end mt-10">
                     <flux:button icon="check" variant="filled" wire:click="editCondominum">

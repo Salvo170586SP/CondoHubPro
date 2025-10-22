@@ -16,6 +16,7 @@ class CreateNotices extends Component
     public $description = '';
     public $type = '';
     public $url_pdf = null;
+    public $is_important = false;
 
     public function submit()
     {
@@ -47,12 +48,13 @@ class CreateNotices extends Component
                 'description' => $this->description,
                 'type' => $this->type,
                 'url_pdf' => $url,
+                'is_important' => $this->is_important,
             ]);
 
-            session()->flash('message', 'Elemento creato con successo!');
+            session()->flash('messageNotice', 'Elemento creato con successo!');
             return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
-            session()->flash('error', 'Errore di creazione. Riprova.');
+            session()->flash('errorNotice', 'Errore di creazione. Riprova.');
             return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
         }
     }

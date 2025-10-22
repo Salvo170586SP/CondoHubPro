@@ -4,7 +4,7 @@ namespace App\Livewire\Admin\Condominiums;
 
 use App\Models\City;
 use App\Models\Condominium;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Livewire\Component;
 
 class CreateCondominiums extends Component
@@ -13,7 +13,7 @@ class CreateCondominiums extends Component
     public $address = '';
     public $cap = '';
     public $city_id = null;
-    public $administrator_id = null;
+    public $administrator_id;
 
     public function submit()
     {
@@ -22,6 +22,7 @@ class CreateCondominiums extends Component
             'address' => 'required|min:2|max:50|string',
             'cap' => 'required|numeric',
             'city_id' => 'required',
+            'administrator_id' => 'required',
         ], [
             'name.required' => 'il campo è obbligatorio',
             'address.required' => 'il campo è obbligatorio',
@@ -31,12 +32,13 @@ class CreateCondominiums extends Component
             'cap.max' => 'il campo è obbligatorio',
             'cap.numeric' => 'il campo deve contenere numeri',
             'city_id.required' => 'il campo è obbligatorio',
+            'administrator_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {
             Condominium::create([
                 'city_id' => $this->city_id,
-                'administrator_id' => Auth::id(),
+                'administrator_id' => $this->administrator_id,
                 'name' => $this->name,
                 'address' => $this->address,
                 'cap' => $this->cap
@@ -53,6 +55,7 @@ class CreateCondominiums extends Component
     public function render()
     {
         $cities = City::all();
-        return view('livewire.admin.condominiums.create-condominiums', compact('cities'));
+        $administrators = User::role('amministratore')->get();
+        return view('livewire.admin.condominiums.create-condominiums', compact('cities','administrators'));
     }
 }

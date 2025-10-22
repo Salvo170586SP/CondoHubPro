@@ -2,10 +2,10 @@
     <div class="w-full h-[30px] my-5">
         @if (!empty($flashMessage))
             <flux:badge color="zinc" class="w-full p-2">{{ $flashMessage }}</flux:badge>
-        @elseif (session('message'))
-            <flux:badge color="zinc" class="w-full p-2">{{ session('message') }}</flux:badge>
-        @elseif(session('error'))
-            <flux:badge color="red" class="w-full p-2">{{ session('error') }}</flux:badge>
+        @elseif (session('messageNotice'))
+            <flux:badge color="zinc" class="w-full p-2">{{ session('messageNotice') }}</flux:badge>
+        @elseif(session('errorNotice'))
+            <flux:badge color="red" class="w-full p-2">{{ session('errorNotice') }}</flux:badge>
         @endif
     </div>
     @if ($noticesBoard->where('is_active', true)->count() > 0)
@@ -30,6 +30,7 @@
                         @endif
                     @endforeach
                 </div>
+
                 <div class="flex items-center gap-2">
                     @if ($notice->url_pdf)
                         <flux:button href="{{ asset('/storage/' . $notice->url_pdf) }}" download icon="arrow-down-tray"
@@ -50,7 +51,11 @@
             </div>
 
             <div class="w-full flex justify-between items-center border-t pt-3">
-                <span class="text-sm">Avviso del {{ $notice->getDate($notice->created_at) }}</span>
+                <div class="w-full flex items-center ">
+                    <span class="text-sm">Avviso del {{ $notice->getDate($notice->created_at) }}</span>
+                    <span
+                        class="inline-block font-semibold text-red-500 px-2 rounded-lg {{-- text-white --}} text-sm capitalize ms-2">{{ $notice->is_important ? 'importante' : null }}</span>
+                </div>
                 <flux:button variant="filled" wire:click="changeActive({{ $notice->id }})"
                     title="Aggiungi ai preferiti">
                     @if (!$notice->is_active)

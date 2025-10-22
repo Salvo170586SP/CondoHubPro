@@ -50,15 +50,39 @@
                 </div>
             </div>
 
-            <div class="w-full p-5 rounded-lg shadow">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-lg font-bold mb-5">Bacheca</h2>
-                    <livewire:admin.noticesBoard.create-notices :condominium_id="$condominium->id" />
+            <div class="w-full space-y-5">
+                <div class="w-full p-5 rounded-lg shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-lg font-bold mb-5 flex items-center">Bacheca <span
+                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $noticesBoardCount }}</span>
+                        </h2>
+                        <livewire:admin.noticesBoard.create-notices :condominium_id="$condominium->id" />
+                    </div>
+                    <livewire:admin.noticesBoard.card-notices :condominium="$condominium" />
                 </div>
-              
-                <livewire:admin.noticesBoard.card-notices :condominium="$condominium" />
-            </div>
 
+                <div class="w-full p-5 rounded-lg shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-lg font-bold mb-5 flex items-center">Appartamenti <span
+                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $apartmentsCount }}</span>
+                        </h2>
+                        <flux:button icon="plus" variant="filled" wire:navigate
+                            href="/condominiums/{{ $condominium->id }}/apartments/create">
+                            Crea
+                        </flux:button>
+                    </div>
+
+                    <div class="w-full h-[30px] my-5">
+                        @if (session('messageApartment'))
+                            <flux:badge color="zinc" class="w-full p-2">{{ session('messageApartment') }}
+                            </flux:badge>
+                        @elseif(session('errorApartment'))
+                            <flux:badge color="red" class="w-full p-2">{{ session('errorApartment') }}</flux:badge>
+                        @endif
+                    </div>
+                    <livewire:admin.condominiums.table-apartments :condominium="$condominium" />
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -2,12 +2,14 @@
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5">
             <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
-            <flux:breadcrumbs.item wire:navigate href="/apartments">Appartamenti</flux:breadcrumbs.item>
-            <flux:breadcrumbs.item>Modifica</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/condominums">Condomini</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/condominiums/{{ $condominium->id }}/show">Dettagli</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item>Modifica Appartamento</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Appartamenti / Modifica</h2>
-            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/apartments">
+            <flux:button icon="arrow-left" variant="filled" wire:navigate
+                href="/condominiums/{{ $condominium->id }}/show">
                 Torna Indietro
             </flux:button>
         </div>
@@ -26,18 +28,11 @@
                 </div>
                 <flux:separator />
                 <div class="w-full grid grid-cols-2 gap-2 mt-5">
-                    <flux:select class="" wire:model="condominium_id" label="Condominio di appartenenza">
-                        <flux:select.option>Seleziona</flux:select.option>
-                        @foreach ($condominiums as $condominium)
-                            <flux:select.option value="{{ $condominium->id }}" wire:key="{{ $condominium->id }}">
-                                {{ $condominium->name }}</flux:select.option>
-                        @endforeach
-                    </flux:select>
-                    <flux:select wire:model="resident_id" label="Condomino">
+                    <flux:select wire:model="resident_id" label="Residente">
                         <flux:select.option>Seleziona</flux:select.option>
                         @foreach ($residents as $resident)
                             <flux:select.option value="{{ $resident->id }}" wire:key="{{ $resident->id }}">
-                                {{ $resident->name .  $resident->surname}}</flux:select.option>
+                                {{ $resident->name . $resident->surname }}</flux:select.option>
                         @endforeach
                     </flux:select>
                 </div>

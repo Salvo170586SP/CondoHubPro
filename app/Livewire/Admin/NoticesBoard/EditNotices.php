@@ -62,10 +62,10 @@ class EditNotices extends Component
                 'url_pdf' => $url,
             ]);
 
-            session()->flash('message', 'Elemento modificato con successo!');
+            session()->flash('messageNotice', 'Elemento modificato con successo!');
             return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
-            session()->flash('error', 'Errore di creazione. Riprova.');
+            session()->flash('errorNotice', 'Errore di creazione. Riprova.');
             return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
         }
     }

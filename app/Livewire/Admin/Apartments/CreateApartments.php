@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class CreateApartments extends Component
 {
+    public Condominium $condominium;
     public $name = '';
     public $unit_number = '';
     public $floor = '';
@@ -25,7 +26,6 @@ class CreateApartments extends Component
             'floor' => 'required|string',
             'square_metres' => 'required|numeric',
             'rooms' => 'required|numeric',
-            'condominium_id' => 'required',
             'resident_id' => 'nullable',
         ], [
             'name.required' => 'il campo è obbligatorio',
@@ -35,12 +35,11 @@ class CreateApartments extends Component
             'square_metres.numeric' => 'il campo può contenere solo numeri',
             'rooms.required' => 'il campo è obbligatorio',
             'rooms.numeric' => 'il campo può contenere solo numeri',
-            'condominium_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {
             Apartment::create([
-                'condominium_id' => $this->condominium_id,
+                'condominium_id' => $this->condominium->id,
                 'resident_id' => $this->resident_id,
                 'name' => $this->name,
                 'floor' => $this->floor,
@@ -49,11 +48,13 @@ class CreateApartments extends Component
                 'unit_number' => $this->unit_number
             ]);
 
-            session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/apartments', navigate: true);
+            $condominium_id = $this->condominium->id;
+            session()->flash('messageApartment', 'Elemento creato con successo!');
+            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
-            session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/apartments', navigate: true);
+            $condominium_id = $this->condominium->id;
+            session()->flash('errorApartment', 'Errore di creazione. Riprova.');
+            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
         }
     }
 

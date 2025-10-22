@@ -18,6 +18,9 @@
                 Crea
             </flux:button>
         </div>
+        <div class="w-100 my-3">
+            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+        </div>
         @if ($residents && $residents->count() > 0)
             <div class="overflow-x-auto">
                 <div class="min-w-full border rounded-lg">
@@ -67,7 +70,7 @@
                                         {{ $resident->email }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        @isset ($resident->apartment->condominium)
+                                        @isset($resident->apartment->condominium)
                                             {{ $resident->apartment->condominium->name }}
                                         @else
                                             -
@@ -75,7 +78,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         @isset($resident->apartment->condominium)
-                                        {{ $resident->apartment->name }}
+                                            {{ $resident->apartment->name }}
                                         @else
                                             -
                                         @endisset
@@ -92,7 +95,7 @@
                                                 href="/residents/{{ $resident->id }}/edit">
                                             </flux:button>
                                             <livewire:admin.residents.delete-residents :resident="$resident"
-                                                wire:key="resident-delete-{{ $resident->id }}" />
+                                                wire:key="resident-delete-{{ $resident->id }}-{{ str()->random(10) }}" />
                                         </div>
                                     </td>
                                 </tr>

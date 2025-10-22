@@ -12,10 +12,23 @@ class TableApartments extends Component
     use WithPagination;
 
     public Condominium $condominium;
+    public $search = '';
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $apartments = Apartment::where('condominium_id', $this->condominium->id)->latest()->paginate(10);
+        $apartments = Apartment::query();
+
+        if ($this->search) {
+            $apartments = $apartments->where('name', 'like', '%' . $this->search . '%');
+        }
+
+        $apartments = $apartments->where('condominium_id', $this->condominium->id)->latest()->paginate(10);
+
         return view('livewire.admin.condominiums.table-apartments', compact('apartments'));
     }
 }

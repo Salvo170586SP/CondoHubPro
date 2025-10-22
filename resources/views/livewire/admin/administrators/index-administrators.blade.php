@@ -18,6 +18,9 @@
                 Crea
             </flux:button>
         </div>
+        <div class="w-100 my-3">
+            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+        </div>
         @if ($administrators && $administrators->count() > 0)
             <div class="overflow-x-auto">
                 <div class="min-w-full border rounded-lg">
@@ -85,7 +88,7 @@
                                                 href="/administrators/{{ $administrator->id }}/edit">
                                             </flux:button>
                                             <livewire:admin.administrators.delete-administrator :administrator="$administrator"
-                                                wire:key="administrator-delete-{{ $administrator->id }}" />
+                                                wire:key="administrator-delete-{{ $administrator->id }}-{{ str()->random(10) }}" />
                                         </div>
                                     </td>
                                 </tr>

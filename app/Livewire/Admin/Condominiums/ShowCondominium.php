@@ -18,6 +18,6 @@ class ShowCondominium extends Component
     {
         $noticesBoardCount = NoticeBoard::where('condominium_id', $this->condominium->id)->count();
         $apartmentsCount = Apartment::where('condominium_id', $this->condominium->id)->count();
-        return view('livewire.admin.condominiums.show-condominium', compact('apartmentsCount','noticesBoardCount'));
+        return view('livewire.admin.condominiums.show-condominium', compact('apartmentsCount', 'noticesBoardCount'));
     }
 }

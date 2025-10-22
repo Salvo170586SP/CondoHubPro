@@ -18,6 +18,21 @@
                 Crea
             </flux:button>
         </div>
+        <div class="flex space-x-3 my-3">
+            <div class="w-100">
+                <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <flux:select wire:model.live="search_city" id="city" placeholder="cerca per città">
+                    <flux:select.option value="">Mostra Tutti</flux:select.option>
+                    @foreach ($cities as $city)
+                        <flux:select.option value="{{ $city->id }}" wire:key="{{ $city->id }}">
+                            {{ $city->name_city }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            </div>
+        </div>
         @if ($condominiums && $condominiums->count() > 0)
             <div class="overflow-x-auto">
                 <div class="min-w-full border rounded-lg">
@@ -64,10 +79,10 @@
                                         {{ $condominium->city->name_city }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        @if($condominium->administrator)
-                                        {{ $condominium->administrator->getFullName() }}
+                                        @if ($condominium->administrator)
+                                            {{ $condominium->administrator->getFullName() }}
                                         @else
-                                        -
+                                            -
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -82,7 +97,7 @@
                                                 href="/condominiums/{{ $condominium->id }}/edit">
                                             </flux:button>
                                             <livewire:admin.condominiums.delete-condominium :condominium="$condominium"
-                                                wire:key="condominium-delete-{{ $condominium->id }}" />
+                                                wire:key="condominium-delete-{{ $condominium->id }}-{{ str()->random(10) }}" />
                                         </div>
                                     </td>
                                 </tr>

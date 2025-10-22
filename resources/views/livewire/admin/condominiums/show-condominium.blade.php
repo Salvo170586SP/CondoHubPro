@@ -53,7 +53,7 @@
             <div class="w-full space-y-5">
                 <div class="w-full p-5 rounded-lg shadow">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold mb-5 flex items-center">Bacheca <span
+                        <h2 class="text-lg font-bold flex items-center">Bacheca <span
                                 class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $noticesBoardCount }}</span>
                         </h2>
                         <livewire:admin.noticesBoard.create-notices :condominium_id="$condominium->id" />
@@ -72,7 +72,7 @@
                         </flux:button>
                     </div>
 
-                    <div class="w-full h-[30px] my-5">
+                    <div class="w-full h-[10px] mb-7">
                         @if (session('messageApartment'))
                             <flux:badge color="zinc" class="w-full p-2">{{ session('messageApartment') }}
                             </flux:badge>

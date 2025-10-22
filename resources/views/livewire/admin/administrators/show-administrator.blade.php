@@ -49,6 +49,9 @@
 
             <div class="w-full p-5 rounded-lg shadow">
                 <h2 class="w-full text-lg font-medium mb-5">Condomini Gestiti</h2>
+                <div class="w-100 my-3">
+                    <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+                </div>
                 <div class="overflow-x-auto">
                     <div class="min-w-full border rounded-lg">
                         <table class="min-w-full bg-white rounded-lg overflow-hidden">

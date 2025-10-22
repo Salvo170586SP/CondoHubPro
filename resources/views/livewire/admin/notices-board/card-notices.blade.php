@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full h-[30px] my-5">
+    <div class="w-full h-[20px] {{-- mb-5 --}}">
         @if (!empty($flashMessage))
             <flux:badge color="zinc" class="w-full p-2">{{ $flashMessage }}</flux:badge>
         @elseif (session('messageNotice'))
@@ -8,14 +8,20 @@
             <flux:badge color="red" class="w-full p-2">{{ session('errorNotice') }}</flux:badge>
         @endif
     </div>
-    @if ($noticesBoard->where('is_active', true)->count() > 0)
-        <flux:button variant="filled" icon="star" class="{{ $is_favorite ? 'border-2 border-gray-800' : null }} mb-3"
-            wire:click="viewFavorite">
-            Preferiti
-            <span
-                class="bg-zinc-500 text-white rounded-full inline-block w-5 h-5 ms-3">{{ $noticesBoard->where('is_active', true)->count() }}</span>
-        </flux:button>
-    @endif
+    <div class="w-full h-[80px] flex justify-between items-center">
+        <div class="w-100">
+            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+        </div>
+        @if ($noticesBoard->where('is_active', true)->count() > 0)
+            <flux:button variant="filled" icon="star" class="{{ $is_favorite ? 'border-2 border-gray-800' : null }}"
+                wire:click="viewFavorite">
+                Preferiti
+                <span
+                    class="bg-zinc-500 text-white rounded-full inline-block w-5 h-5 ms-3">{{ $noticesBoard->where('is_active', true)->count() }}</span>
+            </flux:button>
+        @endif
+    </div>
+
 
     @forelse ($noticesBoard as $notice)
         <div wire:key="notice-{{ $notice->id }}-{{ str()->random(10) }}"

@@ -14,6 +14,12 @@ class CardNotices extends Component
 
     public Condominium $condominium;
     public $is_favorite = false;
+    public $search = '';
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
 
     public function mount(Condominium $condominium)
     {
@@ -36,16 +42,23 @@ class CardNotices extends Component
     {
         $types = config('Condo.types');
 
+        $noticesBoard = NoticeBoard::query();
+
+        if ($this->search) {
+            $noticesBoard = $noticesBoard->where('title', 'like', '%' . $this->search . '%');
+        }
+
         if (!$this->is_favorite) {
-            $noticesBoard = NoticeBoard::where('condominium_id', $this->condominium->id)
+            $noticesBoard = $noticesBoard->where('condominium_id', $this->condominium->id)
                 ->latest()
                 ->paginate(10);
         } else {
-            $noticesBoard = NoticeBoard::where('condominium_id', $this->condominium->id)
+            $noticesBoard = $noticesBoard->where('condominium_id', $this->condominium->id)
                 ->where('is_active', true)
                 ->latest()
                 ->paginate(10);
         }
+
 
         return view('livewire.admin.notices-board.card-notices', compact('noticesBoard', 'types'));
     }

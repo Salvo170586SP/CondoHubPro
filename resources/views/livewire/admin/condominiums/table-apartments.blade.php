@@ -1,4 +1,7 @@
 <div>
+    <div class="w-100 mb-3">
+        <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+    </div>
     @if ($apartments && $apartments->count() > 0)
         <div class="overflow-x-auto">
             <div class="min-w-full border rounded-lg">
@@ -63,7 +66,7 @@
                                             href="/condominiums/{{ $condominium->id }}/apartments/{{ $apartment->id }}/edit">
                                         </flux:button>
                                         <livewire:admin.apartments.delete-apartments :condominium="$condominium" :apartment="$apartment"
-                                            wire:key="apartment-delete-{{ $apartment->id }}" />
+                                            wire:key="apartment-delete-{{ $apartment->id }}-{{ str()->random(10) }}" />
                                     </div>
                                 </td>
                             </tr>

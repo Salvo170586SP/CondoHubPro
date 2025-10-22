@@ -8,6 +8,9 @@
             <h2 class="w-full text-2xl font-medium">Città</h2>
             <livewire:admin.cities.create-city />
         </div>
+        <div class="w-100 my-3">
+            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+        </div>
         @if ($cities && $cities->count() > 0)
             <div class="overflow-x-auto">
                 <div class="min-w-full border rounded-lg">
@@ -44,9 +47,9 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <div class="flex justify-end gap-2">
                                             <livewire:admin.cities.edit-city :city="$city"
-                                                wire:key="city-edit-{{ $city->id }}" />
+                                                wire:key="city-edit-{{ $city->id }}-{{ str()->random(10) }}" />
                                             <livewire:admin.cities.delete-city :city="$city"
-                                                wire:key="city-delete-{{ $city->id }}" />
+                                                wire:key="city-delete-{{ $city->id }}-{{ str()->random(10) }}" />
                                         </div>
                                     </td>
                                 </tr>

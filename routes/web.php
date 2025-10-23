@@ -12,6 +12,7 @@ use App\Livewire\Admin\Condominiums\CreateCondominiums;
 use App\Livewire\Admin\Condominiums\EditCondominium;
 use App\Livewire\Admin\Condominiums\IndexCondominiums;
 use App\Livewire\Admin\Condominiums\ShowCondominium;
+use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
 use App\Livewire\Admin\Residents\IndexResidents;
@@ -24,13 +25,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
+/* Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('dashboard'); */
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->prefix('/admin')->group(function () {
 
     /* CITTA' */
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
     Route::get('/cities', IndexCities::class)->name('cities');
     Route::get('/cities/{city}/show', ShowCity::class)->name('cities.show');
 

@@ -1,7 +1,7 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5 mb-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Residenti</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full h-[30px]">
@@ -14,7 +14,7 @@
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Residenti</h2>
-            <flux:button icon="plus" variant="filled" wire:navigate href="/residents/create">
+            <flux:button icon="plus" variant="filled" wire:navigate href="/admin/residents/create">
                 Crea
             </flux:button>
         </div>
@@ -69,14 +69,14 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         {{ $resident->email }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">
                                         @isset($resident->apartment->condominium)
                                             {{ $resident->apartment->condominium->name }}
                                         @else
                                             -
                                         @endisset
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">
                                         @isset($resident->apartment->condominium)
                                             {{ $resident->apartment->name }}
                                         @else
@@ -89,10 +89,10 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <div class="flex justify-end gap-2">
                                             <flux:button icon="eye" variant="filled" wire:navigate
-                                                href="/residents/{{ $resident->id }}/show">
+                                                href="/admin/residents/{{ $resident->id }}/show">
                                             </flux:button>
                                             <flux:button icon="pencil" variant="filled" wire:navigate
-                                                href="/residents/{{ $resident->id }}/edit">
+                                                href="/admin/residents/{{ $resident->id }}/edit">
                                             </flux:button>
                                             <livewire:admin.residents.delete-residents :resident="$resident"
                                                 wire:key="resident-delete-{{ $resident->id }}-{{ str()->random(10) }}" />

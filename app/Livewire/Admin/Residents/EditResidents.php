@@ -80,10 +80,10 @@ class EditResidents extends Component
             $newApartment->save();
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/residents', navigate: true);
+            return $this->redirect('/admin/residents', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/residents', navigate: true);
+            return $this->redirect('/admin/residents', navigate: true);
         }
     }
     public function render()

@@ -37,10 +37,10 @@ class CreateCity extends Component
             $this->resetForm();
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/cities', navigate: true);
+            return $this->redirect('/admin/cities', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di creazione. Riprova.');
-            return $this->redirect('/cities', navigate: true);
+            return $this->redirect('/admin/cities', navigate: true);
         }
     }
 

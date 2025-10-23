@@ -63,10 +63,10 @@ class EditNotices extends Component
             ]);
 
             session()->flash('messageNotice', 'Elemento modificato con successo!');
-            return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
+            return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
             session()->flash('errorNotice', 'Errore di creazione. Riprova.');
-            return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
+            return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);
         }
     }
     public function render()

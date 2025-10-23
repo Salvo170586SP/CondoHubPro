@@ -25,10 +25,10 @@ class DeleteNotices extends Component
             }
 
             session()->flash('messageNotice', 'Elemento eliminato con successo!');
-            return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
+            return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
             session()->flash('errorNotice', 'Errore di eliminazione. Riprova.');
-            return $this->redirect("/condominiums/$this->condominium_id/show", navigate: true);
+            return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);
         }
     }
 

@@ -59,10 +59,10 @@ class EditCondominium extends Component
 
 
             session()->flash('message', 'Elemento modificato con successo!');
-            return $this->redirect('/condominiums', navigate: true);
+            return $this->redirect('/admin/condominiums', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di creazione. Riprova.');
-            return $this->redirect('/condominiums', navigate: true);
+            return $this->redirect('/admin/condominiums', navigate: true);
         }
     }
 

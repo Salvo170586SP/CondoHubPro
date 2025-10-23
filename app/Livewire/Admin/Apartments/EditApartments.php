@@ -61,11 +61,11 @@ class EditApartments extends Component
 
             $condominium_id = $this->condominium->id;
             session()->flash('messageApartment', 'Elemento modificato con successo!');
-            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
+            return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
             $condominium_id = $this->condominium->id;
             session()->flash('errorApartment', 'Errore di creazione. Riprova.');
-            return $this->redirect("/condominiums/$condominium_id/show", navigate: true);
+            return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
         }
     }
 

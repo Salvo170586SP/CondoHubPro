@@ -1,13 +1,13 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
-            <flux:breadcrumbs.item wire:navigate href="/administrators">Amminsitratori</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/administrators">Amminsitratori</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Crea</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Amminsitratori / Crea</h2>
-            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/administrators">
+            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/administrators">
                 Torna Indietro
             </flux:button>
         </div>
@@ -15,7 +15,7 @@
         <x-step-form :currentStep="$currentStep" />
 
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto bg-zinc-100/30 rounded-lg">
             @if ($currentStep == 1)
                 <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
                     <div class="min-w-full border rounded-lg p-5 space-y-3">

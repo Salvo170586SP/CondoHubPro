@@ -62,10 +62,10 @@ class CreateAdministrators extends Component
             }
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/administrators', navigate: true);
+            return $this->redirect('/admin/administrators', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/administrators', navigate: true);
+            return $this->redirect('/admin/administrators', navigate: true);
         }
     }
 

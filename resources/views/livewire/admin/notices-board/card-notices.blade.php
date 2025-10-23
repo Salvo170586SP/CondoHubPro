@@ -25,7 +25,7 @@
 
     @forelse ($noticesBoard as $notice)
         <div wire:key="notice-{{ $notice->id }}-{{ str()->random(10) }}"
-            class="w-full p-3 bg-slate-50/50 border rounded-lg space-y-3 mb-5 {{ $notice->is_active ? 'bg-slate-100' : null }}">
+            class="w-full p-3  border rounded-lg space-y-3 mb-5 {{ $notice->is_active ? 'bg-blue-100/60' : 'bg-white' }}">
             <div class="flex justify-between items-center mb-5">
                 <div class="flex items-center gap-3">
                     <h3 class="font-medium text-lg capitalize">{{ $notice->title }}</h3>

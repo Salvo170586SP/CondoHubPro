@@ -1,22 +1,22 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5 mb-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
-            <flux:breadcrumbs.item wire:navigate href="/administrators">Amministratori</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/administrators">Amministratori</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Dettagli</flux:breadcrumbs.item>
         </flux:breadcrumbs>
 
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Amministratori / Dettagli</h2>
-            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/administrators">
+            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/administrators">
                 Torna Indietro
             </flux:button>
         </div>
 
         <div class="w-full flex gap-5">
 
-            <div class="w-[380px] p-5 rounded-lg shadow">
+            <div class="w-[380px] p-5 rounded-lg bg-zinc-100/30 shadow">
                 <div class="mb-3 flex justify-between">
                     @if ($administrator->img_user)
                         <flux:avatar size="xl" src="{{ asset('storage/' . $administrator->img_user) }}" />
@@ -24,7 +24,7 @@
                         <flux:avatar name="{{ $administrator->name . ' ' . $administrator->surname }}" />
                     @endif
                     <flux:button icon="pencil" variant="filled" wire:navigate
-                        href="/administrators/{{ $administrator->id }}/edit"> Modifica
+                        href="/admin/administrators/{{ $administrator->id }}/edit"> Modifica
                     </flux:button>
                 </div>
                 <div class="space-y-5 my-5">
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="w-full p-5 rounded-lg shadow">
+            <div class="w-full p-5 rounded-lg shadow bg-zinc-100/30">
                 <h2 class="w-full text-lg font-medium mb-5">Condomini Gestiti</h2>
                 <div class="w-100 my-3">
                     <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
@@ -84,7 +84,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $condominium->name }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 uppercase">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $condominium->address }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -99,7 +99,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             <div class="flex justify-end">
                                                 <flux:button variant="filled" icon="eye" wire:navigate
-                                                    href="/condominiums/{{ $condominium->id }}/show" />
+                                                    href="/admin/condominiums/{{ $condominium->id }}/show" />
                                             </div>
                                         </td>
                                     </tr>

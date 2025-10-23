@@ -22,10 +22,10 @@ class DeleteCity extends Component
             }
 
             session()->flash('message', 'Elemento eliminato con successo!');
-            return $this->redirect('/cities', navigate: true);
+            return $this->redirect('/admin/cities', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di eliminazione. Riprova.');
-            return $this->redirect('/cities', navigate: true);
+            return $this->redirect('/admin/cities', navigate: true);
         }
     }
 

@@ -1,7 +1,7 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5 mb-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Amministratori</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full h-[30px]">
@@ -14,7 +14,7 @@
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Amministratori</h2>
-            <flux:button icon="plus" variant="filled" wire:navigate href="/administrators/create">
+            <flux:button icon="plus" variant="filled" wire:navigate href="/admin/administrators/create">
                 Crea
             </flux:button>
         </div>
@@ -82,10 +82,10 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <div class="flex justify-end gap-2">
                                             <flux:button icon="eye" variant="filled" wire:navigate
-                                                href="/administrators/{{ $administrator->id }}/show">
+                                                href="/admin/administrators/{{ $administrator->id }}/show">
                                             </flux:button>
                                             <flux:button icon="pencil" variant="filled" wire:navigate
-                                                href="/administrators/{{ $administrator->id }}/edit">
+                                                href="/admin/administrators/{{ $administrator->id }}/edit">
                                             </flux:button>
                                             <livewire:admin.administrators.delete-administrator :administrator="$administrator"
                                                 wire:key="administrator-delete-{{ $administrator->id }}-{{ str()->random(10) }}" />

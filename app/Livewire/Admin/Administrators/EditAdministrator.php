@@ -62,10 +62,10 @@ class EditAdministrator extends Component
             ]);
 
             session()->flash('message', 'Elemento modificato con successo!');
-            return $this->redirect('/administrators', navigate: true);
+            return $this->redirect('/admin/administrators', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore nella modifica. Riprova.');
-            return $this->redirect('/administrators', navigate: true);
+            return $this->redirect('/admin/administrators', navigate: true);
         }
     }
 

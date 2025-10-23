@@ -49,10 +49,10 @@ class EditCity extends Component
             }
 
             session()->flash('message', 'Elemento modificato con successo!');
-            return $this->redirect('/cities', navigate: true);
+            return $this->redirect('/admin/cities', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di creazione. Riprova.');
-            return $this->redirect('/cities', navigate: true);
+            return $this->redirect('/admin/cities', navigate: true);
         }
     }
 

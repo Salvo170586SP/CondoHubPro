@@ -45,10 +45,10 @@ class CreateCondominiums extends Component
             ]);
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/condominiums', navigate: true);
+            return $this->redirect('/admin/condominiums', navigate: true);
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/condominiums', navigate: true);
+            return $this->redirect('/admin/condominiums', navigate: true);
         }
     }
 

@@ -1,22 +1,22 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5 mb-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
-            <flux:breadcrumbs.item wire:navigate href="/residents">Residenti</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/residents">Residenti</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Dettagli</flux:breadcrumbs.item>
         </flux:breadcrumbs>
 
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Residenti / Dettagli</h2>
-            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/residents">
+            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/residents">
                 Torna Indietro
             </flux:button>
         </div>
 
         <div class="w-full flex gap-5">
 
-            <div class="w-[380px] h-full p-5 rounded-lg shadow">
+            <div class="w-[380px] h-full p-5 rounded-lg shadow bg-zinc-100/50">
                 <div class="mb-3 flex justify-between">
                     @if ($resident->img_user)
                         <flux:avatar size="xl" src="{{ asset('storage/' . $resident->img_user) }}" />
@@ -24,7 +24,7 @@
                         <flux:avatar name="{{ $resident->name . ' ' . $resident->surname }}" />
                     @endif
                     <flux:button icon="pencil" variant="filled" wire:navigate
-                        href="/residents/{{ $resident->id }}/edit"> Modifica
+                        href="/admin/residents/{{ $resident->id }}/edit"> Modifica
                     </flux:button>
                 </div>
                 <div class="space-y-5 my-5">
@@ -44,11 +44,11 @@
                 </div>
             </div>
 
-            <div class="w-full p-5 rounded-lg shadow">
+            <div class="w-full p-5 rounded-lg shadow bg-zinc-100/50">
                 <div>
                     <h2 class="w-full text-lg font-medium mb-5">Dati Appartamento di Residenza</h2>
                     <div class="overflow-x-auto">
-                        <div class="min-w-full border rounded-lg p-3 space-y-3">
+                        <div class="min-w-full border rounded-lg p-3 space-y-3 bg-white">
                             <div class="grid grid-cols-3">
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Nome Appartamento:</div>
@@ -108,7 +108,7 @@
                 <div class="mt-5">
                     <h2 class="w-full text-lg font-medium mb-5">Dati Condominio</h2>
                     <div class="overflow-x-auto">
-                        <div class="min-w-full border rounded-lg p-3 space-y-3">
+                        <div class="min-w-full border rounded-lg p-3 space-y-3 bg-white">
                             <div class="grid grid-cols-3">
                                 <div class="text-sm text-gray-900">
                                     <div class="font-medium">Nome Condominio:</div>

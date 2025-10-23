@@ -63,7 +63,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <div class="flex justify-end gap-2">
                                         <flux:button icon="pencil" variant="filled" wire:navigate
-                                            href="/condominiums/{{ $condominium->id }}/apartments/{{ $apartment->id }}/edit">
+                                            href="/admin/condominiums/{{ $condominium->id }}/apartments/{{ $apartment->id }}/edit">
                                         </flux:button>
                                         <livewire:admin.apartments.delete-apartments :condominium="$condominium" :apartment="$apartment"
                                             wire:key="apartment-delete-{{ $apartment->id }}-{{ str()->random(10) }}" />

@@ -1,7 +1,7 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Città</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
@@ -53,7 +53,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <div class="flex justify-end gap-2">
                                             <flux:button icon="eye" variant="filled" wire:navigate
-                                                href="/cities/{{ $city->id }}/show" />
+                                                href="/admin/cities/{{ $city->id }}/show" />
                                             <livewire:admin.cities.edit-city :city="$city"
                                                 wire:key="city-edit-{{ $city->id }}-{{ str()->random(10) }}" />
                                             <livewire:admin.cities.delete-city :city="$city"

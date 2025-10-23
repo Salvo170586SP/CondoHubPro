@@ -1,21 +1,21 @@
 <div>
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5 mb-5">
-            <flux:breadcrumbs.item wire:navigate href="/dashboard" icon="home" />
-            <flux:breadcrumbs.item wire:navigate href="/condominiums">Condomini</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
+            <flux:breadcrumbs.item wire:navigate href="/admin/condominiums">Condomini</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Dettagli</flux:breadcrumbs.item>
         </flux:breadcrumbs>
 
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-2xl font-medium">Condomini / Dettagli</h2>
-            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/condominiums">
+            <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/condominiums">
                 Torna Indietro
             </flux:button>
         </div>
 
         <div class="w-full flex gap-5">
-            <div class="w-[400px] h-full p-5 rounded-lg shadow">
+            <div class="w-[400px] h-full p-5 rounded-lg shadow bg-zinc-100/50">
                 <div class="flex-col items-center space-y-3">
                     <div class="text-sm text-gray-900 capitalize">
                         <div class="text-sm font-medium">Nome:</div>
@@ -51,7 +51,7 @@
             </div>
 
             <div class="w-full space-y-5">
-                <div class="w-full p-5 rounded-lg shadow">
+                <div class="w-full p-5 rounded-lg shadow bg-zinc-100/50">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-lg font-bold flex items-center">Bacheca <span
                                 class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $noticesBoardCount }}</span>
@@ -61,13 +61,13 @@
                     <livewire:admin.noticesBoard.card-notices :condominium="$condominium" />
                 </div>
 
-                <div class="w-full p-5 rounded-lg shadow">
+                <div class="w-full p-5 rounded-lg shadow bg-zinc-100/50">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-lg font-bold mb-5 flex items-center">Appartamenti <span
                                 class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $apartmentsCount }}</span>
                         </h2>
                         <flux:button icon="plus" variant="filled" wire:navigate
-                            href="/condominiums/{{ $condominium->id }}/apartments/create">
+                            href="/admin/condominiums/{{ $condominium->id }}/apartments/create">
                             Crea
                         </flux:button>
                     </div>

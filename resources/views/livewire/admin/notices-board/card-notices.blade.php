@@ -29,12 +29,9 @@
             <div class="flex justify-between items-center mb-5">
                 <div class="flex items-center gap-3">
                     <h3 class="font-medium text-lg capitalize">{{ $notice->title }}</h3>
-                    @foreach ($types as $type)
-                        @if ($notice->type == $type['id'])
-                            <span
-                                class="inline-block {{ $type['color'] }} rounded-lg px-3 text-white font-semibold text-sm">{{ $type['label'] }}</span>
-                        @endif
-                    @endforeach
+                    <span
+                        class="inline-block font-semibold text-red-500 px-2 rounded-lg text-sm capitalize">{{ $notice->is_important ? 'importante' : null }}</span>
+
                 </div>
 
                 <div class="flex items-center gap-2">
@@ -59,8 +56,12 @@
             <div class="w-full flex justify-between items-center border-t pt-3">
                 <div class="w-full flex items-center ">
                     <span class="text-sm">Avviso del {{ $notice->getDate($notice->created_at) }}</span>
-                    <span
-                        class="inline-block font-semibold text-red-500 px-2 rounded-lg {{-- text-white --}} text-sm capitalize ms-2">{{ $notice->is_important ? 'importante' : null }}</span>
+                    @foreach ($types as $type)
+                        @if ($notice->type == $type['id'])
+                            <span
+                                class="inline-block {{ $type['color'] }} rounded-lg px-3 text-white font-semibold text-sm ms-3">{{ $type['label'] }}</span>
+                        @endif
+                    @endforeach
                 </div>
                 <flux:button variant="filled" wire:click="changeActive({{ $notice->id }})"
                     title="Aggiungi ai preferiti">

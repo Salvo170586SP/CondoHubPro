@@ -21,10 +21,13 @@
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Città</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Provincia</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3  text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                                    Numero Condomini</th>
+                                <th
+                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Creato il</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -38,14 +41,19 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         {{ $city->name_city }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 uppercase">
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 uppercase">
                                         {{ $city->name_prov }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                                        {{ $city->condominiums->count() }}
+                                    </td>
+                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900">
                                         {{ $city->getDate($city->created_at) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <div class="flex justify-end gap-2">
+                                            <flux:button icon="eye" variant="filled" wire:navigate
+                                                href="/cities/{{ $city->id }}/show" />
                                             <livewire:admin.cities.edit-city :city="$city"
                                                 wire:key="city-edit-{{ $city->id }}-{{ str()->random(10) }}" />
                                             <livewire:admin.cities.delete-city :city="$city"

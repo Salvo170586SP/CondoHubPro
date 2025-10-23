@@ -7,6 +7,7 @@ use App\Livewire\Admin\Administrators\ShowAdministrator;
 use App\Livewire\Admin\Apartments\CreateApartments;
 use App\Livewire\Admin\Apartments\EditApartments;
 use App\Livewire\Admin\Cities\IndexCities;
+use App\Livewire\Admin\Cities\ShowCity;
 use App\Livewire\Admin\Condominiums\CreateCondominiums;
 use App\Livewire\Admin\Condominiums\EditCondominium;
 use App\Livewire\Admin\Condominiums\IndexCondominiums;
@@ -28,7 +29,10 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    /* CITTA' */
     Route::get('/cities', IndexCities::class)->name('cities');
+    Route::get('/cities/{city}/show', ShowCity::class)->name('cities.show');
 
     /* AMMINISTRATORE */
     Route::get('/administrators', IndexAdministrators::class)->name('administrators');

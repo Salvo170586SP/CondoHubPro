@@ -22,7 +22,6 @@ class CreateCondominiums extends Component
             'address' => 'required|min:2|max:50|string',
             'cap' => 'required|numeric',
             'city_id' => 'required',
-            'administrator_id' => 'required',
         ], [
             'name.required' => 'il campo è obbligatorio',
             'address.required' => 'il campo è obbligatorio',
@@ -32,7 +31,6 @@ class CreateCondominiums extends Component
             'cap.max' => 'il campo è obbligatorio',
             'cap.numeric' => 'il campo deve contenere numeri',
             'city_id.required' => 'il campo è obbligatorio',
-            'administrator_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {

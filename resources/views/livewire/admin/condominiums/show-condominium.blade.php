@@ -15,56 +15,60 @@
         </div>
 
         <div class="w-full flex gap-5">
-            <div class="w-[400px] h-full p-5 rounded-lg shadow bg-zinc-100/50">
+            <div class="w-[400px] h-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                 <div class="flex-col items-center space-y-3">
-                    <div class="text-sm text-gray-900 capitalize">
+                    <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Nome:</div>
                         {{ $condominium->name }}
                     </div>
-                    <div class="text-sm text-gray-900 capitalize">
+                    <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Indirizzo:</div>
                         {{ $condominium->address }}
                     </div>
-                    <div class="text-sm text-gray-900 capitalize">
+                    <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Cap:</div>
                         {{ $condominium->cap }}
                     </div>
 
-                    <div class="text-sm text-gray-900 capitalize">
+                    <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Città:</div>
                         {{ $condominium->city->name_city }}
                     </div>
-                    <div class="text-sm text-gray-900">
+                    <div class="text-sm">
                         <div class="text-sm font-medium">Creato il:</div>
                         {{ $condominium->getDate($condominium->created_at) }}
                     </div>
 
-                    <div class="text-sm text-gray-900 capitalize">
+                    <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Numero Appartamenti:</div>
                         {{ $condominium->apartments->count() }}
                     </div>
-                    <div class="text-sm text-gray-900 capitalize">
+                    <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Amministratore:</div>
+                        @if($condominium->administrator)
                         {{ $condominium->administrator->getFullName() }}
+                        @else
+                        -
+                        @endif
                     </div>
                 </div>
             </div>
 
             <div class="w-full space-y-5">
-                <div class="w-full p-5 rounded-lg shadow bg-zinc-100/50">
+                <div class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50 ">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-lg font-bold flex items-center">Bacheca <span
-                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $noticesBoardCount }}</span>
+                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $noticesBoardCount }}</span>
                         </h2>
                         <livewire:admin.noticesBoard.create-notices :condominium_id="$condominium->id" />
                     </div>
                     <livewire:admin.noticesBoard.card-notices :condominium="$condominium" />
                 </div>
 
-                <div class="w-full p-5 rounded-lg shadow bg-zinc-100/50">
+                <div class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-lg font-bold mb-5 flex items-center">Appartamenti <span
-                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $apartmentsCount }}</span>
+                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $apartmentsCount }}</span>
                         </h2>
                         <flux:button icon="plus" variant="filled" wire:navigate
                             href="/admin/condominiums/{{ $condominium->id }}/apartments/create">

@@ -12,7 +12,7 @@
             </flux:button>
         </div>
         <div class="overflow-x-auto">
-            <div class="min-w-full border rounded-lg p-5 space-y-3 bg-zinc-100/50">
+            <div class="min-w-full border dark:border-zinc-600 dark:bg-zinc-700/50 rounded-lg p-5 space-y-3 bg-zinc-100/50">
                 <flux:input wire:model="name" label="Nome" />
                 <flux:input wire:model="address" label="Indirizzo" />
                 <flux:input wire:model="cap" label="Cap" />

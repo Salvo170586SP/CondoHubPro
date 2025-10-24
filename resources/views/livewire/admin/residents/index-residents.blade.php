@@ -23,70 +23,70 @@
         </div>
         @if ($residents && $residents->count() > 0)
             <div class="overflow-x-auto">
-                <div class="min-w-full border rounded-lg">
-                    <table class="min-w-full bg-white rounded-lg overflow-hidden">
-                        <thead class="bg-gray-100">
+                <div class="min-w-full border dark:border-zinc-600 rounded-lg">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
+                        <thead class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                     Nome e Cognome
                                 </th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                     Telefono
                                 </th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                     Email
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                     Condominio di Residenza
                                 </th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                     Appartamento
                                 </th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                     Creato il</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @foreach ($residents as $resident)
                                 <tr wire:key="resident-{{ $resident->id }}-{{ str()->random(10) }}"
-                                    class="hover:bg-gray-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">
+                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
                                         {{ $resident->name . ' ' . $resident->surname }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $resident->phone_number }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $resident->email }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">
+                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
                                         @isset($resident->apartment->condominium)
                                             {{ $resident->apartment->condominium->name }}
                                         @else
                                             -
                                         @endisset
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 capitalize">
+                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
                                         @isset($resident->apartment->condominium)
                                             {{ $resident->apartment->name }}
                                         @else
                                             -
                                         @endisset
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $resident->getDate($resident->created_at) }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex justify-end gap-2">
                                             <flux:button icon="eye" variant="filled" wire:navigate
                                                 href="/admin/residents/{{ $resident->id }}/show">

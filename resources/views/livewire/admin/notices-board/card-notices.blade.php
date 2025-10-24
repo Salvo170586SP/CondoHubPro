@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full h-[20px] {{-- mb-5 --}}">
+    <div class="w-full h-[20px]">
         @if (!empty($flashMessage))
             <flux:badge color="zinc" class="w-full p-2">{{ $flashMessage }}</flux:badge>
         @elseif (session('messageNotice'))
@@ -25,12 +25,12 @@
 
     @forelse ($noticesBoard as $notice)
         <div wire:key="notice-{{ $notice->id }}-{{ str()->random(10) }}"
-            class="w-full p-3  border rounded-lg space-y-3 mb-5 {{ $notice->is_active ? 'bg-blue-100/60' : 'bg-white' }}">
+            class="w-full p-3  border dark:border-zinc-600  rounded-lg space-y-3 mb-5 {{ $notice->is_active ? 'bg-blue-100/60 dark:bg-black/50' : 'bg-white dark:bg-zinc-700' }}">
             <div class="flex justify-between items-center mb-5">
                 <div class="flex items-center gap-3">
                     <h3 class="font-medium text-lg capitalize">{{ $notice->title }}</h3>
                     <span
-                        class="inline-block font-semibold text-red-500 px-2 rounded-lg text-sm capitalize">{{ $notice->is_important ? 'importante' : null }}</span>
+                        class="inline-block font-semibold text-red-500  px-2 rounded-lg text-sm capitalize">{{ $notice->is_important ? 'importante' : null }}</span>
 
                 </div>
 

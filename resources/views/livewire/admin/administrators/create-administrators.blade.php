@@ -15,10 +15,10 @@
         <x-step-form :currentStep="$currentStep" />
 
 
-        <div class="overflow-x-auto bg-zinc-100/30 rounded-lg">
+        <div class="overflow-x-auto bg-zinc-100/30 dark:bg-zinc-700/50 rounded-lg">
             @if ($currentStep == 1)
                 <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                    <div class="min-w-full border rounded-lg p-5 space-y-3">
+                    <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-3">
                         <flux:input wire:model="administratorsStep1.name" label="Nome" />
                         <flux:input wire:model="administratorsStep1.surname" label="Cognome" />
                         <flux:input wire:model="administratorsStep1.phone_number" label="Telefono" />
@@ -33,63 +33,63 @@
                 </div>
             @elseif($currentStep == 2)
                 <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                    <div class="min-w-full border rounded-lg p-5 space-y-3">
+                    <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-3">
                         <div>
                             @error('selectedCondominiums')
                                 <div class="text-red-500 text-sm my-2">{{ $message }}</div>
                             @enderror
                             @if ($condominiums && $condominiums->count() > 0)
                                 <div class="overflow-x-auto">
-                                    <div class="min-w-full border rounded-lg">
-                                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
-                                            <thead class="bg-gray-100">
+                                    <div class="min-w-full border dark:border-zinc-600 rounded-lg">
+                                        <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
+                                            <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                                                 <tr>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                                         Aggiungi
                                                     </th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                                         Nome
                                                     </th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                                         Indirizzo</th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                                         Cap</th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                                         Città</th>
                                                     <th
-                                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                                         Creato il
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="divide-y divide-gray-200">
+                                            <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                                                 @foreach ($condominiums as $condominium)
                                                     <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
-                                                        class="hover:bg-gray-50 transition-colors">
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                        class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                                        <td class="px-6 py-4 whitespace-nowrap">
                                                             <flux:checkbox wire:model="selectedCondominiums"
                                                                 value="{{ $condominium->id }}" />
                                                         </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                        <td class="px-6 py-4 whitespace-nowrap">
                                                             {{ $condominium->name }}
                                                         </td>
                                                         <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 uppercase">
+                                                            class="px-6 py-4 whitespace-nowrap text-smuppercase">
                                                             {{ $condominium->address }}
                                                         </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                        <td class="px-6 py-4 whitespace-nowrap">
                                                             {{ $condominium->cap }}
                                                         </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                        <td class="px-6 py-4 whitespace-nowrap">
                                                             {{ $condominium->city->name_city }}
                                                         </td>
 
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                        <td class="px-6 py-4 whitespace-nowrap">
                                                             {{ $condominium->getDate($condominium->created_at) }}
                                                         </td>
                                                     </tr>
@@ -117,7 +117,7 @@
                 </div>
             @elseif($currentStep == 3)
                 <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                    <div class="min-w-full border rounded-lg p-5 space-y-5">
+                    <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5">
 
                         <h3 class="text-xl font-semibold mb-4">Riepilogo dati amministratore</h3>
                         <div class="grid grid-cols-2 gap-4 text-sm">
@@ -139,8 +139,8 @@
 
                         @if ($selectedCondominiumList && $selectedCondominiumList->count() > 0)
                             <div class="overflow-x-auto">
-                                <table class="min-w-full bg-white rounded-lg border">
-                                    <thead class="bg-gray-100 text-xs uppercase text-gray-500">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
+                                    <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                                         <tr>
                                             <th class="px-4 py-2 text-left">Nome</th>
                                             <th class="px-4 py-2 text-left">Indirizzo</th>
@@ -148,7 +148,7 @@
                                             <th class="px-4 py-2 text-left">Cap</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y divide-gray-200 text-sm">
+                                    <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                                         @foreach ($selectedCondominiumList as $condominium)
                                             <tr>
                                                 <td class="px-4 py-2">{{ $condominium->name }}</td>
@@ -161,7 +161,7 @@
                                 </table>
                             </div>
                         @else
-                            <div class="text-sm italic text-gray-500">Nessun condominio selezionato.</div>
+                            <div class="text-sm italic text-gray-500 dark:text-white">Nessun condominio selezionato.</div>
                         @endif
 
                         <div class="flex justify-end gap-3 mt-10">

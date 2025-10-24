@@ -13,44 +13,44 @@
         </div>
         @if ($cities && $cities->count() > 0)
             <div class="overflow-x-auto">
-                <div class="min-w-full border rounded-lg">
-                    <table class="min-w-full bg-white rounded-lg overflow-hidden">
-                        <thead class="bg-gray-100">
+                <div class="min-w-full border dark:border-zinc-600 rounded-lg">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
+                        <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Città</th>
                                 <th
-                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-center text-xs uppercase tracking-wider">
                                     Provincia</th>
                                 <th
-                                    class="px-6 py-3  text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3  text-xs text-center uppercase tracking-wider">
                                     Numero Condomini</th>
                                 <th
-                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-center text-xs uppercase tracking-wider">
                                     Creato il</th>
                                 <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                             @foreach ($cities as $city)
                                 <tr wire:key="city-{{ $city->id }}-{{ str()->random(10) }}"
-                                    class="hover:bg-gray-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $city->name_city }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 uppercase">
+                                    <td class="px-6 py-4 whitespace-nowrap text-center uppercase">
                                         {{ $city->name_prov }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">
                                         {{ $city->condominiums->count() }}
                                     </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{ $city->getDate($city->created_at) }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex justify-end gap-2">
                                             <flux:button icon="eye" variant="filled" wire:navigate
                                                 href="/admin/cities/{{ $city->id }}/show" />

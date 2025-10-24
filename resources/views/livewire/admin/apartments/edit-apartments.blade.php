@@ -15,7 +15,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            <div class="w-full border rounded-lg p-5 space-y-3 bg-zinc-100/50">
+            <div class="w-full border dark:border-zinc-600 rounded-lg p-5 space-y-3 bg-zinc-100/50 dark:bg-zinc-700/50">
                 <div class="w-full grid grid-cols-3 gap-2">
                     <flux:input wire:model="name" label="Nome" />
                     <flux:input wire:model="floor" label="Piano" />

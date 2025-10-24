@@ -12,7 +12,7 @@
             </flux:button>
         </div>
         <div class="overflow-x-auto">
-            <div class="min-w-full border bg-zinc-100/30 rounded-lg p-5 space-y-3">
+            <div class="min-w-full border dark:border-zinc-600 bg-zinc-100/30 dark:bg-zinc-700/50 rounded-lg p-5 space-y-3">
                 <flux:input wire:model="name" label="Nome" />
                 <flux:input wire:model="surname" label="Cognome" />
                 <flux:input wire:model="phone_number" label="Telefono" />

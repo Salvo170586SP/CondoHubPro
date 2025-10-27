@@ -83,10 +83,6 @@ php artisan serve
 
 ## Sezione screenshot
 
-Gli screenshot originali contenevano spazi nei nomi dei file, che possono causare problemi di rendering su GitHub. Ho aggiunto dei placeholder SVG senza spazi in `public/assets/imgs/screenshots/` per assicurare che le immagini vengano renderizzate correttamente. Sostituisci i placeholder con le tue immagini rinominate (senza spazi) per farle apparire.
-
-Esempi di immagini (placeholder):
-
 ![Dashboard 1](/assets/imgs/screenshots/screenshot-dashboard-1.png)
 ![Dashboard 2](/assets/imgs/screenshots/screenshot-dashboard-2.png)
 ![Dashboard 3](/assets/imgs/screenshots/screenshot-dashboard-3.png)
@@ -99,10 +95,6 @@ Esempi di immagini (placeholder):
 ![Dashboard 10](/assets/imgs/screenshots/screenshot-dashboard-10.png)
 ![Dashboard 11](/assets/imgs/screenshots/screenshot-dashboard-11.png)
 
-Suggerimenti per far funzionare i tuoi screenshot originali:
-
-- Rinomina i file eliminando gli spazi (es. `Screenshot-2025-10-24-180928.png`) oppure sostituisci gli spazi con `%20` nelle path Markdown: `assets/imgs/screenshots/Screenshot%202025-10-24%20180928.png`.
-- Preferibile usare nomi semplici e senza spazi (es. `dashboard-1.png`) e committare i file in `public/assets/imgs/screenshots/`.
  
 ## Contribuire
 

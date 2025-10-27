@@ -8,15 +8,16 @@
 
 
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Condomini / Dettagli</h2>
+            <h2 class="w-full text-xl font-medium">Dettagli Condominio</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/condominiums">
                 Torna Indietro
             </flux:button>
         </div>
 
         <div class="w-full flex gap-5">
-            <div class="w-[400px] h-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
-                <div class="flex-col items-center space-y-3">
+            <div class="w-[400px] h-full space-y-5">
+                <div
+                    class="p-5 flex-col items-center space-y-3 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                     <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Nome:</div>
                         {{ $condominium->name }}
@@ -45,30 +46,48 @@
                     </div>
                     <div class="text-sm capitalize">
                         <div class="text-sm font-medium">Amministratore:</div>
-                        @if($condominium->administrator)
-                        {{ $condominium->administrator->getFullName() }}
+                        @if ($condominium->administrator)
+                            {{ $condominium->administrator->getFullName() }}
                         @else
-                        -
+                            -
                         @endif
                     </div>
                 </div>
+
+                <div
+                    class="p-5 flex-col items-center space-y-3 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
+                    
+                    <div class="text-sm capitalize">
+
+                        <div class="mb-5 flex justify-between items-center">
+                            <div class="font-medium text-sm uppercase">
+                                Segnalazioni 
+                            </div>
+                            <span class="w-5 h-5 bg-black dark:bg-zinc-600 rounded-lg text-white inline-flex items-center justify-center ms-2">{{ $feedbooksCount }}</span>
+                        </div>
+                        <flux:button wire:navigate href="/admin/condominiums/{{ $condominium->id }}/feedbacks">Vai alle segnalazioni</flux:button>
+                    </div>
+                </div>
+
             </div>
 
             <div class="w-full space-y-5">
-                <div class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50 ">
+                <div
+                    class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50 ">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-lg font-bold flex items-center">Bacheca <span
-                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $noticesBoardCount }}</span>
+                                class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">{{ $noticesBoardCount }}</span>
                         </h2>
                         <livewire:admin.noticesBoard.create-notices :condominium_id="$condominium->id" />
                     </div>
                     <livewire:admin.noticesBoard.card-notices :condominium="$condominium" />
                 </div>
 
-                <div class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
+                <div
+                    class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-lg font-bold mb-5 flex items-center">Appartamenti <span
-                                class="inline-flex items-center justify-center font-medium text-sm bg-zinc-500 dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-full ms-2">{{ $apartmentsCount }}</span>
+                                class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">{{ $apartmentsCount }}</span>
                         </h2>
                         <flux:button icon="plus" variant="filled" wire:navigate
                             href="/admin/condominiums/{{ $condominium->id }}/apartments/create">

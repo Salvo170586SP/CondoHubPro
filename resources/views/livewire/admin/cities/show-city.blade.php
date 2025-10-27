@@ -6,13 +6,13 @@
             <flux:breadcrumbs.item>Dettagli</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Città / Dettagli</h2>
+            <h2 class="w-full text-xl font-medium">Dettagli Città</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/cities">
                 Torna Indietro
             </flux:button>
         </div>
 
-        <h3 class="text-xl font-medium mb-4">Condomini di {{ $city->name_city }}</h3>
+        <h3 class="text-lg font-medium mb-4">Condomini di {{ $city->name_city }}</h3>
 
 
         <livewire:admin.cities.table-city-condominiums :city="$city" />

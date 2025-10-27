@@ -7,7 +7,7 @@
     <flux:modal name="create-city" class="md:w-96">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">Aggiungi una città in tabella</flux:heading>
+                <flux:heading size="lg">Crea</flux:heading>
             </div>
             <flux:input wire:model="name_city" label="Città" placeholder="Es: Roma" />
             <flux:input wire:model="name_prov" label="Provincia" placeholder="Es: RM" />

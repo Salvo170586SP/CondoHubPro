@@ -18,7 +18,7 @@
         </a>
 
         <flux:navlist variant="outline">
-            <flux:navlist.group :heading="__('Platform')" class="grid">
+            <flux:navlist.group :heading="__('Anagrafiche')" class="grid">
                 <flux:navlist.item icon="users" :href="route('administrators')"
                     :current="request()->routeIs('administrators')" wire:navigate>
                     {{ __('Anagrafica Amministratori') }}
@@ -27,20 +27,29 @@
                     :current="request()->routeIs('residents')" wire:navigate>
                     {{ __('Anagrafica Residenti') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="tag" :href="route('cities')"
-                    :current="request()->routeIs('cities')" wire:navigate>
+            </flux:navlist.group>
+
+            <flux:navlist.group :heading="__('Gestione')" class="grid">
+                <flux:navlist.item icon="tag" :href="route('cities')" :current="request()->routeIs('cities')"
+                    wire:navigate>
                     {{ __('Città') }}
                 </flux:navlist.item>
                 <flux:navlist.item icon="building-office-2" :href="route('condominiums')"
                     :current="request()->routeIs('condominiums')" wire:navigate>
                     {{ __('Condomini') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="layout-grid" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('Dashboard') }}
-                </flux:navlist.item>
-
             </flux:navlist.group>
+
+            <flux:spacer class="my-2 border dark:border-zinc-700" />
+            
+            <flux:navlist.item icon="layout-grid" :href="route('dashboard')"
+                :current="request()->routeIs('dashboard')" wire:navigate>
+                {{ __('Dashboard') }}
+            </flux:navlist.item>
+
+
+
+
         </flux:navlist>
 
         <flux:spacer />

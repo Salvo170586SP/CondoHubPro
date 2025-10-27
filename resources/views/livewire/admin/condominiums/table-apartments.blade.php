@@ -30,7 +30,7 @@
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                         @foreach ($apartments as $apartment)
                             <tr wire:key="apartment-{{ $apartment->id }}-{{ str()->random(10) }}"
-                                class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                 <td class="px-6 py-4 whitespace-nowrap capitalize">
                                     {{ $apartment->name ?? '-' }}
                                 </td>
@@ -75,11 +75,11 @@
                 </table>
             </div>
             <div class="mx-1 mt-5">
-                {{ $apartments->links() }}
+                {{ $apartments->links('vendor.livewire.tailwind') }}
             </div>
         </div>
     @else
-        <div class="w-full text-center font-medium text-sm">
+        <div class="w-full text-center font-medium text-sm mt-10">
             Non ci sono note in bacheca
         </div>
     @endif

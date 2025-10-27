@@ -13,7 +13,7 @@
         </div>
 
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Amministratori</h2>
+            <h2 class="w-full text-xl font-medium">Amministratori</h2>
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/administrators/create">
                 Crea
             </flux:button>
@@ -27,34 +27,27 @@
                     <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                         <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Nome e Cognome
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Telefono</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Email</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-center text-xs uppercase tracking-wider">
                                     Condomini Affiliati</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Creato il</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                             @foreach ($administrators as $administrator)
                                 <tr wire:key="administrator-{{ $administrator->id }}-{{ str()->random(10) }}"
-                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                                         @if ($administrator->img_user)
                                             <flux:avatar src="{{ asset('storage/' . $administrator->img_user) }}" />
@@ -73,7 +66,12 @@
                                         {{ $administrator->email }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $administrator->condominiums->count() }}
+                                        <div class="text-center">
+                                            <span
+                                                class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">
+                                                {{ $administrator->condominiums->count() }}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $administrator->getDate($administrator->created_at) }}
@@ -96,7 +94,7 @@
                     </table>
                 </div>
                 <div class="mx-1 mt-5">
-                    {{ $administrators->links() }}
+                    {{ $administrators->links('vendor.livewire.tailwind') }}
                 </div>
             </div>
         @else

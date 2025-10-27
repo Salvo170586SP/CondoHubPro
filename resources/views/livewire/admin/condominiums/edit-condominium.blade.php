@@ -6,7 +6,7 @@
             <flux:breadcrumbs.item>Modifica</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Condomini / Modifica</h2>
+            <h2 class="w-full text-xl font-medium">Modifica Condominio</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/condominiums">
                 Torna Indietro
             </flux:button>

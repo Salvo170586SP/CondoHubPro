@@ -8,7 +8,7 @@
 
 
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Residenti / Dettagli</h2>
+            <h2 class="w-full text-xl font-medium">Dettagli Residenti</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/residents">
                 Torna Indietro
             </flux:button>

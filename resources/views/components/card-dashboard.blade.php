@@ -4,7 +4,7 @@
     'urlItem' => null,
 ])
 
-<div class="h-[250px] border dark:border-zinc-600 shadow rounded-lg dark:bg-zinc-700/50  p-5 bg-zinc-50">
+<div class="border dark:border-zinc-600 shadow rounded-lg dark:bg-zinc-700/50  p-5 bg-zinc-50">
     <div class="flex justify-between items-center">
         {{ $slot }}
         @if ($urlAll)

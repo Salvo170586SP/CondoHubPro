@@ -6,7 +6,7 @@
             <flux:breadcrumbs.item>Crea</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Amminsitratori / Crea</h2>
+            <h2 class="w-full text-xl font-medium">Crea Amminsitratore</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/administrators">
                 Torna Indietro
             </flux:button>
@@ -70,7 +70,7 @@
                                             <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                                                 @foreach ($condominiums as $condominium)
                                                     <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
-                                                        class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                                        class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                                         <td class="px-6 py-4 whitespace-nowrap">
                                                             <flux:checkbox wire:model="selectedCondominiums"
                                                                 value="{{ $condominium->id }}" />
@@ -98,7 +98,7 @@
                                         </table>
                                     </div>
                                     <div class="mx-1 mt-5">
-                                        {{ $condominiums->links() }}
+                                        {{ $condominiums->links('vendor.livewire.tailwind') }}
                                     </div>
                                 </div>
                             @else

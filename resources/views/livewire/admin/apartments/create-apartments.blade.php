@@ -8,7 +8,7 @@
             <flux:breadcrumbs.item>Crea Appartamento</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Appartamenti / Crea</h2>
+            <h2 class="w-full text-xl font-medium">Crea Appartamento</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate
                 href="/admin/condominiums/{{ $condominium->id }}/show">
                 Torna Indietro

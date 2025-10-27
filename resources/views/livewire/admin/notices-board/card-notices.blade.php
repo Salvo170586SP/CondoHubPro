@@ -82,7 +82,7 @@
             </div>
         </div>
     @empty
-        <div class="w-full text-center font-medium text-sm">
+        <div class="w-full text-center font-medium text-sm mt-10">
             Non ci sono note in bacheca
         </div>
     @endforelse

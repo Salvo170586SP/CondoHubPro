@@ -22,7 +22,7 @@
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                         @foreach ($cityCondominiums as $condominium)
                             <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
-                                class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                 <td class="px-6 py-4 whitespace-nowrap capitalize">
                                     {{ $condominium->name }}
                                 </td>
@@ -54,7 +54,7 @@
                 </table>
             </div>
             <div class="mx-1 mt-5">
-                {{ $cityCondominiums->links() }}
+                {{ $cityCondominiums->links('vendor.livewire.tailwind') }}
             </div>
         </div>
     @else

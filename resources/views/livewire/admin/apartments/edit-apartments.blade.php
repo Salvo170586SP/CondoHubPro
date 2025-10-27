@@ -7,7 +7,7 @@
             <flux:breadcrumbs.item>Modifica Appartamento</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Appartamenti / Modifica</h2>
+            <h2 class="w-full text-xl font-medium">Modifica Appartamento</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate
                 href="/admin/condominiums/{{ $condominium->id }}/show">
                 Torna Indietro

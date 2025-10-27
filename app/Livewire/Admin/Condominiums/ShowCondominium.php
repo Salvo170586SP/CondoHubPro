@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Condominiums;
 
 use App\Models\Apartment;
 use App\Models\Condominium;
+use App\Models\Feedback;
 use App\Models\NoticeBoard;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,7 @@ class ShowCondominium extends Component
     {
         $noticesBoardCount = NoticeBoard::where('condominium_id', $this->condominium->id)->count();
         $apartmentsCount = Apartment::where('condominium_id', $this->condominium->id)->count();
-        return view('livewire.admin.condominiums.show-condominium', compact('apartmentsCount', 'noticesBoardCount'));
+        $feedbooksCount = Feedback::where('condominium_id', $this->condominium->id)->count();
+        return view('livewire.admin.condominiums.show-condominium', compact('apartmentsCount', 'noticesBoardCount','feedbooksCount'));
     }
 }

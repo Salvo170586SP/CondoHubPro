@@ -13,7 +13,7 @@
         </div>
 
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-2xl font-medium">Residenti</h2>
+            <h2 class="w-full text-xl font-medium">Residenti</h2>
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/residents/create">
                 Crea
             </flux:button>
@@ -56,10 +56,10 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                             @foreach ($residents as $resident)
                                 <tr wire:key="resident-{{ $resident->id }}-{{ str()->random(10) }}"
-                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white transition-colors text-sm">
+                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                     <td class="px-6 py-4 whitespace-nowrap capitalize">
                                         {{ $resident->name . ' ' . $resident->surname }}
                                     </td>
@@ -104,7 +104,7 @@
                     </table>
                 </div>
                 <div class="mx-1 mt-5">
-                    {{ $residents->links() }}
+                    {{ $residents->links('vendor.livewire.tailwind') }}
                 </div>
             </div>
         @else

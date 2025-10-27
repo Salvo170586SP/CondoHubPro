@@ -83,13 +83,14 @@ php artisan serve
 
 ## Sezione screenshot
 
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-24 180928.png)
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-24 180953.png)
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-24 181159.png)
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-24 181214.pn)
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-24 181224.png)
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-24 181250.png)
-[Dashboard](/assets/imgs/screenshots/Screenshot 2025-10-25 112731.png)
+- `public/assets/imgs/screenshots/Screenshot 2025-10-24 180928.png`
+- `public/assets/imgs/screenshots/Screenshot 2025-10-24 180953.png`
+- `public/assets/imgs/screenshots/Screenshot 2025-10-24 181159.png`
+- `public/assets/imgs/screenshots/Screenshot 2025-10-24 181214.png`
+- `public/assets/imgs/screenshots/Screenshot 2025-10-24 181224.png`
+- `public/assets/imgs/screenshots/Screenshot 2025-10-24 181250.png`
+- `public/assets/imgs/screenshots/Screenshot 2025-10-25 112731.png`
+ 
 
 ## Contribuire
 
@@ -103,6 +104,3 @@ Il progetto è tutalmente free Open Source
 ## Ringraziamenti
 
 Seguimi e lascia una recensione. Grazie mille da Salvatore Pitanza
- 
-
- 

@@ -81,21 +81,21 @@ php artisan serve
 - Chat in real time per comunicare tra condomini e amministratore.
 - Bot AI.
 
-## Sezione screenshot
+## Anteprima
 
-![Dashboard 1](http://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-1.png?raw=true)
-![Dashboard 2](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-2.png?raw=true)
-![Dashboard 3](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-3.png?raw=true)
-![Dashboard 4](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-4.png?raw=true)
-![Dashboard 5](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-5.png?raw=true)
-![Dashboard 6](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-6.png?raw=true)
-![Dashboard 7](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-7.png?raw=true)
-![Dashboard 8](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-8.png?raw=true)
-![Dashboard 9](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-9.png?raw=true)
-![Dashboard 10](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-10.png?raw=true)
-![Dashboard 11](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-11.png?raw=true)
+<p float="left">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-1.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-2.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-3.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-4.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-5.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-6.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-8.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-9.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-10.png?raw=true" alt="Alt Text" style="width:250px;">
+<img src="https://github.com/Salvo170586SP/CondoHubPro/blob/main/public/assets/imgs/screenshots/screenshot-dashboard-11.png?raw=true" alt="Alt Text" style="width:250px;">
+</p>
 
- 
 ## Contribuire
 
 - Apri una issue per proporre miglioramenti o segnalare bug.

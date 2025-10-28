@@ -82,7 +82,7 @@
             </div>
         </div>
     @empty
-        <div class="w-full text-center font-medium text-sm mt-10">
+        <div class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
             Non ci sono note in bacheca
         </div>
     @endforelse

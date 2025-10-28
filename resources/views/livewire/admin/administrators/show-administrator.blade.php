@@ -46,12 +46,13 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="w-full p-5 rounded-lg shadow bg-zinc-100/30 dark:bg-zinc-700/50">
                 <h2 class="w-full text-lg font-medium mb-5">Condomini Gestiti</h2>
                 <div class="w-100 my-3">
                     <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
                 </div>
+                @if ($condominiums->count() > 0)
                 <div class="overflow-x-auto">
                     <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                         <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
@@ -111,8 +112,8 @@
                         {{ $condominiums->links('vendor.livewire.tailwind') }}
                     </div>
                 </div>
-                @if ($condominiums->count() == 0)
-                    <div class="w-full text-center italic"> Non ci sono elementi associati</div>
+                @else
+                    <div class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40  p-3 border dark:border-zinc-600 rounded-lg"> Non ci sono elementi associati</div>
                 @endif
             </div>
 

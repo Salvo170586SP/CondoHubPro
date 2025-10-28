@@ -21,38 +21,31 @@
         <div class="w-100 my-3">
             <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
         </div>
-        @if ($residents && $residents->count() > 0)
+        @if ($residents->count() > 0)
             <div class="overflow-x-auto">
                 <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                     <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                         <thead class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Nome e Cognome
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Telefono
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Email
                                 </th>
 
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Condominio di Residenza
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Appartamento
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Creato il</th>
-                                <th
-                                    class="px-6 py-3 text-left uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
@@ -108,7 +101,9 @@
                 </div>
             </div>
         @else
-            <div class="font-medium italic w-full text-center mt-10">non ci sono elementi</div>
+            <div
+                class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
+                Non ci sono elementi</div>
         @endif
     </div>
 </div>

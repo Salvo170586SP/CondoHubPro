@@ -39,7 +39,7 @@ class IndexFeedbacks extends Component
             $feedbacks = $feedbacks->where('priority', $this->filterPriority);
         }
 
-        $feedbacks = $feedbacks->latest()->paginate(5);
+        $feedbacks = $feedbacks->where('condominium_id', $this->condominium->id)->latest()->paginate(5);
 
         return view('livewire.admin.feedbacks.index-feedbacks', compact('feedbacks', 'priorities'));
     }

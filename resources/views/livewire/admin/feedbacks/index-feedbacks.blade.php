@@ -173,7 +173,9 @@
                             </div>
                         </div>
                     @else
-                        <div class="font-medium italic w-full text-center mt-10">non ci sono elementi</div>
+                        <div class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
+                            Non ci sono elementi
+                        </div>
                     @endif
                 </div>
             </div>

@@ -33,32 +33,26 @@
                 </flux:select>
             </div>
         </div>
-        @if ($condominiums && $condominiums->count() > 0)
+
+        @if ($condominiums->count() > 0)
             <div class="overflow-x-auto">
                 <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                     <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                         <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Nome</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Indirizzo</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Cap</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Città</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Amministratore</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Creato il</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
@@ -110,7 +104,9 @@
                 </div>
             </div>
         @else
-            <div class="font-medium italic w-full text-center mt-10">non ci sono elementi</div>
+            <div
+                class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
+                Non ci sono elementi</div>
         @endif
     </div>
 </div>

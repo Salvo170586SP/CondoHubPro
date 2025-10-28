@@ -83,17 +83,17 @@ php artisan serve
 
 ## Sezione screenshot
 
-![Dashboard 1](/assets/imgs/screenshots/screenshot-dashboard-1.png)
-![Dashboard 2](/assets/imgs/screenshots/screenshot-dashboard-2.png)
-![Dashboard 3](/assets/imgs/screenshots/screenshot-dashboard-3.png)
-![Dashboard 4](/assets/imgs/screenshots/screenshot-dashboard-4.png)
-![Dashboard 5](/assets/imgs/screenshots/screenshot-dashboard-5.svg)
-![Dashboard 6](/assets/imgs/screenshots/screenshot-dashboard-6.png)
-![Dashboard 7](/assets/imgs/screenshots/screenshot-dashboard-7.png)
-![Dashboard 8](/assets/imgs/screenshots/screenshot-dashboard-8.png)
-![Dashboard 9](/assets/imgs/screenshots/screenshot-dashboard-9.png)
-![Dashboard 10](/assets/imgs/screenshots/screenshot-dashboard-10.png)
-![Dashboard 11](/assets/imgs/screenshots/screenshot-dashboard-11.png)
+![Dashboard 1](/assets/imgs/screenshots/screenshot-dashboard-1.png?raw=true&sanitize=true)
+![Dashboard 2](/assets/imgs/screenshots/screenshot-dashboard-2.png?raw=true&sanitize=true)
+![Dashboard 3](/assets/imgs/screenshots/screenshot-dashboard-3.png?raw=true&sanitize=true)
+![Dashboard 4](/assets/imgs/screenshots/screenshot-dashboard-4.png?raw=true&sanitize=true)
+![Dashboard 5](/assets/imgs/screenshots/screenshot-dashboard-5.svg?raw=true&sanitize=true)
+![Dashboard 6](/assets/imgs/screenshots/screenshot-dashboard-6.png?raw=true&sanitize=true)
+![Dashboard 7](/assets/imgs/screenshots/screenshot-dashboard-7.png?raw=true&sanitize=true)
+![Dashboard 8](/assets/imgs/screenshots/screenshot-dashboard-8.png?raw=true&sanitize=true)
+![Dashboard 9](/assets/imgs/screenshots/screenshot-dashboard-9.png?raw=true&sanitize=true)
+![Dashboard 10](/assets/imgs/screenshots/screenshot-dashboard-10.png?raw=true&sanitize=true)
+![Dashboard 11](/assets/imgs/screenshots/screenshot-dashboard-11.png?raw=true&sanitize=true)
 
  
 ## Contribuire

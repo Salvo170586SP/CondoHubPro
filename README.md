@@ -99,7 +99,7 @@ php artisan serve
 ## Contribuire
 
 - Apri una issue per proporre miglioramenti o segnalare bug.
-- Per modifiche più estese, crea una branch feature e apri una pull request su `main`.
+- Per modifiche più estese, crea una branch feature e apri una pull request.
 
 ## Licenza
 

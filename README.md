@@ -83,17 +83,17 @@ php artisan serve
 
 ## Sezione screenshot
 
-![Dashboard 1](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-1.png)
-![Dashboard 2](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-2.png)
-![Dashboard 3](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-3.png)
-![Dashboard 4](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-4.png)
-![Dashboard 5](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-5.svg)
-![Dashboard 6](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-6.png)
-![Dashboard 7](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-7.png)
-![Dashboard 8](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-8.png)
-![Dashboard 9](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-9.png)
-![Dashboard 10](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-10.png)
-![Dashboard 11](https://raw.github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-11.png)
+![Dashboard 1](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-1.png)
+![Dashboard 2](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-2.png)
+![Dashboard 3](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-3.png)
+![Dashboard 4](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-4.png)
+![Dashboard 5](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-5.svg)
+![Dashboard 6](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-6.png)
+![Dashboard 7](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-7.png)
+![Dashboard 8](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-8.png)
+![Dashboard 9](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-9.png)
+![Dashboard 10](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-10.png)
+![Dashboard 11](https://github.com/Salvo170586SP/CondoHubPro/public/assets/imgs/screenshots/screenshot-dashboard-11.png)
 
  
 ## Contribuire

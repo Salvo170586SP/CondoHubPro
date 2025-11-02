@@ -17,6 +17,7 @@ class EditNotices extends Component
     public $description = '';
     public $type = '';
     public $url_pdf = null;
+    public $is_important = false;
 
     public function mount(NoticeBoard $notice)
     {
@@ -26,6 +27,7 @@ class EditNotices extends Component
         $this->description = $notice->description;
         $this->type = $notice->type;
         $this->url_pdf = $notice->url_pdf;
+        $this->is_important = (bool) $notice->is_important;
     }
 
 
@@ -36,6 +38,7 @@ class EditNotices extends Component
             'description' => 'required|string',
             'type' => 'required',
             'condominium_id' => 'required',
+            'is_important' => 'boolean',
         ], [
             'title.required' => 'il campo è obbligatorio',
             'title.max' => 'max 50 caratteri',
@@ -60,6 +63,7 @@ class EditNotices extends Component
                 'description' => $this->description,
                 'type' => $this->type,
                 'url_pdf' => $url,
+                'is_important' => $this->is_important,
             ]);
 
             session()->flash('messageNotice', 'Elemento modificato con successo!');

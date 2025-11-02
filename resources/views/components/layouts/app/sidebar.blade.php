@@ -38,6 +38,10 @@
                     :current="request()->routeIs('condominiums')" wire:navigate>
                     {{ __('Condomini') }}
                 </flux:navlist.item>
+                <flux:navlist.item icon="document-duplicate" :href="route('archive')"
+                    :current="request()->routeIs('archive')" wire:navigate>
+                    {{ __('Archivio') }}
+                </flux:navlist.item>
             </flux:navlist.group>
 
             <flux:spacer class="my-2 border dark:border-zinc-700" />

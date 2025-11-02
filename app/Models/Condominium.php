@@ -33,6 +33,11 @@ class Condominium extends Model
         return $this->hasMany(Apartment::class);
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
 
     public function getDate($date)
     {

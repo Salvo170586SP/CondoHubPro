@@ -28,9 +28,10 @@ class NoticeBoard extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function documents()
+ 
+    public function document()
     {
-        return $this->hasMany(Document::class);
+        return $this->hasOne(Document::class);
     }
 
     public function getDate($date)

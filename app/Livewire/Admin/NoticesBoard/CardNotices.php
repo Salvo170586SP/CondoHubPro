@@ -36,6 +36,7 @@ class CardNotices extends Component
     public function viewFavorite()
     {
         $this->is_favorite = !$this->is_favorite;
+        $this->resetPage();
     }
 
     public function render()
@@ -49,17 +50,19 @@ class CardNotices extends Component
         }
 
         if (!$this->is_favorite) {
-            $noticesBoard = $noticesBoard->where('condominium_id', $this->condominium->id)
-                ->latest()
-                ->paginate(10);
+            $noticesBoard = $noticesBoard->where('condominium_id', $this->condominium->id);
         } else {
             $noticesBoard = $noticesBoard->where('condominium_id', $this->condominium->id)
-                ->where('is_active', true)
-                ->latest()
-                ->paginate(10);
+                ->where('is_active', true);
         }
 
+        $noticesBoard = $noticesBoard->latest()->paginate(5);
 
-        return view('livewire.admin.notices-board.card-notices', compact('noticesBoard', 'types'));
+        // total favorites count for this condominium (across all pages)
+        $favoritesCount = NoticeBoard::where('condominium_id', $this->condominium->id)
+            ->where('is_active', true)
+            ->count();
+
+        return view('livewire.admin.notices-board.card-notices', compact('noticesBoard', 'types', 'favoritesCount'));
     }
 }

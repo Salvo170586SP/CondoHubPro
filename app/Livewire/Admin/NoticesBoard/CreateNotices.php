@@ -3,7 +3,9 @@
 namespace App\Livewire\Admin\NoticesBoard;
 
 use App\Models\Condominium;
+use App\Models\Document;
 use App\Models\NoticeBoard;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -24,31 +26,44 @@ class CreateNotices extends Component
             'title' => 'required|max:50|string',
             'description' => 'required|string',
             'type' => 'required',
-            'condominium_id' => 'required',
+                'url_pdf' => 'nullable|file|max:5120',
+                'is_important' => 'boolean',
         ], [
             'title.required' => 'il campo è obbligatorio',
             'title.max' => 'max 50 caratteri',
             'description.required' => 'il campo è obbligatorio',
             'type.required' => 'il campo è obbligatorio',
-            'condominium_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {
             $condominium = Condominium::findOrFail($this->condominium_id);
-            $url = $this->url_pdf;
+
+            $url = null;
+            $nameFile = null;
+            $mimeType = null;
 
             if ($this->url_pdf) {
+                $nameFile = $this->url_pdf->getClientOriginalName();
+                $mimeType = $this->url_pdf->getMimeType();
                 $url = $this->url_pdf->store('pdfsNotice', 'public');
             }
 
-            NoticeBoard::create([
+            $notice =    NoticeBoard::create([
                 'condominium_id' => $this->condominium_id,
                 'created_by' =>   $condominium->administrator_id,
                 'title' => $this->title,
                 'description' => $this->description,
                 'type' => $this->type,
-                'url_pdf' => $url,
                 'is_important' => $this->is_important,
+            ]);
+
+            Document::create([
+                'notice_board_id' => $notice->id,
+                'condominium_id' => $condominium->id,
+                'uploaded_by' => Auth::id(),
+                'name_file' => $nameFile,
+                'url_pdf' => $url,
+                'mime_type' => $mimeType,
             ]);
 
             session()->flash('messageNotice', 'Elemento creato con successo!');

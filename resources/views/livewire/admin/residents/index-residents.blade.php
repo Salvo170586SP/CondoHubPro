@@ -28,6 +28,8 @@
                         <thead class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
                                 <th class="px-6 py-3 text-left uppercase tracking-wider">
+                                </th>
+                                <th class="px-6 py-3 text-left uppercase tracking-wider">
                                     Nome e Cognome
                                 </th>
                                 <th class="px-6 py-3 text-left uppercase tracking-wider">
@@ -53,6 +55,13 @@
                             @foreach ($residents as $resident)
                                 <tr wire:key="resident-{{ $resident->id }}-{{ str()->random(10) }}"
                                     class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        @if ($resident->img_user)
+                                            <flux:avatar src="{{ asset('storage/' . $resident->img_user) }}" />
+                                        @else
+                                            <flux:avatar name="{{ $resident->getFullName() }}" />
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap capitalize">
                                         {{ $resident->name . ' ' . $resident->surname }}
                                     </td>

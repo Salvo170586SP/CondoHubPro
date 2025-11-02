@@ -13,6 +13,8 @@ use App\Livewire\Admin\Condominiums\EditCondominium;
 use App\Livewire\Admin\Condominiums\IndexCondominiums;
 use App\Livewire\Admin\Condominiums\ShowCondominium;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\Documents\IndexDocuments;
+use App\Livewire\Admin\Documents\ShowDocuments;
 use App\Livewire\Admin\Feedbacks\CreateFeedbacks;
 use App\Livewire\Admin\Feedbacks\EditFeedbacks;
 use App\Livewire\Admin\Feedbacks\IndexFeedbacks;
@@ -33,15 +35,20 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('/admin')->group(function () {
 
-    /* CITTA' */
+    /* DASHBOARD' */
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
    
-    /* CITTA' */
+    /* ARCHIVIO' */
+    Route::get('/archive', IndexDocuments::class)->name('archive');
+    Route::get('/archive/{condominium}/show', ShowDocuments::class)->name('archive.show');
     
+    /* CITTA' */ 
     Route::get('/cities', IndexCities::class)->name('cities');
     Route::get('/cities/{city}/show', ShowCity::class)->name('cities.show');
     
     /* AMMINISTRATORE */
+    
+
     Route::get('/administrators', IndexAdministrators::class)->name('administrators');
     Route::get('/administrators/create', CreateAdministrators::class)->name('amministrators.create');
     Route::get('/administrators/{administrator}/edit', EditAdministrator::class)->name('amministrators.edit');

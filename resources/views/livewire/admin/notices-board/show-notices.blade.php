@@ -19,7 +19,15 @@
                 <flux:spacer />
                 <div class="space-x-3">
                     <flux:modal.close>
-                        <flux:button variant="ghost">Cancel</flux:button>
+                        <div class="flex items-center gap-3">
+                            @if ($notice->document)
+                                <flux:button href="{{ asset('/storage/' . $notice->document->url_pdf) }}" download
+                                    icon="arrow-down-tray" variant="filled">
+                                    Scarica Allegato
+                                </flux:button>
+                            @endif
+                            <flux:button variant="ghost">Cancel</flux:button>
+                        </div>
                     </flux:modal.close>
                 </div>
             </div>

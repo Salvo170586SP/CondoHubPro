@@ -11,6 +11,8 @@
             </div>
             <flux:input label="Titolo" wire:model="title" />
             <flux:textarea label="Descrizione" wire:model="description" />
+            <flux:checkbox label="Importante" wire:model="is_important" />
+
             <flux:select wire:model="type" label="Tipo">
                 <flux:select.option value="">Seleziona</flux:select.option>
                 @if (is_array($types) || $types instanceof \Illuminate\Support\Collection)

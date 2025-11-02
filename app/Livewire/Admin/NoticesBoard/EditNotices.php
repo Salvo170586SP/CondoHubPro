@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\NoticesBoard;
 
 use App\Models\NoticeBoard;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -26,7 +27,8 @@ class EditNotices extends Component
         $this->title = $notice->title;
         $this->description = $notice->description;
         $this->type = $notice->type;
-        $this->url_pdf = $notice->url_pdf;
+
+        $this->url_pdf = optional($notice->document)->url_pdf ?? null;
         $this->is_important = (bool) $notice->is_important;
     }
 
@@ -37,24 +39,32 @@ class EditNotices extends Component
             'title' => 'required|max:50|string',
             'description' => 'required|string',
             'type' => 'required',
-            'condominium_id' => 'required',
             'is_important' => 'boolean',
         ], [
             'title.required' => 'il campo è obbligatorio',
             'title.max' => 'max 50 caratteri',
             'description.required' => 'il campo è obbligatorio',
             'type.required' => 'il campo è obbligatorio',
-            'condominium_id.required' => 'il campo è obbligatorio',
         ]);
 
         try {
-            $url = $this->notice->url_pdf;
+            $currentUrl = $this->notice->document->url_pdf ?? null;
+            $nameFile = $this->notice->document->name_file ?? null;
+            $mimeType = $this->notice->document->mime_type ?? null;
 
             if ($this->url_pdf && !is_string($this->url_pdf)) {
-                if ($this->notice->url_pdf) {
-                    Storage::disk('public')->delete($this->notice->url_pdf);
+                $newUrl = $this->url_pdf->store('pdfsNotice', 'public');
+                $newNameFile = $this->url_pdf->getClientOriginalName();
+                $newMimeType = $this->url_pdf->getMimeType();
+                if ($currentUrl && Storage::disk('public')->exists($currentUrl)) {
+                    Storage::disk('public')->delete($currentUrl);
                 }
-                $url = $this->url_pdf->store('pdfsNotice', 'public');
+
+                $url = $newUrl;
+                $nameFile = $newNameFile;
+                $mimeType = $newMimeType;
+            } else {
+                $url = $currentUrl;
             }
 
             $this->notice->update([
@@ -65,6 +75,28 @@ class EditNotices extends Component
                 'url_pdf' => $url,
                 'is_important' => $this->is_important,
             ]);
+
+            $document = $this->notice->document;
+
+            if ($document) {
+                $document->update([
+                    'notice_board_id' => $this->notice->id,
+                    'condominium_id' => $this->condominium_id,
+                    'uploaded_by' => Auth::id(),
+                    'name_file' => $nameFile,
+                    'url_pdf' => $url,
+                    'mime_type' => $mimeType,
+                ]);
+            } else {
+                $this->notice->document()->create([
+                    'notice_board_id' => $this->notice->id,
+                    'condominium_id' => $this->condominium_id,
+                    'uploaded_by' => Auth::id(),
+                    'name_file' => $nameFile,
+                    'url_pdf' => $url,
+                    'mime_type' => $mimeType,
+                ]);
+            }
 
             session()->flash('messageNotice', 'Elemento modificato con successo!');
             return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);

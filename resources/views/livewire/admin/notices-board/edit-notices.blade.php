@@ -24,6 +24,14 @@
                 @endif
             </flux:select>
             <flux:input type="file" label="Carica file" wire:model="url_pdf" />
+            @if (optional($notice->document)->url_pdf)
+                <div class="mt-2 text-sm text-gray-600">
+                    File attuale:
+                    <div class="underline text-blue-600 hover:text-blue-800">
+                        {{ $notice->document->name_file ?? basename($notice->document->url_pdf) }}
+                    </div>
+                </div>
+            @endif
             <div class="flex">
                 <flux:spacer />
                 <flux:button type="submit" variant="primary" wire:click="submit">Modifica</flux:button>

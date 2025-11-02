@@ -48,7 +48,7 @@ class CreateNotices extends Component
                 $url = $this->url_pdf->store('pdfsNotice', 'public');
             }
 
-            $notice =    NoticeBoard::create([
+            $notice = NoticeBoard::create([
                 'condominium_id' => $this->condominium_id,
                 'created_by' =>   $condominium->administrator_id,
                 'title' => $this->title,

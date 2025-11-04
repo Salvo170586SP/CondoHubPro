@@ -24,11 +24,11 @@ class DeleteFeedbacks extends Component
             }
             
             $condominium_id = $this->condominium->id;
-            session()->flash('message', 'Elemento eliminato con successo!');
+            session()->flash('messageFeedback', 'Elemento eliminato con successo!');
             return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
         } catch (\Throwable $th) {
             $condominium_id = $this->condominium->id;
-            session()->flash('message', 'Errore di eliminazione. Riprova.');
+            session()->flash('errorFeedback', 'Errore di eliminazione. Riprova.');
             return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
         }
     }

@@ -1,6 +1,38 @@
 <div>
-    <div class="w-100 mb-3">
-        <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+    <div class="flex items-center justify-between my-3 h-15">
+
+        <div class="w-100">
+            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+        </div>
+
+        @if (count($selected) > 0)
+            <div class="bg-zinc-50 w-[350px] flex justify-between items-center shadow rounded-lg p-3">
+                <div class="text-zinc-600 font-medium border-e pe-2">
+                    <span class="font-bold me-2">{{ count($selected) }}</span> selezionati
+                </div>
+
+                <div>
+                    <flux:modal.trigger name="delete-profile">
+                        <flux:button size="sm" icon="trash" variant="danger">Elimina Selezionati
+                        </flux:button>
+                    </flux:modal.trigger>
+
+                    <flux:modal name="delete-profile" class="md:w-96">
+                        <div class="space-y-6">
+                            <div>
+                                <flux:heading size="lg">Attenzione!</flux:heading>
+                                <flux:text class="mt-2">Sei sicuoro di eliminare i selezionati?</flux:text>
+                            </div>
+
+                            <div class="flex">
+                                <flux:spacer />
+                                <flux:button wire:click="deleteSelected" variant="danger">Elimina</flux:button>
+                            </div>
+                        </div>
+                    </flux:modal>
+                </div>
+            </div>
+        @endif
     </div>
     @if ($apartments->count() > 0)
         <div class="overflow-x-auto">
@@ -9,6 +41,10 @@
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                <flux:checkbox type="checkbox" wire:model.live="areAllSelected"
+                                    class="form-checkbox h-4 w-4" />
+                            </th>
+                            <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
                                 Nome
                             </th>
                             <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
@@ -31,7 +67,12 @@
                         @foreach ($apartments as $apartment)
                             <tr wire:key="apartment-{{ $apartment->id }}-{{ str()->random(10) }}"
                                 class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <flux:checkbox type="checkbox" wire:model.live="selected"
+                                        wire:key="select-{{ $apartment->id }}" value="{{ $apartment->id }}"
+                                        class="form-checkbox h-4 w-4" />
+                                </td>
+                                <td class="px-2 py-4 whitespace-nowrap capitalize">
                                     {{ $apartment->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap uppercase">

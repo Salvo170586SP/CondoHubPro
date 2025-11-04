@@ -12,6 +12,9 @@ class IndexCondominiums extends Component
     use WithPagination;
     public $search = '';
     public $search_city = '';
+    public $selected = [];
+    public $areAllSelected = false;
+    public $currentPageIds = [];
 
     public function updatedSearch()
     {
@@ -22,6 +25,72 @@ class IndexCondominiums extends Component
     {
         $this->resetPage();
     }
+
+    public function mount()
+    {
+        $this->currentPageIds = [];
+        $this->areAllSelected = false;
+        $this->selected = [];
+    }
+
+
+
+    public function deleteSelected()
+    {
+        if (empty($this->selected)) {
+            session()->flash('error', 'Nessun elemento selezionato.');
+            return;
+        }
+
+        $ids = $this->selected;
+
+        $condominiums = Condominium::whereIn('id', $ids)->get();
+
+        foreach ($condominiums as $condominium) {
+            $condominium->delete();
+        }
+
+        $this->selected = [];
+        $this->areAllSelected = false;
+
+        session()->flash('message', "Elementi selezionati eliminati");
+
+        $this->resetPage();
+    }
+
+
+
+    /**
+     * Restituisce gli ID amministratore per la pagina correntemente impaginata (rispettando la ricerca).
+     */
+    protected function getCurrentPageCondominiumIds(): array
+    {
+        return $this->currentPageIds ?? [];
+    }
+
+    /**
+     * Quando cambia l'array di selezione per riga, aggiorna lo stato della casella di controllo dell'intestazione.
+     */
+    public function updatedSelected()
+    {
+        $ids = $this->getCurrentPageCondominiumIds();
+        $this->areAllSelected = !empty($ids) && count(array_diff($ids, $this->selected)) === 0;
+    }
+
+    /**
+     * Quando la casella di controllo dell'intestazione (areAllSelected) è selezionata, aggiungi/rimuovi gli ID della pagina corrente.
+     */
+    public function updatedAreAllSelected($value)
+    {
+        $ids = $this->getCurrentPageCondominiumIds();
+
+        if ($value) {
+            $this->selected = array_values(array_unique(array_merge($this->selected, $ids)));
+        } else {
+            $this->selected = array_values(array_diff($this->selected, $ids));
+        }
+    }
+
 
     public function render()
     {
@@ -38,6 +107,11 @@ class IndexCondominiums extends Component
         $condominiums = $condominiums->latest()->paginate();
 
         $cities = City::all();
+
+        // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
+        $this->currentPageIds = $condominiums->pluck('id')->toArray();
+
+        $this->areAllSelected = !empty($this->currentPageIds) && count(array_diff($this->currentPageIds, $this->selected)) === 0;
 
         return view('livewire.admin.condominiums.index-condominiums', compact('condominiums', 'cities'));
     }

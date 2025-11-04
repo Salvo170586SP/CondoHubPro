@@ -40,6 +40,8 @@ class CreateResidents extends Component
 
     public function submit()
     {
+        $this->validate();
+
         try {
             $url = null;
 
@@ -56,13 +58,14 @@ class CreateResidents extends Component
                 'password' =>  $this->password ??= Hash::make('password'),
             ])->assignRole('condomino');
 
-            $apartment = Apartment::findOrFail($this->apartment_id);
-            if ($apartment && $resident->resident_id) {
-                $apartment->resident_id = NULL;
+            if ($this->apartment_id) {
+                $apartment = Apartment::findOrFail($this->apartment_id);
+                if ($apartment && $resident->resident_id) {
+                    $apartment->resident_id = NULL;
+                }
+                $apartment->resident_id = $resident->id;
+                $apartment->save();
             }
-            $apartment->resident_id = $resident->id;
-
-            $apartment->save();
 
             session()->flash('message', 'Elemento creato con successo!');
             return $this->redirect('/admin/residents', navigate: true);

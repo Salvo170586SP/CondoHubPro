@@ -18,8 +18,40 @@
                 Crea
             </flux:button>
         </div>
-        <div class="w-100 my-3">
-            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+        <div class="flex items-center justify-between my-3 h-15">
+
+            <div class="w-100">
+                <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
+            </div>
+
+            @if (count($selected) > 0)
+                <div class="bg-zinc-50 w-[350px] flex justify-between items-center shadow rounded-lg p-3">
+                    <div class="text-zinc-600 font-medium border-e pe-2">
+                        <span class="font-bold me-2">{{ count($selected) }}</span> selezionati
+                    </div>
+
+                    <div>
+                        <flux:modal.trigger  name="delete-profile">
+                            <flux:button size="sm" icon="trash" variant="danger">Elimina Selezionati</flux:button>
+                        </flux:modal.trigger>
+
+                        <flux:modal name="delete-profile" class="md:w-96">
+                            <div class="space-y-6">
+                                <div>
+                                    <flux:heading size="lg">Attenzione!</flux:heading>
+                                    <flux:text class="mt-2">Sei sicuoro di eliminare i selezionati?</flux:text>
+                                </div>
+                                
+                                <div class="flex">
+                                    <flux:spacer />
+                                    <flux:button wire:click="deleteSelected" variant="danger">Elimina</flux:button>
+                                </div>
+                            </div>
+                        </flux:modal>
+                    </div>
+                </div>
+            @endif
+
         </div>
         @if ($administrators->count() > 0)
             <div class="overflow-x-auto">
@@ -28,9 +60,12 @@
                         <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                    <flux:checkbox type="checkbox" wire:model.live="areAllSelected" />
+                                </th>
+                                <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                    Nome e Cognome
+                                    Nome
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                                     Telefono</th>
@@ -49,6 +84,10 @@
                                 <tr wire:key="administrator-{{ $administrator->id }}-{{ str()->random(10) }}"
                                     class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <flux:checkbox type="checkbox" wire:model.live="selected"
+                                            wire:key="select-{{ $administrator->id }}" value="{{ $administrator->id }}" />
+                                    </td>
+                                    <td class="px-2 py-4 whitespace-nowrap text-sm">
                                         @if ($administrator->img_user)
                                             <flux:avatar src="{{ asset('storage/' . $administrator->img_user) }}" />
                                         @else
@@ -102,5 +141,13 @@
                 class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
                 Non ci sono elementi</div>
         @endif
+
+
+
+
+
+
+
     </div>
+
 </div>

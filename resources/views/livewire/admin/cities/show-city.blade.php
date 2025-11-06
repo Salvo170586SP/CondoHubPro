@@ -13,9 +13,6 @@
         </div>
 
         <h3 class="text-lg font-medium mb-4">Condomini di {{ $city->name_city }}</h3>
-
-
         <livewire:admin.cities.table-city-condominiums :city="$city" />
-
     </div>
 </div>

@@ -61,9 +61,9 @@
                 <div class="text-sm capitalize">
                     <div class="text-sm font-medium">Amministratore:</div>
                     @if ($condominium->administrator)
-                        {{ $condominium->administrator->getFullName() }}
+                    {{ $condominium->administrator->getFullName() }}
                     @else
-                        -
+                    -
                     @endif
                 </div>
             </div>
@@ -75,8 +75,9 @@
                 <div
                     class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold mb-5 flex items-center">Segnalazioni <span
-                                class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-lg ms-2">{{ $feedbacks->count() }}
+                        <h2 class="text-lg font-bold flex items-center">Segnalazioni <span
+                                class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-lg ms-2">{{
+                                $feedbacks->count() }}
                             </span>
                         </h2>
                         <flux:button icon="plus" variant="filled" wire:navigate
@@ -87,10 +88,10 @@
 
                     <div class="w-full h-[10px] mb-7">
                         @if (session('messageFeedback'))
-                            <flux:badge color="zinc" class="w-full p-2">{{ session('messageFeedback') }}
-                            </flux:badge>
+                        <flux:badge color="zinc" class="w-full p-2">{{ session('messageFeedback') }}
+                        </flux:badge>
                         @elseif(session('errorFeedback'))
-                            <flux:badge color="red" class="w-full p-2">{{ session('errorFeedback') }}</flux:badge>
+                        <flux:badge color="red" class="w-full p-2">{{ session('errorFeedback') }}</flux:badge>
                         @endif
                     </div>
 
@@ -107,9 +108,8 @@
                                     placeholder="filtra priorità">
                                     <flux:select.option value="">Mostra Tutti</flux:select.option>
                                     @foreach ($priorities as $priority)
-                                        <flux:select.option value="{{ $priority['id'] }}"
-                                            wire:key="{{ $priority['id'] }}">
-                                            {{ $priority['label'] }}</flux:select.option>
+                                    <flux:select.option value="{{ $priority['id'] }}" wire:key="{{ $priority['id'] }}">
+                                        {{ $priority['label'] }}</flux:select.option>
                                     @endforeach
                                 </flux:select>
                             </div>
@@ -117,112 +117,84 @@
 
 
                         @if (count($selected) > 0)
-                            <div class="bg-zinc-50 w-[350px] flex justify-between items-center shadow rounded-lg p-3">
-                                <div class="text-zinc-600 font-medium border-e pe-2">
-                                    <span class="font-bold me-2">{{ count($selected) }}</span> selezionati
-                                </div>
-
-                                <div>
-                                    <flux:modal.trigger name="delete-profile">
-                                        <flux:button size="sm" icon="trash" variant="danger">Elimina Selezionati
-                                        </flux:button>
-                                    </flux:modal.trigger>
-
-                                    <flux:modal name="delete-profile" class="md:w-96">
-                                        <div class="space-y-6">
-                                            <div>
-                                                <flux:heading size="lg">Attenzione!</flux:heading>
-                                                <flux:text class="mt-2">Sei sicuoro di eliminare i selezionati?
-                                                </flux:text>
-                                            </div>
-
-                                            <div class="flex">
-                                                <flux:spacer />
-                                                <flux:button wire:click="deleteSelected" variant="danger">Elimina
-                                                </flux:button>
-                                            </div>
-                                        </div>
-                                    </flux:modal>
-                                </div>
-                            </div>
+                        <x-modal-select :selected="$selected" />
                         @endif
                     </div>
 
                     @if ($feedbacks && $feedbacks->count() > 0)
-                        <div class="overflow-x-auto">
-                            <div class="min-w-full border dark:border-zinc-600 rounded-lg">
-                                <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
-                                    <thead
-                                        class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                <flux:checkbox type="checkbox" wire:model.live="areAllSelected" />
-                                            </th>
-                                            <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
-                                                Titolo</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Creato da</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Priorità</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Creato il</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                                        @foreach ($feedbacks as $feedback)
-                                            <tr wire:key="feedback-{{ $feedback->id }}-{{ str()->random(10) }}"
-                                                class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                                    <flux:checkbox type="checkbox" wire:model.live="selected"
-                                                        wire:key="select-{{ $feedback->id }}"
-                                                        value="{{ $feedback->id }}" class="form-checkbox h-4 w-4" />
-                                                </td>
-                                                <td class="px-2 py-4 whitespace-nowrap capitalize">
-                                                    {{ $feedback->title }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap capitalize">
-                                                    {{ $feedback->creator->getFullName() }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    @foreach ($priorities as $priority)
-                                                        @if ($feedback->priority == $priority['id'])
-                                                            <span
-                                                                class="{{ $priority['color'] }} px-3 py-1 text-white rounded-lg">{{ $priority['label'] }}</span>
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $feedback->getDate($feedback->created_at) }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="flex justify-end gap-2">
-                                                        <flux:button icon="eye" variant="filled" wire:navigate
-                                                            href="/admin/condominiums/{{ $condominium->id }}/feedbacks/{{ $feedback->id }}/show">
-                                                        </flux:button>
-                                                        <flux:button icon="pencil" variant="filled" wire:navigate
-                                                            href="/admin/condominiums/{{ $condominium->id }}/feedbacks/{{ $feedback->id }}/edit">
-                                                        </flux:button>
-                                                        <livewire:admin.feedbacks.delete-feedbacks :condominium="$condominium"
-                                                            :feedback="$feedback"
-                                                            wire:key="feedback-delete-{{ $condominium->id }}-{{ $feedback->id }}-{{ str()->random(10) }}" />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="mx-1 mt-5">
-                                {{ $feedbacks->links('vendor.livewire.tailwind') }}
-                            </div>
+                    <div class="overflow-x-auto">
+                        <div class="mb-5">
+                            {{ $feedbacks->links('vendor.livewire.tailwind') }}
                         </div>
+                        <div class="min-w-full border dark:border-zinc-600 rounded-lg">
+                            <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
+                                <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                            <flux:checkbox type="checkbox" wire:model.live="areAllSelected" />
+                                        </th>
+                                        <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
+                                            Titolo</th>
+                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                            Creato da</th>
+                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                            Priorità</th>
+                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                            Creato il</th>
+                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
+                                    @foreach ($feedbacks as $feedback)
+                                    <tr wire:key="feedback-{{ $feedback->id }}-{{ str()->random(10) }}"
+                                        class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <flux:checkbox type="checkbox" wire:model.live="selected"
+                                                wire:key="select-{{ $feedback->id }}" value="{{ $feedback->id }}"
+                                                class="form-checkbox h-4 w-4" />
+                                        </td>
+                                        <td class="px-2 py-4 whitespace-nowrap capitalize">
+                                            {{ $feedback->title }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                            {{ $feedback->creator->getFullName() }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @foreach ($priorities as $priority)
+                                            @if ($feedback->priority == $priority['id'])
+                                            <span class="{{ $priority['color'] }} px-3 py-1 text-white rounded-lg">{{
+                                                $priority['label'] }}</span>
+                                            @endif
+                                            @endforeach
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $feedback->getDate($feedback->created_at) }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex justify-end gap-2">
+                                                <flux:button icon="eye" variant="filled" wire:navigate
+                                                    href="/admin/condominiums/{{ $condominium->id }}/feedbacks/{{ $feedback->id }}/show">
+                                                </flux:button>
+                                                <flux:button icon="pencil" variant="filled" wire:navigate
+                                                    href="/admin/condominiums/{{ $condominium->id }}/feedbacks/{{ $feedback->id }}/edit">
+                                                </flux:button>
+                                                <livewire:admin.feedbacks.delete-feedbacks :condominium="$condominium"
+                                                    :feedback="$feedback"
+                                                    wire:key="feedback-delete-{{ $condominium->id }}-{{ $feedback->id }}-{{ str()->random(10) }}" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     @else
-                        <div
-                            class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-                            Non ci sono elementi
-                        </div>
+                    <div
+                        class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
+                        Non ci sono elementi
+                    </div>
                     @endif
                 </div>
             </div>

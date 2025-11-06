@@ -92,7 +92,7 @@ class TableApartments extends Component
             $apartments = $apartments->where('name', 'like', '%' . $this->search . '%');
         }
 
-        $apartments = $apartments->where('condominium_id', $this->condominium->id)->latest()->paginate(10);
+        $apartments = $apartments->where('condominium_id', $this->condominium->id)->latest()->paginate(5);
         // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
         $this->currentPageIds = $apartments->pluck('id')->toArray();
         $this->areAllSelected = !empty($this->currentPageIds) && count(array_diff($this->currentPageIds, $this->selected)) === 0;

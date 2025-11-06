@@ -104,7 +104,7 @@ class IndexCondominiums extends Component
             $condominiums = $condominiums->where('city_id', $this->search_city);
         }
 
-        $condominiums = $condominiums->latest()->paginate();
+        $condominiums = $condominiums->latest()->paginate(10);
 
         $cities = City::all();
 

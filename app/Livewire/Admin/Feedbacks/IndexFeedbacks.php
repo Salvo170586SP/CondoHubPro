@@ -37,7 +37,6 @@ class IndexFeedbacks extends Component
         $this->suppressAreAllSelectedHook = false;
     }
 
-
     public function deleteSelected()
     {
         try {

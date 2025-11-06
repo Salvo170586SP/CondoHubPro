@@ -21,7 +21,6 @@
             </div>
         </div>
 
-
         {{$condominiums->links('vendor.livewire.tailwind')}}
         <div class="w-full my-5 grid grid-cols-5 gap-2">
             @foreach ($condominiums as $condominium)

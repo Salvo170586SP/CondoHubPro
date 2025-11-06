@@ -86,9 +86,10 @@ class EditResidents extends Component
             return $this->redirect('/admin/residents', navigate: true);
         }
     }
+
     public function render()
     {
-        $apartments = Apartment::latest()->paginate(10);
+        $apartments = Apartment::where('resident_id', NULL)->get();
         return view('livewire.admin.residents.edit-residents', compact('apartments'));
     }
 }

@@ -2,7 +2,8 @@
     <div class="container mx-auto relative h-full flex-1 p-2">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
-            <flux:breadcrumbs.item>Archivio</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item wire:navigate href="/admin/archive">Archivio</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item>Archivi del condominio {{$condominium->name}}</flux:breadcrumbs.item>
         </flux:breadcrumbs>
         <div class="w-full h-[30px]">
             @if (session('message'))
@@ -11,8 +12,6 @@
             <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
             @endif
         </div>
-
-
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-xl font-medium">Archivio del Condominio {{$condominium->name}}</h2>

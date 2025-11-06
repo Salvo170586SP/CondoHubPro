@@ -120,15 +120,15 @@
                                 </div>
                                 <div class="text-sm">
                                     <div class="font-medium">Amministratore</div>
-                                    @isset($resident->apartment)
-                                        {{ $resident->apartment->condominium->administrator->name . ' ' . $resident->apartment->condominium->administrator->surname }}
+                                    @isset($resident->apartment->condominium->administrator)
+                                        {{ $resident->apartment->condominium->administrator->getFullName() }}
                                     @else
                                         -
                                     @endisset
                                 </div>
                                 <div class="text-sm">
                                     <div class="font-medium">Città:</div>
-                                    @isset($resident->apartment)
+                                    @isset($resident->apartment->condominium)
                                         {{ $resident->apartment->condominium->city->name_city }}
                                     @else
                                         -

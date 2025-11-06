@@ -97,11 +97,11 @@
                                 @endisset
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap capitalize">
-                                @isset($resident->apartment->condominium)
+                                @if($resident->apartment)
                                 {{ $resident->apartment->name }}
                                 @else
                                 -
-                                @endisset
+                                @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $resident->getDate($resident->created_at) }}

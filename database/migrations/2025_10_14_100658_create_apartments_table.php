@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('condominium_id');
+            $table->unsignedBigInteger('condominium_id')->nullable();
             $table->unsignedBigInteger('resident_id')->nullable();
             $table->string('unit_number')->nullable(); // es. "Int. 3" o "Scala A - Int. 2"
             $table->string('floor')->nullable(); // es. "2° piano"

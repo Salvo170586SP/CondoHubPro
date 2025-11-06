@@ -7,10 +7,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class CreateResidents extends Component
 {
 
+    use WithPagination;
     use WithFileUploads;
 
     public $name = '';
@@ -19,7 +21,13 @@ class CreateResidents extends Component
     public $img_user = null;
     public $email = '';
     public $password;
-    public $apartment_id;
+
+    public $name_apartment = '';
+    public $unit_number = '';
+    public $floor = '';
+    public $square_metres;
+    public $rooms;
+
 
     protected $rules = [
         'name' => 'required|string',
@@ -27,6 +35,12 @@ class CreateResidents extends Component
         'phone_number' => 'nullable|numeric',
         'img_user' => 'nullable',
         'email' => 'required|unique:users,email',
+
+        'name_apartment' => 'required|max:30|string',
+        'unit_number' => 'nullable|string',
+        'floor' => 'required|string',
+        'square_metres' => 'required|numeric',
+        'rooms' => 'required|numeric',
     ];
 
     protected $messages = [
@@ -35,8 +49,15 @@ class CreateResidents extends Component
         'phone_number.numeric' => 'il campo deve contenere numeri',
         'email.required' => 'il campo è obbligatorio',
         'email.unique' => 'Questa mail è esistente',
-    ];
 
+        'name_apartment.required' => 'il campo è obbligatorio',
+        'name_apartment.max' => 'il campo deve contenere massimo 30 caratteri',
+        'floor.required' => 'il campo è obbligatorio',
+        'square_metres.required' => 'il campo è obbligatorio',
+        'square_metres.numeric' => 'il campo può contenere solo numeri',
+        'rooms.required' => 'il campo è obbligatorio',
+        'rooms.numeric' => 'il campo può contenere solo numeri',
+    ];
 
     public function submit()
     {
@@ -49,7 +70,7 @@ class CreateResidents extends Component
                 $url = $this->img_user->store('imgsUser', 'public');
             }
 
-            $resident =  User::create([
+            $resident = User::create([
                 'name' => $this->name,
                 'surname' => $this->surname,
                 'phone_number' => $this->phone_number,
@@ -58,14 +79,14 @@ class CreateResidents extends Component
                 'password' =>  $this->password ??= Hash::make('password'),
             ])->assignRole('condomino');
 
-            if ($this->apartment_id) {
-                $apartment = Apartment::findOrFail($this->apartment_id);
-                if ($apartment && $resident->resident_id) {
-                    $apartment->resident_id = NULL;
-                }
-                $apartment->resident_id = $resident->id;
-                $apartment->save();
-            }
+            Apartment::create([
+                'name' => $this->name_apartment,
+                'unit_number' => $this->unit_number,
+                'floor' => $this->floor,
+                'square_metres' => $this->square_metres,
+                'rooms' => $this->rooms,
+                'resident_id' => $resident->id,
+            ]);
 
             session()->flash('message', 'Elemento creato con successo!');
             return $this->redirect('/admin/residents', navigate: true);
@@ -77,7 +98,7 @@ class CreateResidents extends Component
 
     public function render()
     {
-        $apartments = Apartment::latest()->paginate(10);
+        $apartments = Apartment::where('resident_id', NULL)->paginate(10);
         return view('livewire.admin.residents.create-residents', compact('apartments'));
     }
 }

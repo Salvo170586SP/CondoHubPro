@@ -13,23 +13,36 @@
         </div>
 
         <div class="overflow-x-auto">
-
-            <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
-                <div class="grid grid-cols-2 gap-3">
-                    <flux:input wire:model="name" label="Nome" />
-                    <flux:input wire:model="surname" label="Cognome" />
+            <div
+                class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
+                <h2 class="dark:text-zinc-200 font-medium mb-5">Dati Anagrafici</h2>
+                <div class="border-b dark:border-zinc-600 pb-5 space-y-5">
+                    <div class="grid grid-cols-2 gap-3">
+                        <flux:input wire:model="name" label="Nome" />
+                        <flux:input wire:model="surname" label="Cognome" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <flux:input wire:model="phone_number" label="Telefono" />
+                        <flux:input wire:model="email" label="Email" />
+                        <flux:input type="file" wire:model="img_user" label="Allega Foto" />
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <flux:input wire:model="phone_number" label="Telefono" />
-                    <flux:input wire:model="email" label="Email" />
-                    <flux:select wire:model="apartment_id" label="Appartamento di residenza">
-                        <flux:select.option>Seleziona</flux:select.option>
-                        @foreach ($apartments as $apartment)
-                            <flux:select.option value="{{ $apartment->id }}" wire:key="{{ $apartment->id }}">
-                                {{ $apartment->name }}</flux:select.option>
-                        @endforeach
-                    </flux:select>
-                    <flux:input type="file" wire:model="img_user" label="Allega Foto" />
+
+                <div class="w-full">
+                    <h2 class="dark:text-zinc-200 font-medium mb-5">Dati Catastali</h2>
+
+                    <div class="w-full space-y-5 mt-5">
+                        <div class="w-full grid grid-cols-4 gap-2">
+                            <flux:input wire:model="name_apartment" label="Nome" />
+                            <flux:input wire:model="floor" label="Piano" />
+                            <flux:input wire:model="unit_number" label="Interno" />
+                        </div>
+
+                        <div class="w-full grid grid-cols-5 gap-2">
+                            <flux:input type="number" wire:model="rooms" label="Numero Vani" />
+                            <flux:input type="number" wire:model="square_metres" label="Metri Quadri" />
+                        </div>
+                    </div>
                 </div>
                 <div class="flex justify-end mt-10">
                     <flux:button icon="check" variant="filled" wire:click="submit">

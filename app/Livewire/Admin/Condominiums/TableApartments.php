@@ -32,25 +32,27 @@ class TableApartments extends Component
 
     public function deleteSelected()
     {
-        if (empty($this->selected)) {
-            session()->flash('error', 'Nessun elemento selezionato.');
-            return;
+
+        try {
+            $ids = $this->selected;
+
+            $apartments = Apartment::whereIn('id', $ids)->get();
+
+            foreach ($apartments as $apartment) {
+                $apartment->update([
+                    'condominium_id' => NULL
+                ]);
+            }
+
+            $this->selected = [];
+            $this->areAllSelected = false;
+
+            session()->flash('message', "Elementi selezionati eliminati");     
+            $this->resetPage();
+
+        } catch (\Throwable $th) {
+            session()->flash('errorApartment', 'Errore di creazione. Riprova.');
         }
-
-        $ids = $this->selected;
-
-        $apartments = Apartment::whereIn('id', $ids)->get();
-
-        foreach ($apartments as $apartment) {
-            $apartment->delete();
-        }
-
-        $this->selected = [];
-        $this->areAllSelected = false;
-
-        session()->flash('message', "Elementi selezionati eliminati");
-
-        $this->resetPage();
     }
 
     /**

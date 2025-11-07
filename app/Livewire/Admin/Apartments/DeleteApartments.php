@@ -21,7 +21,9 @@ class DeleteApartments extends Component
     {
         try {
             if ($this->apartment) {
-                $this->apartment->delete();
+                $this->apartment->update([
+                    'condominium_id' => NULL
+                ]);
             }
 
             $condominium_id = $this->condominium->id;

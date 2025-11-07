@@ -10,58 +10,46 @@ use Livewire\Component;
 class CreateApartments extends Component
 {
     public Condominium $condominium;
-    public $name = '';
-    public $unit_number = '';
-    public $floor = '';
-    public $square_metres;
-    public $rooms;
-    public $resident_id;
-    public $condominium_id;
+    public $selectedApartment = [];
+
+    public function rules()
+    {
+        return [
+            'selectedApartment' => 'required|array',
+            'selectedApartment.*' => 'integer|exists:apartments,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'selectedApartment.required' => 'Seleziona un appartamento',
+            'selectedApartment.exists' => 'L\'appartamento selezionato non è valido',
+        ];
+    }
 
     public function submit()
     {
-        $this->validate([
-            'name' => 'required|max:30|string',
-            'unit_number' => 'nullable|string',
-            'floor' => 'required|string',
-            'square_metres' => 'required|numeric',
-            'rooms' => 'required|numeric',
-            'resident_id' => 'nullable',
-        ], [
-            'name.required' => 'il campo è obbligatorio',
-            'name.max' => 'il campo deve contenere massimo 30 caratteri',
-            'floor.required' => 'il campo è obbligatorio',
-            'square_metres.required' => 'il campo è obbligatorio',
-            'square_metres.numeric' => 'il campo può contenere solo numeri',
-            'rooms.required' => 'il campo è obbligatorio',
-            'rooms.numeric' => 'il campo può contenere solo numeri',
-        ]);
+        $this->validate();
 
         try {
-            Apartment::create([
-                'condominium_id' => $this->condominium->id,
-                'resident_id' => $this->resident_id,
-                'name' => $this->name,
-                'floor' => $this->floor,
-                'square_metres' => $this->square_metres,
-                'rooms' => $this->rooms,
-                'unit_number' => $this->unit_number
-            ]);
+            foreach ($this->selectedApartment as $apartment_id) {
+                $apartment =  Apartment::findOrFail($apartment_id);
+                $apartment->update(['condominium_id' => $this->condominium->id]);
+            }
 
-            $condominium_id = $this->condominium->id;
             session()->flash('messageApartment', 'Elemento creato con successo!');
-            return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
-            $condominium_id = $this->condominium->id;
             session()->flash('errorApartment', 'Errore di creazione. Riprova.');
-            return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
         }
+
+        $condominium_id = $this->condominium->id;
+        return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
     }
 
     public function render()
     {
-        $residents = User::role('condomino')->get();
-        $condominiums = Condominium::all();
-        return view('livewire.admin.apartments.create-apartments', compact('residents', 'condominiums'));
+        $apartments = Apartment::whereNull('condominium_id')->paginate(10);
+        return view('livewire.admin.apartments.create-apartments', compact('apartments'));
     }
 }

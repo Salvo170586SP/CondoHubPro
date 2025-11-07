@@ -112,11 +112,11 @@
                             <div class="grid grid-cols-3">
                                 <div class="text-sm">
                                     <div class="font-medium">Nome Condominio:</div>
-                                    @isset($resident->apartment)
+                                    @if($resident->apartment && $resident->apartment->condominium)
                                         {{ $resident->apartment->condominium->name }}
                                     @else
                                         -
-                                    @endisset
+                                    @endif
                                 </div>
                                 <div class="text-sm">
                                     <div class="font-medium">Amministratore</div>
@@ -138,27 +138,27 @@
                             <div class="grid grid-cols-3">
                                 <div class="text-sm">
                                     <div class="font-medium">Indirizzo:</div>
-                                    @isset($resident->apartment)
+                                    @if($resident->apartment && $resident->apartment->condominium)
                                         {{ $resident->apartment->condominium->address }}
                                     @else
                                         -
-                                    @endisset
+                                    @endif
                                 </div>
                                 <div class="text-sm">
                                     <div class="font-medium">Cap:</div>
-                                    @isset($resident->apartment)
+                                    @if($resident->apartment && $resident->apartment->condominium)
                                         {{ $resident->apartment->condominium->cap }}
                                     @else
                                         -
-                                    @endisset
+                                    @endif
                                 </div>
                                 <div class="text-sm">
                                     <div class="font-medium">Data Creazione:</div>
-                                    @isset($resident->apartment)
+                                    @if($resident->apartment && $resident->apartment->condominium) 
                                         {{ $resident->apartment->condominium->getDate($resident->apartment->condominium->created_at) }}
                                     @else
                                         -
-                                    @endisset
+                                    @endif
                                 </div>
                             </div>
                         </div>

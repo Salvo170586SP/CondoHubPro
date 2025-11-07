@@ -90,7 +90,7 @@
                                 class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">{{ $apartmentsCount }}</span>
                         </h2>
                         <flux:button icon="plus" variant="filled" wire:navigate
-                            href="/admin/condominiums/{{ $condominium->id }}/apartments/create">
+                            href="/admin/condominiums/{{ $condominium->id }}/apartments/add">
                             Crea
                         </flux:button>
                     </div>

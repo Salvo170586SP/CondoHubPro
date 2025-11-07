@@ -47,8 +47,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('/admin')->group(f
     Route::get('/cities/{city}/show', ShowCity::class)->name('cities.show');
     
     /* AMMINISTRATORE */
-    
-
     Route::get('/administrators', IndexAdministrators::class)->name('administrators');
     Route::get('/administrators/create', CreateAdministrators::class)->name('amministrators.create');
     Route::get('/administrators/{administrator}/edit', EditAdministrator::class)->name('amministrators.edit');
@@ -66,8 +64,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('/admin')->group(f
     Route::get('/condominiums/{condominium}/edit', EditCondominium::class)->name('condominiums.edit');
     Route::get('/condominiums/{condominium}/show', ShowCondominium::class)->name('condominiums.show');
     /* APPARTAMENTI */
-    Route::get('condominiums/{condominium}/apartments/create', CreateApartments::class)->name('condominums.apartments.create');
-    Route::get('condominiums/{condominium}/apartments/{apartment}/edit', EditApartments::class)->name('condominums.apartments.edit');
+    Route::get('condominiums/{condominium}/apartments/add', CreateApartments::class)->name('condominums.apartments.add');
     /* FEEDBACKS */
     Route::get('condominiums/{condominium}/feedbacks/', IndexFeedbacks::class)->name('feedbacks');
     Route::get('condominiums/{condominium}/feedbacks/create', CreateFeedbacks::class)->name('feedbacks.create');

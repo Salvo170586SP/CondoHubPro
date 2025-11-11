@@ -26,8 +26,8 @@ class CreateNotices extends Component
             'title' => 'required|max:50|string',
             'description' => 'required|string',
             'type' => 'required',
-                'url_pdf' => 'nullable|file|max:5120',
-                'is_important' => 'boolean',
+            'url_pdf' => 'nullable|file|max:5120',
+            'is_important' => 'boolean',
         ], [
             'title.required' => 'il campo è obbligatorio',
             'title.max' => 'max 50 caratteri',

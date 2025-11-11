@@ -5,14 +5,17 @@ use App\Livewire\Admin\Administrators\CreateAdministrators;
 use App\Livewire\Admin\Administrators\EditAdministrator;
 use App\Livewire\Admin\Administrators\ShowAdministrator;
 use App\Livewire\Admin\Apartments\CreateApartments;
-use App\Livewire\Admin\Apartments\EditApartments;
-use App\Livewire\Admin\Cities\IndexCities;
+ use App\Livewire\Admin\Cities\IndexCities;
 use App\Livewire\Admin\Cities\ShowCity;
 use App\Livewire\Admin\Condominiums\CreateCondominiums;
 use App\Livewire\Admin\Condominiums\EditCondominium;
 use App\Livewire\Admin\Condominiums\IndexCondominiums;
 use App\Livewire\Admin\Condominiums\ShowCondominium;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\Diary\CreateDiary;
+use App\Livewire\Admin\Diary\EditDiary;
+use App\Livewire\Admin\Diary\IndexDiary;
+use App\Livewire\Admin\Diary\ShowDiary;
 use App\Livewire\Admin\Documents\IndexDocuments;
 use App\Livewire\Admin\Documents\ShowDocuments;
 use App\Livewire\Admin\Feedbacks\CreateFeedbacks;
@@ -23,7 +26,7 @@ use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
 use App\Livewire\Admin\Residents\IndexResidents;
 use App\Livewire\Admin\Residents\ShowResidents;
-use Illuminate\Support\Facades\Route;
+ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
@@ -37,6 +40,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('/admin')->group(f
 
     /* DASHBOARD' */
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+    /* AGENDA' */
+    Route::get('/diary', IndexDiary::class)->name('diary');
+    Route::get('/diary/create', CreateDiary::class)->name('diary.create');
+    Route::get('/diary/{diary}/show', ShowDiary::class)->name('diary.show');
+    Route::get('/diary/{diary}/edit', EditDiary::class)->name('diary.edit');
    
     /* ARCHIVIO' */
     Route::get('/archive', IndexDocuments::class)->name('archive');

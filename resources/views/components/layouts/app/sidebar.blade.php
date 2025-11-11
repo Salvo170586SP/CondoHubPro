@@ -43,8 +43,12 @@
                     {{ __('Archivio') }}
                 </flux:navlist.item>
             </flux:navlist.group>
-
+            
             <flux:spacer class="my-2 border dark:border-zinc-700" />
+            <flux:navlist.item icon="calendar-days" :href="route('diary')"
+                :current="request()->routeIs('diary')" wire:navigate>
+                {{ __('Mia Agenda') }}
+            </flux:navlist.item>
             
             <flux:navlist.item icon="layout-grid" :href="route('dashboard')"
                 :current="request()->routeIs('dashboard')" wire:navigate>

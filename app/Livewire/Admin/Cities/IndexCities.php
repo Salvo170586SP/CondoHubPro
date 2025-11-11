@@ -13,6 +13,7 @@ class IndexCities extends Component
     public $selected = [];
     public $areAllSelected = false;
     public $currentPageIds = [];
+    public $orderByCondos = false;
 
 
     public function updatedSearch()
@@ -25,6 +26,12 @@ class IndexCities extends Component
         $this->currentPageIds = [];
         $this->areAllSelected = false;
         $this->selected = [];
+    }
+
+    public function setOrder()
+    {
+        $this->orderByCondos = !$this->orderByCondos;
+        $this->resetPage();
     }
 
 
@@ -93,14 +100,21 @@ class IndexCities extends Component
             $cities = $cities->where('name_city', 'like', '%' . $this->search . '%');
         }
 
-        $cities = $cities->latest()->paginate(10);
+         if ($this->orderByCondos) {
+            $cities->withCount('condominiums')
+               ->orderBy('condominiums_count', 'desc');
+        } else {
+            $cities->latest();
+        }
+
+        $cities = $cities->paginate(10);
 
         // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
         $this->currentPageIds = $cities->pluck('id')->toArray();
 
         // mi assicuro che la casella di controllo dell'intestazione rifletta la pagina corrente
         $this->areAllSelected = !empty($this->currentPageIds) && count(array_diff($this->currentPageIds, $this->selected)) === 0;
-     
+
         return view('livewire.admin.cities.index-cities', compact('cities'));
     }
 }

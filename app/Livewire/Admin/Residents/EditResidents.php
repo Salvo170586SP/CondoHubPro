@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Residents;
 
+use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -89,6 +90,15 @@ class EditResidents extends Component
             if ($this->resident->apartment) {
                 $this->resident->apartment->update([
                     'name' => $this->name_apartment,
+                    'floor' => $this->floor,
+                    'unit_number' => $this->unit_number,
+                    'rooms' => $this->rooms,
+                    'square_metres' => $this->square_metres,
+                ]);
+            }else{
+                Apartment::create([
+                    'name' => $this->name_apartment,
+                    'resident_id' => $this->resident->id,
                     'floor' => $this->floor,
                     'unit_number' => $this->unit_number,
                     'rooms' => $this->rooms,

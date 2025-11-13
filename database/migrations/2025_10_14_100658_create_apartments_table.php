@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('rooms')->nullable();
             $table->timestamps();
 
-            $table->foreign('condominium_id')->references('id')->on('condominiums')->onDelete('cascade');
+            $table->foreign('condominium_id')->references('id')->on('condominiums')->onDelete('set null');
             $table->foreign('resident_id')->references('id')->on('users')->onDelete('set null');
         });
     }

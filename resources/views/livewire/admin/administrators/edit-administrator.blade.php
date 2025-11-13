@@ -17,6 +17,7 @@
                 <flux:input wire:model="surname" label="Cognome" />
                 <flux:input wire:model="phone_number" label="Telefono" />
                 <flux:input type="file" wire:model="img_user" label="Allega Foto" />
+            
                 <div class="flex justify-end mt-10">
                     <flux:button icon="check" variant="filled" wire:click="editAdministrator">
                         Modifica

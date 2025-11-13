@@ -1,6 +1,6 @@
 # CondoHubPro
 
-Una piattaforma di gestione condominale OpenSource sviluppata con Laravel. Questo repository contiene l'applicazione backend + interfaccia costruita con Livewire e le integrazioni standard di Laravel.
+Una piattaforma di gestione condominale OpenSource sviluppata con Laravel/Livewire. Questo repository contiene l'applicazione backend + interfaccia costruita con Livewire e le integrazioni standard di Laravel.
 
 ## Descrizione
 
@@ -11,7 +11,7 @@ CondoHubPro è pensata per la gestione di condomini, appartamenti, documenti e c
 - PHP 8+ / Laravel
 - Livewire
 - Vite, Node/NPM 
-- Spatie Permission
+- Spatie Permission / Role
 
 ## Requisiti
 
@@ -19,6 +19,12 @@ CondoHubPro è pensata per la gestione di condomini, appartamenti, documenti e c
 - Composer
 - Node.js + npm (per asset)
 - MySQL / MariaDB o altro DB supportato da Laravel
+
+## Credenziali Admin (fare prima i seeder)
+
+*CAMBIARE LA PASSWORD SE IN PRODUZIONE
+- email: admin@condohubpro.com
+- pasword: passoword
 
 ## Installazione (dev)
 
@@ -71,13 +77,15 @@ php artisan serve
 ## Uso principale
 
 - L'app espone interfacce per amministratori e utenti tramite controller e componenti Livewire.
-- Caricamento e gestione documenti (modulo Document) - (in fase di sviluppo).
 - Creazione e pubblicazione di avvisi sulla bacheca (NoticeBoard CRUD).
 - Gestione appartamenti e condomini con assegnazione utenti.
 - Sistema di feedback per raccogliere segnalazioni dagli inquilini.
+- Gestione dei documenti.
+- Gestione della propria agenda.
+- Visualizzazione dei log di sistema.
 
 ## Prossime funzionalità in arrivo
-- Gestione dei documenti.
+- Invio automatico email su avvisi in bacheca e segnalazioni.
 - Chat in real time per comunicare tra condomini e amministratore.
 - Bot AI.
 
@@ -103,7 +111,7 @@ php artisan serve
 
 ## Licenza
 
-Il progetto è tutalmente free Open Source
+Il progetto è totalmente free Open Source
 
 ## Ringraziamenti
 

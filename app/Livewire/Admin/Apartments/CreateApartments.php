@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Apartments;
 use App\Models\Apartment;
 use App\Models\Condominium;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class CreateApartments extends Component
@@ -39,8 +40,10 @@ class CreateApartments extends Component
             }
 
             session()->flash('messageApartment', 'Elemento creato con successo!');
+            Log::info('Creazione Appartamento - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('errorApartment', 'Errore di creazione. Riprova.');
+            Log::error('Creazione Appartamento - Errore di creazione');
         }
 
         $condominium_id = $this->condominium->id;

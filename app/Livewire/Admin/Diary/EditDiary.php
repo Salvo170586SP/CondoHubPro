@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Diary;
 
 use App\Models\Diary;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class EditDiary extends Component
@@ -49,8 +50,10 @@ class EditDiary extends Component
             ]);
 
             session()->flash('message', 'Elemento modificato con successo!');
+            Log::info('Modifica Agenda - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di modifica. Riprova.');
+            Log::error('Modifica Agenda - Errore di modifica');
         }
 
         return $this->redirect('/admin/diary', navigate: true);

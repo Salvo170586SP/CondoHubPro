@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Cities;
 
 use App\Models\City;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class EditCity extends Component
@@ -49,8 +50,10 @@ class EditCity extends Component
             }
 
             session()->flash('message', 'Elemento modificato con successo!');
+            Log::info('Modifica Città - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di creazione. Riprova.');
+            Log::error('Modifica Città - Errore di modifica');
         }
 
         return $this->redirect('/admin/cities', navigate: true);

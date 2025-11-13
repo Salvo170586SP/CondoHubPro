@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Condominiums;
 use App\Models\City;
 use App\Models\Condominium;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class EditCondominium extends Component
@@ -59,17 +60,19 @@ class EditCondominium extends Component
 
 
             session()->flash('message', 'Elemento modificato con successo!');
-            return $this->redirect('/admin/condominiums', navigate: true);
+            Log::info('Modifica Condominio - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('message', 'Errore di creazione. Riprova.');
-            return $this->redirect('/admin/condominiums', navigate: true);
+            session()->flash('message', 'Errore di modifica. Riprova.');
+            Log::error('Modifica Condominio - Errore di modifica');
         }
+
+        return $this->redirect('/admin/condominiums', navigate: true);
     }
 
     public function render()
     {
         $cities = City::all();
         $administrators = User::role('amministratore')->get();
-        return view('livewire.admin.condominiums.edit-condominium', compact('cities','administrators'));
+        return view('livewire.admin.condominiums.edit-condominium', compact('cities', 'administrators'));
     }
 }

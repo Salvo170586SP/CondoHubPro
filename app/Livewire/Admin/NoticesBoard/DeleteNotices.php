@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\NoticesBoard;
 
 use App\Models\Condominium;
 use App\Models\NoticeBoard;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
@@ -31,7 +32,9 @@ class DeleteNotices extends Component
             }
 
             session()->flash('messageNotice', 'Elemento eliminato con successo!');
+            Log::info('Eliminazione Nota Bacheca - Operazione completata con successo');
         } catch (\Throwable $th) {
+            Log::error('Eliminazione Nota Bacheca - Errore di eliminazione');
             session()->flash('errorNotice', 'Errore di eliminazione. Riprova.');
         }
 

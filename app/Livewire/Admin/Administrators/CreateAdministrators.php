@@ -6,6 +6,7 @@ use App\Livewire\Forms\Administrators\Create\Step1;
 use App\Models\Condominium;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -62,11 +63,13 @@ class CreateAdministrators extends Component
             }
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/admin/administrators', navigate: true);
+            Log::info('Creazione Amministratore - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/admin/administrators', navigate: true);
+            Log::error('Creazione Amministratore - Errore di creazione');
         }
+
+        return $this->redirect('/admin/administrators', navigate: true);
     }
 
     public function render()

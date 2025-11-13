@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Diary;
 
 use App\Models\Diary;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteDiary extends Component
@@ -21,8 +22,10 @@ class DeleteDiary extends Component
                 $this->d->delete();
             }
             session()->flash('message', 'Elemento eliminato con successo!');
+            Log::info('Eliminazione Agenda - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di eliminazione. Riprova.');
+            Log::error('Eliminazione Agenda - Errore di eliminazione');
         }
 
         return $this->redirect('/admin/diary', navigate: true);

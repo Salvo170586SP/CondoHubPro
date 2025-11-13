@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Cities;
 
 use App\Models\City;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteCity extends Component
@@ -22,8 +23,10 @@ class DeleteCity extends Component
             }
 
             session()->flash('message', 'Elemento eliminato con successo!');
+            Log::info('Eliminazione Città - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore di eliminazione. Riprova.');
+            Log::error('Eliminazione Città - Errore di eliminazione');
         }
 
         return $this->redirect('/admin/cities', navigate: true);

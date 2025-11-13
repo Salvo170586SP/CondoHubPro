@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Apartments;
 
 use App\Models\Apartment;
 use App\Models\Condominium;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteApartments extends Component
@@ -26,14 +27,15 @@ class DeleteApartments extends Component
                 ]);
             }
 
-            $condominium_id = $this->condominium->id;
             session()->flash('messageApartment', 'Elemento eliminato con successo!');
-            return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
+            Log::info('Eliminazione Appartamento - Operazione completata con successo');
         } catch (\Throwable $th) {
-            $condominium_id = $this->condominium->id;
             session()->flash('errorApartment', 'Errore di eliminazione. Riprova.');
-            return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
+            Log::error('Eliminazione Appartamento - Errore di eliminazione');
         }
+
+        $condominium_id = $this->condominium->id;
+        return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
     }
     public function render()
     {

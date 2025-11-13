@@ -22,6 +22,7 @@ use App\Livewire\Admin\Feedbacks\CreateFeedbacks;
 use App\Livewire\Admin\Feedbacks\EditFeedbacks;
 use App\Livewire\Admin\Feedbacks\IndexFeedbacks;
 use App\Livewire\Admin\Feedbacks\ShowFeedbacks;
+use App\Livewire\Admin\Logs\IndexLogs;
 use App\Livewire\Admin\NoticesBoard\IndexNotices;
 use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
@@ -41,6 +42,9 @@ Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->
 
     /* DASHBOARD' */
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+   
+    /* LOGS' */
+    Route::get('/logs', IndexLogs::class)->name('logs');
 
     /* AGENDA' */
     Route::get('/diary', IndexDiary::class)->name('diary');

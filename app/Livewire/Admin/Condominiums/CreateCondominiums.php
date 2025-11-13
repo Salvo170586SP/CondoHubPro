@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Condominiums;
 use App\Models\City;
 use App\Models\Condominium;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class CreateCondominiums extends Component
@@ -43,17 +44,19 @@ class CreateCondominiums extends Component
             ]);
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/admin/condominiums', navigate: true);
+            Log::info('Creazione Condominio - Operazione completata con successo');
         } catch (\Throwable $th) {
+            Log::error('Creazione Condominio - Errore di creazione');
             session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/admin/condominiums', navigate: true);
         }
+
+        return $this->redirect('/admin/condominiums', navigate: true);
     }
 
     public function render()
     {
         $cities = City::all();
         $administrators = User::role('amministratore')->get();
-        return view('livewire.admin.condominiums.create-condominiums', compact('cities','administrators'));
+        return view('livewire.admin.condominiums.create-condominiums', compact('cities', 'administrators'));
     }
 }

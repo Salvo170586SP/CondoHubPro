@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Feedbacks;
 
 use App\Models\Condominium;
 use App\Models\Feedback;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteFeedbacks extends Component
@@ -22,15 +23,16 @@ class DeleteFeedbacks extends Component
             if ($this->feedback) {
                 $this->feedback->delete();
             }
-            
-            $condominium_id = $this->condominium->id;
+
             session()->flash('messageFeedback', 'Elemento eliminato con successo!');
-            return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
+            Log::info('Eliminazione Segnalazione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            $condominium_id = $this->condominium->id;
             session()->flash('errorFeedback', 'Errore di eliminazione. Riprova.');
-            return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
+            Log::error('Eliminazione Segnalazione - Errore di eliminazione');
         }
+
+        $condominium_id = $this->condominium->id;
+        return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
     }
     public function render()
     {

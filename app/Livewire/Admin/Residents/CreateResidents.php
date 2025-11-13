@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Residents;
 use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -89,11 +90,13 @@ class CreateResidents extends Component
             ]);
 
             session()->flash('message', 'Elemento creato con successo!');
-            return $this->redirect('/admin/residents', navigate: true);
+            Log::info('Creazione Residente - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore di creazione. Riprova.');
-            return $this->redirect('/admin/residents', navigate: true);
+            Log::error('Creazione Residente - Errore di creazione');
         }
+
+        return $this->redirect('/admin/residents', navigate: true);
     }
 
     public function render()

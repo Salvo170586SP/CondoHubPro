@@ -69,13 +69,17 @@
                 {{ __('Mia Agenda') }}
             </flux:navlist.item>
 
+            @role('admin|amministratore')
+            <flux:navlist.item icon="exclamation-triangle" :href="route('logs')" :current="request()->routeIs('logs')"
+                wire:navigate>
+                {{ __('Logs') }}
+            </flux:navlist.item>
+            @endrole
+
             <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                 wire:navigate>
                 {{ __('Dashboard') }}
             </flux:navlist.item>
-
-
-
 
         </flux:navlist>
 

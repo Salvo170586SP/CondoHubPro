@@ -6,6 +6,7 @@ use App\Models\Condominium;
 use App\Models\Document;
 use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -46,7 +47,7 @@ class CreateNotices extends Component
                 'type' => $this->type,
                 'is_important' => $this->is_important,
             ]);
-            
+
             $url = null;
             $nameFile = null;
             $mimeType = null;
@@ -55,7 +56,7 @@ class CreateNotices extends Component
                 $nameFile = $this->url_pdf->getClientOriginalName();
                 $mimeType = $this->url_pdf->getMimeType();
                 $url = $this->url_pdf->store('pdfsNotice', 'public');
-                
+
                 Document::create([
                     'notice_board_id' => $notice->id,
                     'condominium_id' => $condominium->id,
@@ -67,8 +68,10 @@ class CreateNotices extends Component
             }
 
             session()->flash('messageNotice', 'Elemento creato con successo!');
+            Log::info('Creazione Nota Bacheca - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('errorNotice', 'Errore di creazione. Riprova.');
+            Log::error('Creazione Nota Bacheca - Errore di creazione');
         }
 
         return $this->redirect("/admin/notices-board/$condominium->id", navigate: true);

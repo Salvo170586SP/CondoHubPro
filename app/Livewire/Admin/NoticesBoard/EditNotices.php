@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\NoticesBoard;
 
 use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -108,7 +109,9 @@ class EditNotices extends Component
             }
 
             session()->flash('messageNotice', 'Elemento modificato con successo!');
+            Log::info('Modifica Nota Bacheca - Operazione completata con successo');
         } catch (\Throwable $th) {
+            Log::error('Modifica Nota Bacheca - Errore di modifica');
             session()->flash('errorNotice', 'Errore di creazione. Riprova.');
         }
 

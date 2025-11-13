@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Administrators;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -62,11 +63,13 @@ class EditAdministrator extends Component
             ]);
 
             session()->flash('message', 'Elemento modificato con successo!');
-            return $this->redirect('/admin/administrators', navigate: true);
+            Log::info('Modifica Amministratore - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('error', 'Errore nella modifica. Riprova.');
-            return $this->redirect('/admin/administrators', navigate: true);
+            Log::error('Modifica Amministratore - Errore di modifica');
         }
+
+        return $this->redirect('/admin/administrators', navigate: true);
     }
 
     public function render()

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Diary;
 
 use App\Models\Diary;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class CreateDiary extends Component
@@ -40,8 +41,10 @@ class CreateDiary extends Component
             ]);
 
             session()->flash('message', 'Elemento creato con successo!');
+            Log::info('Creazione Agenda - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di creazione. Riprova.');
+            Log::error('Creazione Agenda - Errore di creazione');
         }
 
         return $this->redirect('/admin/diary', navigate: true);

@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Feedbacks;
 use App\Models\Condominium;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class CreateFeedbacks extends Component
@@ -36,14 +37,15 @@ class CreateFeedbacks extends Component
                 'priority' => $this->priority
             ]);
 
-            $condominium_id = $this->condominium->id;
             session()->flash('messageFeedback', 'Elemento creato con successo!');
-            return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
+            Log::info('Creazione Segnalazione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            $condominium_id = $this->condominium->id;
             session()->flash('errorFeedback', 'Errore di creazione. Riprova.');
-            return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
+            Log::error('Creazione Segnalazione - Errore di creazione');
         }
+
+        $condominium_id = $this->condominium->id;
+        return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
     }
 
     public function render()

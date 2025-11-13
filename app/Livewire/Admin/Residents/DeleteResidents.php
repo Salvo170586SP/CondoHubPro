@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Residents;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteResidents extends Component
@@ -22,11 +23,13 @@ class DeleteResidents extends Component
             }
 
             session()->flash('message', 'Elemento eliminato con successo!');
-            return $this->redirect('/admin/residents', navigate: true);
+            Log::info('Eliminazione Residente - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di eliminazione. Riprova.');
-            return $this->redirect('/admin/residents', navigate: true);
+            Log::error('Eliminazione Residente - Errore di eliminazione');
         }
+
+        return $this->redirect('/admin/residents', navigate: true);
     }
 
     public function render()

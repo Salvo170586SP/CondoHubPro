@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Feedbacks;
 
 use App\Models\Condominium;
 use App\Models\Feedback;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class EditFeedbacks extends Component
@@ -43,14 +44,15 @@ class EditFeedbacks extends Component
                 'priority' => $this->priority
             ]);
 
-            $condominium_id = $this->condominium->id;
             session()->flash('messageFeedback', 'Elemento modificato con successo!');
-            return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
+            Log::info('Modifica Segnalazione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            $condominium_id = $this->condominium->id;
             session()->flash('errorFeedback', 'Errore di modifica. Riprova.');
-            return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
+            Log::error('Modifica Segnalazione - Errore di modifica'); 
         }
+        
+        $condominium_id = $this->condominium->id;
+        return $this->redirect("/admin/condominiums/$condominium_id/feedbacks", navigate: true);
     }
 
     public function render()

@@ -21,11 +21,15 @@ class IndexDocuments extends Component
   {
     $condominiums = Condominium::query();
 
+    if (auth()->user()->hasRole('amministratore')) {
+      $condominiums = $condominiums->where('administrator_id', Auth::id())->latest()->paginate(10);
+    }
+
     if ($this->search) {
       $condominiums = $condominiums->where('name', 'like', '%' . $this->search . '%');
     }
 
-    $condominiums = $condominiums->where('administrator_id', Auth::id())->latest()->paginate(10);
+    $condominiums = $condominiums->latest()->paginate(10);
 
     return view('livewire.admin.documents.index-documents', compact('condominiums'));
   }

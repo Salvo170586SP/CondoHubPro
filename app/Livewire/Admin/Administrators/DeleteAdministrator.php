@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Administrators;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteAdministrator extends Component
@@ -22,11 +23,13 @@ class DeleteAdministrator extends Component
             }
 
             session()->flash('message', 'Elemento eliminato con successo!');
-            return $this->redirect('/admin/administrators', navigate: true);
+            Log::info('Eliminazione Amministratore - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di eliminazione. Riprova.');
-            return $this->redirect('/admin/administrators', navigate: true);
+            Log::error('Eliminazione Amministratore - Errore di eliminazione');
         }
+
+        return $this->redirect('/admin/administrators', navigate: true);
     }
 
     public function render()

@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Condominiums;
 
 use App\Models\Condominium;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class DeleteCondominium extends Component
@@ -21,12 +22,14 @@ class DeleteCondominium extends Component
                 $this->condominium->delete();
             }
 
+            Log::info('Eliminazione Condominio - Operazione completata con successo');
             session()->flash('message', 'Elemento eliminato con successo!');
-            return $this->redirect('/admin/condominiums', navigate: true);
         } catch (\Throwable $th) {
+            Log::error('Eliminazione Condominio - Errore di eliminazione');
             session()->flash('message', 'Errore di eliminazione. Riprova.');
-            return $this->redirect('/admin/condominiums', navigate: true);
         }
+
+        return $this->redirect('/admin/condominiums', navigate: true);
     }
 
     public function render()

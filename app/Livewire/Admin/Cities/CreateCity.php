@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Cities;
 
 use App\Models\City;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class CreateCity extends Component
@@ -37,8 +38,10 @@ class CreateCity extends Component
             $this->resetForm();
 
             session()->flash('message', 'Elemento creato con successo!');
+            Log::info('Creazione Città - Operazione completata con successo');
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di creazione. Riprova.');
+            Log::error('Creazione Città - Errore di creazione');
         }
 
         return $this->redirect('/admin/cities', navigate: true);

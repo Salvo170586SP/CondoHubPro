@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Condominiums;
 
 use App\Models\City;
 use App\Models\Condominium;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,25 +38,30 @@ class IndexCondominiums extends Component
 
     public function deleteSelected()
     {
-        if (empty($this->selected)) {
-            session()->flash('error', 'Nessun elemento selezionato.');
-            return;
+        try {
+
+            if (empty($this->selected)) {
+                session()->flash('error', 'Nessun elemento selezionato.');
+                return;
+            }
+
+            $ids = $this->selected;
+
+            $condominiums = Condominium::whereIn('id', $ids)->get();
+
+            foreach ($condominiums as $condominium) {
+                $condominium->delete();
+            }
+
+            $this->selected = [];
+            $this->areAllSelected = false;
+
+            session()->flash('message', "Elementi selezionati eliminati");
+            Log::info('Eliminazione Selettiva Condominio - Operazione completata con successo');
+            $this->resetPage();
+        } catch (\Throwable $th) {
+            Log::error('Eliminazione Selettiva Condominio - Errore di eliminazione');
         }
-
-        $ids = $this->selected;
-
-        $condominiums = Condominium::whereIn('id', $ids)->get();
-
-        foreach ($condominiums as $condominium) {
-            $condominium->delete();
-        }
-
-        $this->selected = [];
-        $this->areAllSelected = false;
-
-        session()->flash('message', "Elementi selezionati eliminati");
-
-        $this->resetPage();
     }
 
 

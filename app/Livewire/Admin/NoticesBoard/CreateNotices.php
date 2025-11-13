@@ -38,6 +38,15 @@ class CreateNotices extends Component
         try {
             $condominium = Condominium::findOrFail($this->condominium_id);
 
+            $notice = NoticeBoard::create([
+                'condominium_id' => $this->condominium_id,
+                'created_by' =>   Auth::id(),
+                'title' => $this->title,
+                'description' => $this->description,
+                'type' => $this->type,
+                'is_important' => $this->is_important,
+            ]);
+            
             $url = null;
             $nameFile = null;
             $mimeType = null;
@@ -46,32 +55,23 @@ class CreateNotices extends Component
                 $nameFile = $this->url_pdf->getClientOriginalName();
                 $mimeType = $this->url_pdf->getMimeType();
                 $url = $this->url_pdf->store('pdfsNotice', 'public');
+                
+                Document::create([
+                    'notice_board_id' => $notice->id,
+                    'condominium_id' => $condominium->id,
+                    'uploaded_by' => Auth::id(),
+                    'name_file' => $nameFile,
+                    'url_pdf' => $url,
+                    'mime_type' => $mimeType,
+                ]);
             }
 
-            $notice = NoticeBoard::create([
-                'condominium_id' => $this->condominium_id,
-                'created_by' =>   $condominium->administrator_id,
-                'title' => $this->title,
-                'description' => $this->description,
-                'type' => $this->type,
-                'is_important' => $this->is_important,
-            ]);
-
-            Document::create([
-                'notice_board_id' => $notice->id,
-                'condominium_id' => $condominium->id,
-                'uploaded_by' => Auth::id(),
-                'name_file' => $nameFile,
-                'url_pdf' => $url,
-                'mime_type' => $mimeType,
-            ]);
-
             session()->flash('messageNotice', 'Elemento creato con successo!');
-            return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);
         } catch (\Throwable $th) {
             session()->flash('errorNotice', 'Errore di creazione. Riprova.');
-            return $this->redirect("/admin/condominiums/$this->condominium_id/show", navigate: true);
         }
+
+        return $this->redirect("/admin/notices-board/$condominium->id", navigate: true);
     }
 
     public function render()

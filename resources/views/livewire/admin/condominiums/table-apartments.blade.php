@@ -5,9 +5,11 @@
             <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
         </div>
 
+        @role('admin|amministratore')
         @if (count($selected) > 0)
         <x-modal-select :selected="$selected" />
         @endif
+        @endrole
     </div>
     @if ($apartments->count() > 0)
     <div class="overflow-x-auto">
@@ -18,11 +20,13 @@
             <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                 <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                     <tr>
+                        @role('admin|amministratore')
                         <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                             <flux:checkbox type="checkbox" wire:model.live="areAllSelected"
                                 class="form-checkbox h-4 w-4" />
                         </th>
-                        <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
+                        @endrole
+                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                             Nome
                         </th>
                         <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
@@ -31,26 +35,30 @@
                             Interno</th>
                         <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                             Stanze</th>
+                        @role('admin|amministratore')
                         <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                             Metri Quadri</th>
+                        @endrole
                         <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                             Residente</th>
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                            Creato il</th>
+                        @role('admin|amministratore')
                         <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
                         </th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
                     @foreach ($apartments as $apartment)
                     <tr wire:key="apartment-{{ $apartment->id }}-{{ str()->random(10) }}"
                         class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
+                        @role('admin|amministratore')
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                             <flux:checkbox type="checkbox" wire:model.live="selected"
                                 wire:key="select-{{ $apartment->id }}" value="{{ $apartment->id }}"
                                 class="form-checkbox h-4 w-4" />
                         </td>
-                        <td class="px-2 py-4 whitespace-nowrap capitalize">
+                        @endrole
+                        <td class="px-6 py-4 whitespace-nowrap capitalize">
                             {{ $apartment->name ?? '-' }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap uppercase">
@@ -66,9 +74,11 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             {{ $apartment->rooms ?? '-' }}
                         </td>
+                        @role('admin|amministratore')
                         <td class="px-6 py-4 whitespace-nowrap">
                             {{ $apartment->square_metres ?? '-' }}
                         </td>
+                        @endrole
                         <td class="px-6 py-4 whitespace-nowrap capitalize">
                             @if ($apartment->resident)
                             {{ $apartment->resident->getFullName() }}
@@ -76,9 +86,7 @@
                             -
                             @endif
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            {{ $apartment->getDate($apartment->created_at) }}
-                        </td>
+                        @role('admin|amministratore')
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex justify-end gap-2">
                                 <livewire:admin.apartments.delete-apartments :condominium="$condominium"
@@ -86,6 +94,7 @@
                                     wire:key="apartment-delete-{{ $apartment->id }}-{{ str()->random(10) }}" />
                             </div>
                         </td>
+                        @endrole
                     </tr>
                     @endforeach
                 </tbody>

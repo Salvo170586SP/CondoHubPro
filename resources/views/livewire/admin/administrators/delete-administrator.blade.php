@@ -1,6 +1,6 @@
 <div>
     <flux:modal.trigger name="delete-administrator-[{{ $administrator->id }}]">
-        <flux:button icon="trash" variant="filled">
+        <flux:button icon="trash" size="sm" variant="primary" color="red">Elimina
         </flux:button>
     </flux:modal.trigger>
     <flux:modal name="delete-administrator-[{{ $administrator->id }}]" class="md:w-96">

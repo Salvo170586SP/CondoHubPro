@@ -95,11 +95,13 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
-                                    <flux:button icon="eye" variant="filled" wire:navigate
+                                    <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                         href="/admin/administrators/{{ $administrator->id }}/show">
+                                        Dettagli
                                     </flux:button>
-                                    <flux:button icon="pencil" variant="filled" wire:navigate
+                                    <flux:button icon="pencil" size="sm" variant="filled" wire:navigate
                                         href="/admin/administrators/{{ $administrator->id }}/edit">
+                                        Modifica
                                     </flux:button>
                                     <livewire:admin.administrators.delete-administrator :administrator="$administrator"
                                         wire:key="administrator-delete-{{ $administrator->id }}-{{ str()->random(10) }}" />

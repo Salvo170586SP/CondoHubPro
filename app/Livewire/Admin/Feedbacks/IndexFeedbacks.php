@@ -145,6 +145,7 @@ class IndexFeedbacks extends Component
         }
 
         $feedbacks = $feedbacks->where('condominium_id', $this->condominium->id)->latest()->paginate(5);
+        
         $this->currentPageIds = $feedbacks->pluck('id')->toArray();
 
         return view('livewire.admin.feedbacks.index-feedbacks', compact('feedbacks', 'priorities'));

@@ -6,7 +6,8 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800/80">
-    <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-200/40 dark:border-zinc-700 dark:bg-zinc-900">
+    <flux:sidebar sticky stashable
+        class="border-e border-zinc-200 bg-zinc-200/40 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
             <figure class="w-11 h-11 rounded-lg overflow-hidden">
@@ -18,6 +19,7 @@
         </a>
 
         <flux:navlist variant="outline">
+            @role('admin')
             <flux:navlist.group :heading="__('Anagrafiche')" class="grid">
                 <flux:navlist.item icon="users" :href="route('administrators')"
                     :current="request()->routeIs('administrators')" wire:navigate>
@@ -28,30 +30,47 @@
                     {{ __('Anagrafica Residenti') }}
                 </flux:navlist.item>
             </flux:navlist.group>
+            @endrole
+
 
             <flux:navlist.group :heading="__('Gestione')" class="grid">
+                @role('admin')
                 <flux:navlist.item icon="tag" :href="route('cities')" :current="request()->routeIs('cities')"
                     wire:navigate>
                     {{ __('Città') }}
                 </flux:navlist.item>
+
                 <flux:navlist.item icon="building-office-2" :href="route('condominiums')"
                     :current="request()->routeIs('condominiums')" wire:navigate>
                     {{ __('Condomini') }}
                 </flux:navlist.item>
+                @endrole
+
+                @role('admin|amministratore')
                 <flux:navlist.item icon="document-duplicate" :href="route('archive')"
                     :current="request()->routeIs('archive')" wire:navigate>
                     {{ __('Archivio') }}
                 </flux:navlist.item>
+                @endrole
+
             </flux:navlist.group>
-            
+
             <flux:spacer class="my-2 border dark:border-zinc-700" />
-            <flux:navlist.item icon="calendar-days" :href="route('diary')"
-                :current="request()->routeIs('diary')" wire:navigate>
+
+            @role('condomino|amministratore')
+            <flux:navlist.item icon="calendar-days" :href="route('condominiums')"
+                :current="request()->routeIs('condominiums')" wire:navigate>
+                {{ __('I Miei Condomini') }}
+            </flux:navlist.item>
+            @endrole
+
+            <flux:navlist.item icon="calendar-days" :href="route('diary')" :current="request()->routeIs('diary')"
+                wire:navigate>
                 {{ __('Mia Agenda') }}
             </flux:navlist.item>
-            
-            <flux:navlist.item icon="layout-grid" :href="route('dashboard')"
-                :current="request()->routeIs('dashboard')" wire:navigate>
+
+            <flux:navlist.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                wire:navigate>
                 {{ __('Dashboard') }}
             </flux:navlist.item>
 

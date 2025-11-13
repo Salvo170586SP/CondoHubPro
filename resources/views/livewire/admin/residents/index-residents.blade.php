@@ -51,13 +51,6 @@
                             <th class="px-6 py-3 text-left uppercase tracking-wider">
                                 Email
                             </th>
-
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
-                                Residenza
-                            </th>
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
-                                Appartamento
-                            </th>
                             <th class="px-6 py-3 text-left uppercase tracking-wider">
                                 Creato il</th>
                             <th class="px-6 py-3 text-left uppercase tracking-wider">
@@ -89,30 +82,16 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $resident->email }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
-                                @isset($resident->apartment->condominium)
-                                {{ $resident->apartment->condominium->name }}
-                                @else
-                                -
-                                @endisset
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
-                                @if($resident->apartment)
-                                {{ $resident->apartment->name }}
-                                @else
-                                -
-                                @endif
-                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $resident->getDate($resident->created_at) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
-                                    <flux:button icon="eye" variant="filled" wire:navigate
-                                        href="/admin/residents/{{ $resident->id }}/show">
+                                    <flux:button icon="eye" size="sm" variant="filled" wire:navigate
+                                        href="/admin/residents/{{ $resident->id }}/show">Dettagli
                                     </flux:button>
-                                    <flux:button icon="pencil" variant="filled" wire:navigate
-                                        href="/admin/residents/{{ $resident->id }}/edit">
+                                    <flux:button icon="pencil" size="sm" variant="filled" wire:navigate
+                                        href="/admin/residents/{{ $resident->id }}/edit">Modifica
                                     </flux:button>
                                     <livewire:admin.residents.delete-residents :resident="$resident"
                                         wire:key="resident-delete-{{ $resident->id }}-{{ str()->random(10) }}" />

@@ -22,7 +22,6 @@ class Condominium extends Model
         return $this->belongsTo(City::class);
     }
 
-
     public function administrator()
     {
         return $this->belongsTo(User::class);
@@ -37,6 +36,16 @@ class Condominium extends Model
     {
         return $this->hasMany(Document::class);
     }
+  
+    public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class);
+    }
+  
+    public function noticesBoard()
+    {
+        return $this->hasMany(NoticeBoard::class);
+    }
 
 
     public function getDate($date)
@@ -48,7 +57,7 @@ class Condominium extends Model
         return mb_convert_case(
             Carbon::parse($date)
                 ->locale('it')
-                ->translatedFormat('d F Y'),
+                ->translatedFormat('d M Y'),
             MB_CASE_TITLE,
             'UTF-8'
         );

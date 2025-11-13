@@ -13,7 +13,6 @@ class CreateFeedbacks extends Component
     public $title = '';
     public $description = '';
     public $priority = null;
-    public $created_by = null;
 
     public function submit()
     {
@@ -31,7 +30,7 @@ class CreateFeedbacks extends Component
         try {
             Feedback::create([
                 'condominium_id' => $this->condominium->id,
-                'created_by' =>   Auth::id(),
+                'created_by' => Auth::id(),
                 'title' => $this->title,
                 'description' => $this->description,
                 'priority' => $this->priority

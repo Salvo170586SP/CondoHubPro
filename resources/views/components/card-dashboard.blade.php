@@ -58,7 +58,7 @@
             </li>
             @endforeach
             @else
-            <li class="font-medium">Nessun residente disponibile</li>
+            <li class="w-full text-center font-medium text-sm text-zinc-500">Nessun risultato disponibile</li>
             @endif
         </ul>
     </div>

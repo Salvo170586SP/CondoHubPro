@@ -2,7 +2,7 @@
     'selected',
 ])
 
-<div class="border border-zinc-200 dark:border-zinc-600  bg-white dark:bg-zinc-700 w-[350px] flex justify-between items-center   rounded-lg py-2 px-4 {{-- shadow --}}">
+<div class="border border-zinc-200 dark:border-zinc-600  bg-white dark:bg-zinc-700 w-[350px] flex justify-between items-center   rounded-lg py-2 px-4">
     <div class="text-zinc-600 dark:text-zinc-300 font-medium border-e pe-2">
         <span class="font-bold me-2">{{ count($selected) }}</span> selezionati
     </div>

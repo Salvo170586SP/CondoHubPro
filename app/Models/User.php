@@ -83,6 +83,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Apartment::class, 'resident_id');
     }
+  
+    /**
+     * Se l'utente è un residente, può avere un appartmento
+     */
+    public function apartments()
+    {
+        return $this->hasMany(Apartment::class, 'resident_id');
+    }
 
     public function diaries()
     {
@@ -104,7 +112,7 @@ class User extends Authenticatable
         return mb_convert_case(
             Carbon::parse($date)
                 ->locale('it')
-                ->translatedFormat('d F Y'),
+                ->translatedFormat('d M Y'),
             MB_CASE_TITLE,
             'UTF-8'
         );

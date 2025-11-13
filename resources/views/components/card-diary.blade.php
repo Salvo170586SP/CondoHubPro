@@ -4,12 +4,12 @@
 ])
 
 <div wire:key="notice-{{ $d->id }}-{{ str()->random(10) }}"
-    class="w-full bg-zinc-100/40 border dark:border-zinc-600 rounded-lg mb-5 shadow">
+    class="w-full bg-zinc-100/60 dark:bg-zinc-700 border dark:border-zinc-600 rounded-lg mb-5 shadow">
     <div class="flex justify-between items-center">
         <div class="w-full flex flex-col gap-1">
             @if ($d->is_important)
             <div
-                class="flex justify-center items-center font-medium py-1 m-1 bg-red-100 border border-red-600 text-red-600 rounded-lg">
+                class="flex justify-center items-center font-medium text-sm py-1 m-1 bg-red-100 dark:bg-red-800/40 border border-red-300 dark:border-red-700 dark:text-red-300 text-red-500 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.0"
                     stroke="currentColor" class="size-4 me-2">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -18,25 +18,25 @@
                 Importante
             </div>
             @endif
-            <div class="border-b flex justify-between items-center  p-2">
+            <div class="border-b dark:border-zinc-500 flex justify-between items-center p-2">
                 <div>
-                    <div class="font-medium text-xs capitalize text-zinc-500">{{ $d->getYear($d->date) }}
+                    <div class="font-medium text-xs capitalize text-zinc-500 dark:text-zinc-300">{{ $d->getYear($d->date) }}
                     </div>
                     <div class="font-medium text-3xl capitalize">{{ $d->getDate($d->date) }}</div>
                 </div>
-                <div class="flex  gap-2">
+                <div class="flex gap-2">
                     <flux:button icon="eye" variant="filled" size="sm" wire:navigate
-                        href="/admin/diary/{{$d->id}}/show" />
+                        href="/admin/diary/{{$d->id}}/show">Dettagli</flux:button>
                     <flux:button icon="pencil" variant="filled" size="sm" wire:navigate
-                        href="/admin/diary/{{$d->id}}/edit" />
+                        href="/admin/diary/{{$d->id}}/edit">Modifica</flux:button>
                     <livewire:admin.diary.delete-diary wire:key="{{ $d->id }}-{{ str()->random(10) }}" :d="$d" />
                 </div>
             </div>
             <div class="px-2 py-4">
                 <h3 class="font-medium text-lg capitalize">{{ $d->title }}</h3>
-                <p class="text-zinc-500">{{str($d->content)->limit(100)}}</p>
+                <p class="text-zinc-500 dark:text-zinc-300">{{str($d->content)->limit(100)}}</p>
             </div>
-            <div class="px-2 py-3 border-t text-zinc-400 text-sm">
+            <div class="px-2 py-3 border-t dark:border-zinc-500 text-zinc-400 text-sm">
                 Categoria:
                 @if($d->category)
                 @foreach($categories as $c)

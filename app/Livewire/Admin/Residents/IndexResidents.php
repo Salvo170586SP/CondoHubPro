@@ -94,7 +94,8 @@ class IndexResidents extends Component
                 ->orWhere('surname', 'like', '%' . $this->search . '%');
         }
 
-        $residents = $residents->role('condomino')->with('apartment')->paginate(10);
+        $residents = $residents->role('condomino')->with('apartment')->latest()->paginate(10);
+
         // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
         $this->currentPageIds = $residents->pluck('id')->toArray();
 

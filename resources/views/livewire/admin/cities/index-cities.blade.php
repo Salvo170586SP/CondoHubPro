@@ -45,8 +45,8 @@
                                 Provincia</th>
                             <th class="px-6 py-3  text-xs text-center uppercase tracking-wider">
                                 <div class="flex justify-center">
-                                    Numero Condomini
-                                    <button wire:click="setOrder" class="bg-zinc-200 rounded-full h-5 w-5 flex justify-center items-center ms-2 cursor-pointer">
+                                    Condomini
+                                    <button wire:click="setOrder" class="bg-zinc-200 dark:bg-zinc-500 rounded-full h-5 w-5 flex justify-center items-center ms-2 cursor-pointer">
                                         @if($orderByCondos)
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="2.5" stroke="currentColor" class="size-4">
@@ -96,8 +96,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
-                                    <flux:button icon="eye" variant="filled" wire:navigate
-                                        href="/admin/cities/{{ $city->id }}/show" />
+                                    <flux:button icon="eye" size="sm" variant="filled" wire:navigate
+                                        href="/admin/cities/{{ $city->id }}/show">Dettagli</flux:button> 
                                     <livewire:admin.cities.edit-city :city="$city"
                                         wire:key="city-edit-{{ $city->id }}-{{ str()->random(10) }}" />
                                     <livewire:admin.cities.delete-city :city="$city"

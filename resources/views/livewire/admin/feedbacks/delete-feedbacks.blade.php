@@ -1,6 +1,6 @@
 <div>
     <flux:modal.trigger name="delete-feedback-[{{ $feedback->id }}]">
-        <flux:button icon="trash" variant="filled" >
+        <flux:button icon="trash" variant="primary" color="red" size="sm">Elimina
         </flux:button>
     </flux:modal.trigger>
     <flux:modal name="delete-feedback-[{{ $feedback->id }}]" class="md:w-96">

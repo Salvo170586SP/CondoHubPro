@@ -34,7 +34,7 @@ class Feedback extends Model
         return mb_convert_case(
             Carbon::parse($date)
                 ->locale('it')
-                ->translatedFormat('d F Y'),
+                ->translatedFormat('d M Y'),
             MB_CASE_TITLE,
             'UTF-8'
         );

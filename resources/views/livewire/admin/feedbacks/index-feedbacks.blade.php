@@ -17,7 +17,7 @@
             </flux:button>
         </div>
 
-        <div class="w-full grid grid-cols-3 gap-5 mb-5">
+        <div class="w-full grid grid-cols-3 gap-3 mb-3">
             <div
                 class="h-full p-5 flex-col items-center space-y-3 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                 <div class="flex justify-between">
@@ -173,15 +173,23 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex justify-end gap-2">
-                                                <flux:button icon="eye" variant="filled" wire:navigate
+                                                <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                                     href="/admin/condominiums/{{ $condominium->id }}/feedbacks/{{ $feedback->id }}/show">
+                                                    Dettagli
                                                 </flux:button>
-                                                <flux:button icon="pencil" variant="filled" wire:navigate
+                                                @if($feedback->creator && auth()->id() == $feedback->creator->id ||
+                                                auth()->user()->hasRole('admin'))
+                                                <flux:button icon="pencil" size="sm" variant="filled" wire:navigate
                                                     href="/admin/condominiums/{{ $condominium->id }}/feedbacks/{{ $feedback->id }}/edit">
+                                                    Modifica
                                                 </flux:button>
+                                                @endif
+
+                                                @if($feedback->creator && auth()->id() == $feedback->creator->id || auth()->user()->hasRole(['admin','amministratore']))
                                                 <livewire:admin.feedbacks.delete-feedbacks :condominium="$condominium"
                                                     :feedback="$feedback"
                                                     wire:key="feedback-delete-{{ $condominium->id }}-{{ $feedback->id }}-{{ str()->random(10) }}" />
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

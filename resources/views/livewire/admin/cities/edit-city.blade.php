@@ -1,6 +1,7 @@
 <div>
-    <flux:modal.trigger name="edit-city-[{{ $city->id }}]"  wire:click="resetForm">
-        <flux:button icon="pencil" variant="filled" >
+    <flux:modal.trigger name="edit-city-[{{ $city->id }}]" wire:click="resetForm">
+        <flux:button icon="pencil" variant="filled" size="sm">
+            Modifica
         </flux:button>
     </flux:modal.trigger>
     <flux:modal name="edit-city-[{{ $city->id }}]" class="md:w-96">

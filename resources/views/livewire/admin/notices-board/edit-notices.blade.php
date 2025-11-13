@@ -1,6 +1,6 @@
 <div>
     <flux:modal.trigger name="edit-notice-[{{ $notice->id }}]">
-        <flux:button icon="pencil" variant="filled">
+        <flux:button icon="pencil"  size="sm" variant="filled">
             Modifica
         </flux:button>
     </flux:modal.trigger>

@@ -94,7 +94,22 @@ class IndexCondominiums extends Component
 
     public function render()
     {
+        $user = auth()->user();
+
         $condominiums = Condominium::query();
+
+        if ($user->hasRole('condomino')) {
+            $apartmentIds = $user->apartments?->pluck('condominium_id')->toArray() ?? [];
+            if (!empty($apartmentIds)) {
+                $condominiums->whereIn('id', $apartmentIds);
+            } else {
+                // Nessun condominio -> nessun risultato
+                $condominiums->whereRaw('1 = 0');
+            }
+        } elseif ($user->hasRole('amministratore')) {
+            $condominiumIds = $condominiums->where('administrator_id', $user->id);
+        }
+
 
         if ($this->search) {
             $condominiums = $condominiums->where('name', 'like', '%' . $this->search . '%');

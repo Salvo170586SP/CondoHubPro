@@ -44,8 +44,8 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex justify-end gap-2">
-                                        <flux:button icon="eye" variant="filled" wire:navigate
-                                            href="/admin/condominiums/{{ $condominium->id }}/show" />
+                                        <flux:button icon="eye" size="sm" variant="filled" wire:navigate
+                                            href="/admin/condominiums/{{ $condominium->id }}/show">Dettagli</flux:button>
                                     </div>
                                 </td>
                             </tr>

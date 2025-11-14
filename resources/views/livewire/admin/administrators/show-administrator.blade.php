@@ -97,8 +97,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex justify-end">
-                                            <flux:button variant="filled" icon="eye" wire:navigate
-                                                href="/admin/condominiums/{{ $condominium->id }}/show" />
+                                            <flux:button variant="filled" icon="eye" size="sm" wire:navigate
+                                                href="/admin/condominiums/{{ $condominium->id }}/show">Dettagli
+                                            </flux:button>
                                         </div>
                                     </td>
                                 </tr>

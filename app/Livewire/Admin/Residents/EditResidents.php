@@ -23,6 +23,7 @@ class EditResidents extends Component
     public $unit_number;
     public $rooms;
     public $square_metres;
+    public $newApartment = [];
 
     protected $rules = [
         'name' => 'required|string',
@@ -30,11 +31,11 @@ class EditResidents extends Component
         'phone_number' => 'nullable|numeric',
         'img_user' => 'nullable',
 
-        'name_apartment' => 'required|max:30|string',
-        'unit_number' => 'nullable|string',
-        'floor' => 'required|string',
-        'square_metres' => 'required|numeric',
-        'rooms' => 'required|numeric',
+        'newApartment.*.name_apartment' => 'required|max:30|string',
+        'newApartment.*.unit_number' => 'nullable|string',
+        'newApartment.*.floor' => 'required|string',
+        'newApartment.*.square_metres' => 'required|numeric',
+        'newApartment.*.rooms' => 'required|numeric',
     ];
 
     protected $messages = [
@@ -42,13 +43,13 @@ class EditResidents extends Component
         'surname.required' => 'il campo è obbligatorio',
         'phone_number.numeric' => 'il campo deve contenere numeri',
 
-        'name_apartment.required' => 'il campo è obbligatorio',
-        'name_apartment.max' => 'il campo deve contenere massimo 30 caratteri',
-        'floor.required' => 'il campo è obbligatorio',
-        'square_metres.required' => 'il campo è obbligatorio',
-        'square_metres.numeric' => 'il campo può contenere solo numeri',
-        'rooms.required' => 'il campo è obbligatorio',
-        'rooms.numeric' => 'il campo può contenere solo numeri',
+        'newApartment.*.name_apartment.required' => 'il campo è obbligatorio',
+        'newApartment.*.name_apartment.max' => 'il campo deve contenere massimo 30 caratteri',
+        'newApartment.*.floor.required' => 'il campo è obbligatorio',
+        'newApartment.*.square_metres.required' => 'il campo è obbligatorio',
+        'newApartment.*.square_metres.numeric' => 'il campo può contenere solo numeri',
+        'newApartment.*.rooms.required' => 'il campo è obbligatorio',
+        'newApartment.*.rooms.numeric' => 'il campo può contenere solo numeri',
     ];
 
     public function mount(User $resident)
@@ -58,12 +59,56 @@ class EditResidents extends Component
         $this->surname = $resident->surname;
         $this->phone_number = $resident->phone_number;
         $this->img_user = $resident->img_user;
-        $this->name_apartment = $resident->apartment ? $resident->apartment->name : '';
-        $this->floor = $resident->apartment ? $resident->apartment->floor : '';
-        $this->unit_number = $resident->apartment ? $resident->apartment->unit_number : '';
-        $this->rooms = $resident->apartment ? $resident->apartment->rooms : '';
-        $this->square_metres = $resident->apartment ? $resident->apartment->square_metres : '';
+
+        foreach ($resident->apartments as $index => $apartment) {
+            $this->newApartment[$index] = [
+                'id' => $apartment->id,
+                'name_apartment' => $apartment->name,
+                'floor' => $apartment->floor,
+                'unit_number' => $apartment->unit_number,
+                'rooms' => $apartment->rooms,
+                'square_metres' => $apartment->square_metres,
+            ];
+        }
     }
+
+    public function addApartment()
+    {
+        $this->newApartment[] = [
+            'id' => null,
+            'name_apartment' => '',
+            'floor' => '',
+            'unit_number' => '',
+            'rooms' => '',
+            'square_metres' => '',
+        ];
+    }
+
+    public function closeNewApartment($index)
+    {
+        // Se l'appartamento ha un ID, significa che esiste nel DB
+        if (isset($this->newApartment[$index]['id']) && $this->newApartment[$index]['id']) {
+            $apartment = Apartment::find($this->newApartment[$index]['id']);
+            if ($apartment) {
+                $apartment->delete();
+            }
+        }
+
+        unset($this->newApartment[$index]);
+        $this->newApartment = array_values($this->newApartment);
+    }
+
+    public function deleteApartment($index, $apartment_id)
+    {
+        $apartment = Apartment::findOrFail($apartment_id);
+        if ($apartment) {
+            $apartment->delete();
+        }
+
+        unset($this->newApartment[$index]);
+        $this->newApartment = array_values($this->newApartment);
+    }
+
 
     public function submit()
     {
@@ -86,24 +131,31 @@ class EditResidents extends Component
                 'img_user' => $url,
             ]);
 
-
-            if ($this->resident->apartment) {
-                $this->resident->apartment->update([
-                    'name' => $this->name_apartment,
-                    'floor' => $this->floor,
-                    'unit_number' => $this->unit_number,
-                    'rooms' => $this->rooms,
-                    'square_metres' => $this->square_metres,
-                ]);
-            }else{
-                Apartment::create([
-                    'name' => $this->name_apartment,
-                    'resident_id' => $this->resident->id,
-                    'floor' => $this->floor,
-                    'unit_number' => $this->unit_number,
-                    'rooms' => $this->rooms,
-                    'square_metres' => $this->square_metres,
-                ]);
+            // Gestione appartamenti
+            foreach ($this->newApartment as $apartmentData) {
+                if (isset($apartmentData['id']) && $apartmentData['id']) {
+                    // Aggiorna appartamento esistente
+                    $apartment = Apartment::find($apartmentData['id']);
+                    if ($apartment) {
+                        $apartment->update([
+                            'name' => $apartmentData['name_apartment'],
+                            'floor' => $apartmentData['floor'],
+                            'unit_number' => $apartmentData['unit_number'],
+                            'rooms' => $apartmentData['rooms'],
+                            'square_metres' => $apartmentData['square_metres'],
+                        ]);
+                    }
+                } else {
+                    // Crea nuovo appartamento
+                    Apartment::create([
+                        'name' => $apartmentData['name_apartment'],
+                        'resident_id' => $this->resident->id,
+                        'floor' => $apartmentData['floor'],
+                        'unit_number' => $apartmentData['unit_number'],
+                        'rooms' => $apartmentData['rooms'],
+                        'square_metres' => $apartmentData['square_metres'],
+                    ]);
+                }
             }
 
             session()->flash('message', 'Elemento creato con successo!');

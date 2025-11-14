@@ -28,7 +28,24 @@ class CreateResidents extends Component
     public $floor = '';
     public $square_metres;
     public $rooms;
+    public $newApartment = [];
 
+    public function openNewApartment()
+    {
+        $this->newApartment[] = [
+            'name_apartment' => '',
+            'unit_number' => '',
+            'floor' => '',
+            'square_metres' => '',
+            'rooms' => '',
+        ];
+    }
+
+    public function closeNewApartment($index)
+    {
+        unset($this->newApartment[$index]);
+        $this->newApartment = array_values($this->newApartment);
+    }
 
     protected $rules = [
         'name' => 'required|string',
@@ -37,11 +54,11 @@ class CreateResidents extends Component
         'img_user' => 'nullable',
         'email' => 'required|unique:users,email',
 
-        'name_apartment' => 'required|max:30|string',
-        'unit_number' => 'nullable|string',
-        'floor' => 'required|string',
-        'square_metres' => 'required|numeric',
-        'rooms' => 'required|numeric',
+        'newApartment.*.name_apartment' => 'required|max:30|string',
+        'newApartment.*.unit_number' => 'nullable|string',
+        'newApartment.*.floor' => 'required|string',
+        'newApartment.*.square_metres' => 'required|numeric',
+        'newApartment.*.rooms' => 'required|numeric',
     ];
 
     protected $messages = [
@@ -51,13 +68,13 @@ class CreateResidents extends Component
         'email.required' => 'il campo è obbligatorio',
         'email.unique' => 'Questa mail è esistente',
 
-        'name_apartment.required' => 'il campo è obbligatorio',
-        'name_apartment.max' => 'il campo deve contenere massimo 30 caratteri',
-        'floor.required' => 'il campo è obbligatorio',
-        'square_metres.required' => 'il campo è obbligatorio',
-        'square_metres.numeric' => 'il campo può contenere solo numeri',
-        'rooms.required' => 'il campo è obbligatorio',
-        'rooms.numeric' => 'il campo può contenere solo numeri',
+        'newApartment.*.name_apartment.required' => 'il campo è obbligatorio',
+        'newApartment.*.name_apartment.max' => 'il campo deve contenere massimo 30 caratteri',
+        'newApartment.*.floor.required' => 'il campo è obbligatorio',
+        'newApartment.*.square_metres.required' => 'il campo è obbligatorio',
+        'newApartment.*.square_metres.numeric' => 'il campo può contenere solo numeri',
+        'newApartment.*.rooms.required' => 'il campo è obbligatorio',
+        'newApartment.*.rooms.numeric' => 'il campo può contenere solo numeri',
     ];
 
     public function submit()
@@ -80,14 +97,16 @@ class CreateResidents extends Component
                 'password' =>  $this->password ??= Hash::make('password'),
             ])->assignRole('condomino');
 
-            Apartment::create([
-                'name' => $this->name_apartment,
-                'unit_number' => $this->unit_number,
-                'floor' => $this->floor,
-                'square_metres' => $this->square_metres,
-                'rooms' => $this->rooms,
-                'resident_id' => $resident->id,
-            ]);
+            foreach ($this->newApartment as $apartment) {
+                Apartment::create([
+                    'name' => $apartment['name_apartment'],
+                    'unit_number' => $apartment['unit_number'],
+                    'floor' => $apartment['floor'],
+                    'square_metres' => $apartment['square_metres'],
+                    'rooms' => $apartment['rooms'],
+                    'resident_id' => $resident->id,
+                ]);
+            }
 
             session()->flash('message', 'Elemento creato con successo!');
             Log::info('Creazione Residente - Operazione completata con successo');

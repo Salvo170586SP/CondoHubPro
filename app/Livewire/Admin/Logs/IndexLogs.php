@@ -10,15 +10,9 @@ class IndexLogs extends Component
 {
     public $logs = [];
     public $autoRefresh = true;
-    public $filterLevel = 'all'; 
+    public $filterLevel = 'all';
     public $searchTerm = '';
     public $maxLines = 500;
-
- 
-    public function mount()
-    {
-        $this->loadLogs();
-    }
 
     public function loadLogs()
     {
@@ -38,7 +32,6 @@ class IndexLogs extends Component
 
         $this->logs = $this->parseLogLines($lines);
 
-        // Applica filtri
         if ($this->filterLevel !== 'all') {
             $this->logs = array_filter($this->logs, function ($log) {
                 return strtolower($log['level']) === $this->filterLevel;
@@ -51,7 +44,6 @@ class IndexLogs extends Component
             });
         }
 
-        // Inverti l'ordine per mostrare i più recenti in alto
         $this->logs = array_reverse(array_values($this->logs));
     }
 
@@ -105,7 +97,7 @@ class IndexLogs extends Component
                 session()->flash('message', 'Logs svuotati con successo');
             }
 
-           /*  $this->loadLogs(); */
+            /*  $this->loadLogs(); */
         } catch (\Throwable $th) {
             session()->flash('message', 'Errore di eliminazione. Riprova.');
         }
@@ -115,6 +107,7 @@ class IndexLogs extends Component
 
     public function render()
     {
+        $this->loadLogs();
         return view('livewire.admin.logs.index-logs');
     }
 }

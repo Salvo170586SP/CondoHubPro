@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Administrators;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class DeleteAdministrator extends Component
@@ -19,6 +20,9 @@ class DeleteAdministrator extends Component
     {
         try {
             if ($this->administrator) {
+                if ($this->administrator->img_user) {
+                    Storage::disk('public')->delete($this->administrator->img_user);
+                }
                 $this->administrator->delete();
             }
 

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Residents;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class DeleteResidents extends Component
@@ -19,6 +20,9 @@ class DeleteResidents extends Component
     {
         try {
             if ($this->resident) {
+                if ($this->resident->img_user) {
+                    Storage::disk('public')->delete($this->resident->img_user);
+                }
                 $this->resident->delete();
             }
 

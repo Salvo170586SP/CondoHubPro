@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\Residents;
 
+use App\Livewire\Forms\Residents\Create\Step1;
+use App\Livewire\Forms\Residents\Create\Step2;
 use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -12,92 +14,58 @@ use Livewire\WithPagination;
 
 class CreateResidents extends Component
 {
-
     use WithPagination;
     use WithFileUploads;
 
-    public $name = '';
-    public $surname = '';
-    public $phone_number = '';
-    public $img_user = null;
-    public $email = '';
-    public $password;
+    public Step1 $residentStep1;
+    public Step2 $residentStep2;
+    public $currentStep = 1;
 
-    public $name_apartment = '';
-    public $unit_number = '';
-    public $floor = '';
-    public $square_metres;
-    public $rooms;
-    public $newApartment = [];
+    public function addStep()
+    {
+        if ($this->currentStep === 1) {
+            $this->residentStep1->validate();
+        } elseif ($this->currentStep === 2) {
+            $this->residentStep2->validate();
+        }
+
+        $this->currentStep++;
+    }
+
+    public function backStep()
+    {
+        $this->currentStep--;
+    }
 
     public function openNewApartment()
     {
-        $this->newApartment[] = [
-            'name_apartment' => '',
-            'unit_number' => '',
-            'floor' => '',
-            'square_metres' => '',
-            'rooms' => '',
-        ];
+        $this->residentStep2->openNewApartment();
     }
 
     public function closeNewApartment($index)
     {
-        unset($this->newApartment[$index]);
-        $this->newApartment = array_values($this->newApartment);
+        $this->residentStep2->closeNewApartment($index);
     }
-
-    protected $rules = [
-        'name' => 'required|string',
-        'surname' => 'required|string',
-        'phone_number' => 'nullable|numeric',
-        'img_user' => 'nullable',
-        'email' => 'required|unique:users,email',
-
-        'newApartment.*.name_apartment' => 'required|max:30|string',
-        'newApartment.*.unit_number' => 'nullable|string',
-        'newApartment.*.floor' => 'required|string',
-        'newApartment.*.square_metres' => 'required|numeric',
-        'newApartment.*.rooms' => 'required|numeric',
-    ];
-
-    protected $messages = [
-        'name.required' => 'il campo è obbligatorio',
-        'surname.required' => 'il campo è obbligatorio',
-        'phone_number.numeric' => 'il campo deve contenere numeri',
-        'email.required' => 'il campo è obbligatorio',
-        'email.unique' => 'Questa mail è esistente',
-
-        'newApartment.*.name_apartment.required' => 'il campo è obbligatorio',
-        'newApartment.*.name_apartment.max' => 'il campo deve contenere massimo 30 caratteri',
-        'newApartment.*.floor.required' => 'il campo è obbligatorio',
-        'newApartment.*.square_metres.required' => 'il campo è obbligatorio',
-        'newApartment.*.square_metres.numeric' => 'il campo può contenere solo numeri',
-        'newApartment.*.rooms.required' => 'il campo è obbligatorio',
-        'newApartment.*.rooms.numeric' => 'il campo può contenere solo numeri',
-    ];
 
     public function submit()
     {
-        $this->validate();
-
         try {
             $url = null;
 
-            if ($this->img_user) {
-                $url = $this->img_user->store('imgsUser', 'public');
+            if ($this->residentStep1->img_user) {
+                $url = $this->residentStep1->img_user->store('imgsUser', 'public');
             }
 
             $resident = User::create([
-                'name' => $this->name,
-                'surname' => $this->surname,
-                'phone_number' => $this->phone_number,
+                'name' => $this->residentStep1->name,
+                'surname' => $this->residentStep1->surname,
+                'phone_number' => $this->residentStep1->phone_number,
                 'img_user' => $url,
-                'email' => $this->email,
-                'password' =>  $this->password ??= Hash::make('password'),
+                'email' => $this->residentStep1->email,
+                'password' =>  $this->residentStep1->password ??= Hash::make('password'),
             ])->assignRole('condomino');
 
-            foreach ($this->newApartment as $apartment) {
+            foreach ($this->residentStep2->newApartment as $apartment) {
                 Apartment::create([
                     'name' => $apartment['name_apartment'],
                     'unit_number' => $apartment['unit_number'],

@@ -32,15 +32,15 @@
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Nome File</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Inserito da</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Formato</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Inserito il</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                             </th>
                         </tr>
                     </thead>
@@ -48,31 +48,31 @@
                         @foreach ($docs as $document)
                         <tr wire:key="apartment-{{ $document->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
+                            <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 {{ $document->name_file ?? '-' }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
+                            <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 @if($document->uploader)
                                 {{ $document->uploader->getFullName() }}
                                 @else
                                 -
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 @if ($document->mime_type)
                                 {{ $document->mime_type }}
                                 @else
                                 -
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
+                            <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 @if ($document->created_at)
                                 {{ $document->getDate($document->created_at) }}
                                 @else
                                 -
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
                                     <flux:dropdown align="start">
                                         <flux:button variant="filled" icon:trailing="ellipsis-horizontal" size="sm" />

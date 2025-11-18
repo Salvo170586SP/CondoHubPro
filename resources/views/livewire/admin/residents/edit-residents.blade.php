@@ -37,7 +37,7 @@
                             <span
                                 class="inline-flex justify-center items-center ms-2 w-5 h-5 bg-zinc-600 text-white rounded-full">{{count($newApartment)}}</span>
                         </div>
-                        <flux:button icon="plus-circle" variant="primary" wire:click="addApartment"
+                        <flux:button icon="plus-circle" variant="filled" wire:click="addApartment"
                             class="cursor-pointer">
                             Aggiungi Appartamento
                         </flux:button>
@@ -45,10 +45,10 @@
 
                     {{-- Lista Appartamenti --}}
                     @if(count($newApartment) > 0)
-                    <div class="h-[330px] border bg-white p-5 mt-3 rounded-lg overflow-y-auto">
+                    <div class="h-[330px] border bg-white dark:bg-zinc-800 dark:border-zinc-500 p-5 mt-3 rounded-lg overflow-y-auto">
                         @foreach($newApartment as $index => $apartment)
                         <div wire:key="apartment-{{ $index }}-{{ $apartment['id'] ?? 'new' }}"
-                            class="w-full border dark:border-zinc-600  rounded-lg p-5 my-3 space-y-5 bg-white dark:bg-zinc-800 border-zinc-300">
+                            class="w-full border dark:border-zinc-600  rounded-lg p-5 my-3 space-y-5 bg-white dark:bg-zinc-700/50 border-zinc-300">
 
                             <div class="flex items-center justify-between">
                                 <flux:button icon="minus-circle" size="sm" variant="danger" class="cursor-pointer"

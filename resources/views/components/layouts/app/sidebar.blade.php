@@ -6,8 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800/80">
-    <flux:sidebar sticky stashable
-        class="border-e border-zinc-200 bg-zinc-100  dark:border-zinc-700 dark:bg-zinc-900">
+    <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-100  dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
             <figure class="w-11 h-11 rounded-lg overflow-hidden">
@@ -53,6 +52,10 @@
                 </flux:navlist.item>
                 @endrole
 
+                <flux:navlist.item icon="currency-euro" :href="route('payments')"
+                    :current="request()->routeIs('payments')" wire:navigate>
+                    {{ __('Pagamenti') }}
+                </flux:navlist.item>
             </flux:navlist.group>
 
             <flux:spacer class="my-2 border dark:border-zinc-700" />
@@ -86,9 +89,9 @@
         <flux:spacer />
 
         <flux:navlist variant="outline">
-            <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
+            <flux:navlist.item icon="folder-git-2" href="https://github.com/Salvo170586SP/CondoHubPro.git"
                 target="_blank">
-                {{ __('Repository') }}
+                {{ __('Git') }}
             </flux:navlist.item>
         </flux:navlist>
 

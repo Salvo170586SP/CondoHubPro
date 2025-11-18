@@ -36,17 +36,16 @@ class Condominium extends Model
     {
         return $this->hasMany(Document::class);
     }
-  
+
     public function feedbacks()
     {
         return $this->hasMany(Feedback::class);
     }
-  
+
     public function noticesBoard()
     {
         return $this->hasMany(NoticeBoard::class);
     }
-
 
     public function getDate($date)
     {

@@ -131,7 +131,6 @@ class IndexCondominiums extends Component
 
         // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
         $this->currentPageIds = $condominiums->pluck('id')->toArray();
-
         $this->areAllSelected = !empty($this->currentPageIds) && count(array_diff($this->currentPageIds, $this->selected)) === 0;
 
         return view('livewire.admin.condominiums.index-condominiums', compact('condominiums', 'cities'));

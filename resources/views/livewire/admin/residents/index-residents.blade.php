@@ -36,24 +36,24 @@
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider">
                                 <flux:checkbox type="checkbox" wire:model.live="areAllSelected"
                                     class="form-checkbox h-4 w-4" />
                             </th>
-                            <th class="px-2 py-3 text-left uppercase tracking-wider">
+                            <th class="px-2 py-3 text-left tracking-wider uppercase">
                             </th>
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Nome
                             </th>
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Telefono
                             </th>
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Email
                             </th>
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Creato il</th>
-                            <th class="px-6 py-3 text-left uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
                             </th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@
                         @foreach ($residents as $resident)
                         <tr wire:key="resident-{{ $resident->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <td class="px-4 py-4 whitespace-nowrap text-sm">
                                 <flux:checkbox type="checkbox" wire:model.live="selected"
                                     wire:key="select-{{ $resident->id }}" value="{{ $resident->id }}"
                                     class="form-checkbox h-4 w-4" />
@@ -73,19 +73,19 @@
                                 <flux:avatar name="{{ $resident->getFullName() }}" />
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
+                            <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 {{ $resident->name . ' ' . $resident->surname }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 {{ $resident->phone_number }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 {{ $resident->email }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 {{ $resident->getDate($resident->created_at) }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
                                     <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                         href="/admin/residents/{{ $resident->id }}/show">Dettagli

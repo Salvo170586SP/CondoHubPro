@@ -24,6 +24,10 @@ use App\Livewire\Admin\Feedbacks\IndexFeedbacks;
 use App\Livewire\Admin\Feedbacks\ShowFeedbacks;
 use App\Livewire\Admin\Logs\IndexLogs;
 use App\Livewire\Admin\NoticesBoard\IndexNotices;
+use App\Livewire\Admin\Payments\CreatePayments;
+use App\Livewire\Admin\Payments\EditPayments;
+use App\Livewire\Admin\Payments\IndexPayments;
+use App\Livewire\Admin\Payments\ShowPayments;
 use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
 use App\Livewire\Admin\Residents\IndexResidents;
@@ -45,6 +49,12 @@ Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->
    
     /* LOGS' */
     Route::get('/logs', IndexLogs::class)->name('logs');
+
+    /* PAYMENTS */
+    Route::get('/payments', IndexPayments::class)->name('payments');
+    Route::get('/payments/create', CreatePayments::class)->name('payments.create');
+    Route::get('/payments/{payment}/show', ShowPayments::class)->name('payments.show');
+    Route::get('/payments/{payment}/edit', EditPayments::class)->name('payments.edit');
 
     /* AGENDA' */
     Route::get('/diary', IndexDiary::class)->name('diary');

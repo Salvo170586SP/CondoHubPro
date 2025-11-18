@@ -36,26 +36,26 @@
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
-                            <th class="ps-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="ps-4 py-3 text-left text-xs tracking-wider">
                                 <flux:checkbox type="checkbox" wire:model.live="areAllSelected" />
                             </th>
-                            <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-2 py-3 text-left text-xs tracking-wider uppercase">
                                 Città</th>
-                            <th class="px-6 py-3 text-center text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-center text-xs tracking-wider uppercase">
                                 Provincia</th>
-                            <th class="px-6 py-3  text-xs text-center uppercase tracking-wider">
+                            <th class="px-4 py-3  text-xs text-center tracking-wider uppercase">
                                 <div class="flex justify-center">
                                     Condomini
                                     <button wire:click="setOrder" class="bg-zinc-200 dark:bg-zinc-500 rounded-full h-5 w-5 flex justify-center items-center ms-2 cursor-pointer">
                                         @if($orderByCondos)
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="2.5" stroke="currentColor" class="size-4">
+                                            stroke-width="2.5" stroke="currentColor" class="size-3">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                                         </svg>
                                         @else
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="2.5" stroke="currentColor" class="size-4">
+                                            stroke-width="2.5" stroke="currentColor" class="size-3">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                         </svg>
@@ -63,9 +63,9 @@
                                     </button>
                                 </div>
                             </th>
-                            <th class="px-6 py-3 text-center text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-center text-xs tracking-wider uppercase">
                                 Creato il</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             </th>
                         </tr>
                     </thead>
@@ -73,17 +73,17 @@
                         @foreach ($cities as $city)
                         <tr wire:key="city-{{ $city->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                            <td class="ps-6 py-4 whitespace-nowrap text-sm">
+                            <td class="ps-4 py-4 whitespace-nowrap text-sm">
                                 <flux:checkbox type="checkbox" wire:model.live="selected"
                                     wire:key="select-{{ $city->id }}" value="{{ $city->id }}" />
                             </td>
                             <td class="px-2 py-4 w-50 whitespace-nowrap">
                                 {{ $city->name_city }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center uppercase">
+                            <td class="px-4 py-4 whitespace-nowrap text-center uppercase">
                                 {{ $city->name_prov }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                            <td class="px-4 py-4 whitespace-nowrap text-center">
                                 <div class="text-center">
                                     <span
                                         class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">
@@ -91,10 +91,10 @@
                                     </span>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
                                 {{ $city->getDate($city->created_at) }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
                                     <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                         href="/admin/cities/{{ $city->id }}/show">Dettagli</flux:button> 

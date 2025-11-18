@@ -30,28 +30,28 @@
                             <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                                 <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                                     <tr>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Aggiungi
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Appartamento
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Residente
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Metri quadri
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Vani
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Piano
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Interno
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                             Creato il
                                         </th>
                                     </tr>
@@ -60,33 +60,33 @@
                                     @foreach ($apartments as $apartment)
                                     <tr wire:key="apartment-{{ $apartment->id }}-{{ str()->random(10) }}"
                                         class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             <flux:checkbox wire:model="selectedApartment"
                                                 value="{{ $apartment->id }}" />
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             {{ $apartment->name }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-smuppercase">
+                                        <td class="px-4 py-4 whitespace-nowrap text-smuppercase">
                                             @if($apartment->resident)
                                             {{ $apartment->resident->getFullName() }}
                                             @else
                                             -
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             {{ $apartment->square_metres }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             {{ $apartment->rooms }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             {{ $apartment->floor }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             {{ $apartment->unit_number }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-4 py-4 whitespace-nowrap">
                                             {{ $apartment->getDate($apartment->created_at) }}
                                         </td>
                                     </tr>

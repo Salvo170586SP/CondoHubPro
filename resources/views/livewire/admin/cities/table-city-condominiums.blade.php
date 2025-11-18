@@ -5,17 +5,17 @@
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Nome</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Indirizzo</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Cap</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Amministratore</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Creato il</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
                             </th>
                         </tr>
                     </thead>
@@ -23,26 +23,26 @@
                         @foreach ($cityCondominiums as $condominium)
                             <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
                                 class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                <td class="px-4 py-4 whitespace-nowrap capitalize">
                                     {{ $condominium->name }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm capitalize">
+                                <td class="px-4 py-4 whitespace-nowrap text-sm capitalize">
                                     {{ $condominium->address }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                <td class="px-4 py-4 whitespace-nowrap capitalize">
                                     {{ $condominium->cap }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-4 py-4 whitespace-nowrap">
                                     @if ($condominium->administrator)
                                         {{ $condominium->administrator->getFullName() }}
                                     @else
                                         -
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-4 py-4 whitespace-nowrap">
                                     {{ $condominium->getDate($condominium->created_at) }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-4 py-4 whitespace-nowrap">
                                     <div class="flex justify-end gap-2">
                                         <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                             href="/admin/condominiums/{{ $condominium->id }}/show">Dettagli</flux:button>

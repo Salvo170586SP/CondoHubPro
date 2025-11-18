@@ -38,23 +38,23 @@
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider">
                                 <flux:checkbox type="checkbox" wire:model.live="areAllSelected" />
                             </th>
-                            <th class="px-2 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-2 py-3 text-left text-xs tracking-wider uppercase">
                             </th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Nome
                             </th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Telefono</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Email</th>
-                            <th class="px-6 py-3 text-center text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-center text-xs tracking-wider uppercase">
                                 Condomini Affiliati</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Creato il</th>
-                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             </th>
                         </tr>
                     </thead>
@@ -62,7 +62,7 @@
                         @foreach ($administrators as $administrator)
                         <tr wire:key="administrator-{{ $administrator->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <td class="px-4 py-4 whitespace-nowrap text-sm">
                                 <flux:checkbox type="checkbox" wire:model.live="selected"
                                     wire:key="select-{{ $administrator->id }}" value="{{ $administrator->id }}" />
                             </td>
@@ -73,16 +73,16 @@
                                 <flux:avatar name="{{ $administrator->name . ' ' . $administrator->surname }}" />
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap capitalize">
+                            <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 {{ $administrator->name . ' ' . $administrator->surname }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 {{ $administrator->phone_number }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 {{ $administrator->email }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="text-center">
                                     <span
                                         class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">
@@ -90,10 +90,10 @@
                                     </span>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 {{ $administrator->getDate($administrator->created_at) }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
                                     <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                         href="/admin/administrators/{{ $administrator->id }}/show">

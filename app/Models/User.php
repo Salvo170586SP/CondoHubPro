@@ -83,7 +83,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Apartment::class, 'resident_id');
     }
-  
+
     /**
      * Se l'utente è un residente, può avere un appartmento
      */
@@ -95,6 +95,11 @@ class User extends Authenticatable
     public function diaries()
     {
         return  $this->hasMany(Diary::class);
+    }
+
+    public function payments()
+    {
+        return  $this->hasMany(Payment::class, 'resident_id');
     }
 
     public function getFullName()

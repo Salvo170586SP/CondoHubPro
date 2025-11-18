@@ -16,10 +16,6 @@
                 <div class="flex justify-between items-center">
                     <div class="space-x-15">
                         <span class="capitalize font-medium text-sm">
-                            <span class="text-zinc-500 dark:text-zinc-400">Condominio:</span>
-                            {{ $item->condominium->name }}
-                        </span>
-                        <span class="capitalize font-medium text-sm">
                             <span class="text-zinc-500 dark:text-zinc-400">Avviso del:</span>
                             {{ $item->getDate($item->created_at) }}
                         </span>

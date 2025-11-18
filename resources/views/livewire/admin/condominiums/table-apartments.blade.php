@@ -21,28 +21,28 @@
                 <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                     <tr>
                         @role('admin|amministratore')
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             <flux:checkbox type="checkbox" wire:model.live="areAllSelected"
                                 class="form-checkbox h-4 w-4" />
                         </th>
                         @endrole
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             Nome
                         </th>
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             Piano</th>
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             Interno</th>
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             Stanze</th>
                         @role('admin|amministratore')
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             Metri Quadri</th>
                         @endrole
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                             Residente</th>
                         @role('admin|amministratore')
-                        <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                        <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                         </th>
                         @endrole
                     </tr>
@@ -52,34 +52,34 @@
                     <tr wire:key="apartment-{{ $apartment->id }}-{{ str()->random(10) }}"
                         class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                         @role('admin|amministratore')
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <td class="px-4 py-4 whitespace-nowrap text-sm">
                             <flux:checkbox type="checkbox" wire:model.live="selected"
                                 wire:key="select-{{ $apartment->id }}" value="{{ $apartment->id }}"
                                 class="form-checkbox h-4 w-4" />
                         </td>
                         @endrole
-                        <td class="px-6 py-4 whitespace-nowrap capitalize">
+                        <td class="px-4 py-4 whitespace-nowrap capitalize">
                             {{ $apartment->name ?? '-' }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap uppercase">
+                        <td class="px-4 py-4 whitespace-nowrap uppercase">
                             {{ $apartment->floor ?? '-' }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-4 py-4 whitespace-nowrap">
                             @if ($apartment->unit_number)
                             {{ $apartment->unit_number ?? '-' }}
                             @else
                             -
                             @endif
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-4 py-4 whitespace-nowrap">
                             {{ $apartment->rooms ?? '-' }}
                         </td>
                         @role('admin|amministratore')
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-4 py-4 whitespace-nowrap">
                             {{ $apartment->square_metres ?? '-' }}
                         </td>
                         @endrole
-                        <td class="px-6 py-4 whitespace-nowrap capitalize">
+                        <td class="px-4 py-4 whitespace-nowrap capitalize">
                             @if ($apartment->resident)
                             {{ $apartment->resident->getFullName() }}
                             @else
@@ -87,7 +87,7 @@
                             @endif
                         </td>
                         @role('admin|amministratore')
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-4 py-4 whitespace-nowrap">
                             <div class="flex justify-end gap-2">
                                 <livewire:admin.apartments.delete-apartments :condominium="$condominium"
                                     :apartment="$apartment"

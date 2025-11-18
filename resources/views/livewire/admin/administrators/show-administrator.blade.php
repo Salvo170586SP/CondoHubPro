@@ -62,17 +62,17 @@
                             <thead
                                 class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium text-xs">
                                 <tr>
-                                    <th class="px-6 py-3 text-left uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left tracking-wider uppercase">
                                         Nome</th>
-                                    <th class="px-6 py-3 text-left uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left tracking-wider uppercase">
                                         Indirizzo</th>
-                                    <th class="px-6 py-3 text-left not-even:uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left tracking-wider uppercase">
                                         Cap</th>
-                                    <th class="px-6 py-3 text-left not-only:uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left  tracking-wider uppercase">
                                         Città</th>
-                                    <th class="px-6 py-3 text-left uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left tracking-wider uppercase">
                                         Creato il</th>
-                                    <th class="px-6 py-3 text-left uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left tracking-wider uppercase">
                                     </th>
                                 </tr>
                             </thead>
@@ -80,22 +80,22 @@
                                 @foreach ($condominiums as $condominium)
                                 <tr wire:key="condominiumAdmin-{{ $condominium->id }}-{{ str()->random(10) }}"
                                     class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                    <td class="px-4 py-4 whitespace-nowrap capitalize">
                                         {{ $condominium->name }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                    <td class="px-4 py-4 whitespace-nowrap capitalize">
                                         {{ $condominium->address }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 py-4 whitespace-nowrap">
                                         {{ $condominium->cap }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                    <td class="px-4 py-4 whitespace-nowrap capitalize">
                                         {{ $condominium->city->name_city }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 py-4 whitespace-nowrap">
                                         {{ $condominium->getDate($condominium->created_at) }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 py-4 whitespace-nowrap">
                                         <div class="flex justify-end">
                                             <flux:button variant="filled" icon="eye" size="sm" wire:navigate
                                                 href="/admin/condominiums/{{ $condominium->id }}/show">Dettagli

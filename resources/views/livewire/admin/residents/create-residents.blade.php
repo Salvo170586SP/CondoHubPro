@@ -40,18 +40,18 @@
                         <h2 class="dark:text-zinc-200 font-bold">Dati Catastali</h2>
                         <small class="text-xs font-medium">*Aggiungi i tuoi appartamenti</small>
                     </div>
-                    <div class="flex justify-between items-center gap-3">
+                    <div class="flex justify-between items-center gap-3 mb-3">
                         <div class="font-medium text-sm">
                             Appartamenti aggiunti
                             <span
                                 class="inline-flex justify-center items-center ms-2 w-5 h-5 bg-zinc-600 text-white rounded-full">{{count($residentStep2->newApartment)}}</span>
                         </div>
-                        <flux:button icon="plus-circle" variant="primary" class="cursor-pointer"
+                        <flux:button icon="plus-circle" variant="filled" class="cursor-pointer"
                             wire:click="openNewApartment">Aggiungi Appartamento</flux:button>
                     </div>
                     {{-- Lista Appartamenti --}}
                     @if(count($residentStep2->newApartment) > 0)
-                    <div class="h-[330px] border bg-white p-5 rounded-lg overflow-y-auto">
+                    <div class="h-[330px] border bg-white dark:bg-zinc-800 dark:border-zinc-500 p-5 rounded-lg overflow-y-auto">
                         @foreach($residentStep2->newApartment as $index => $apartment)
                         <div wire:key="newApartment-{{$index}}-{{str()->random(10)}}"
                             class="w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50 mt-3 border-zinc-300 ">

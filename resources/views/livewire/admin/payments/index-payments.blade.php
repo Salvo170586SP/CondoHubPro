@@ -14,9 +14,11 @@
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-xl font-medium">Quote Pagamenti</h2>
+            @role('admin|amministratore')
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/payments/create">
                 Crea
             </flux:button>
+            @endrole
         </div>
 
         <div class="flex items-center justify-between my-3 h-15">
@@ -99,7 +101,7 @@
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 {{ $payment->resident->apartment->condominium->name ?? '-' }}
-                             </td>
+                            </td>
                             <td class="px-4 py-4 whitespace-nowrap">
                                 @if($payment->document && $payment->document->url_pdf)
                                 <span class="px-3 py-1 bg-green-500 text-white font-medium rounded-lg">Emanata</span>
@@ -135,6 +137,7 @@
                                     <flux:button icon="eye" size="sm" variant="filled" wire:navigate
                                         href="/admin/payments/{{ $payment->id }}/show">Dettagli
                                     </flux:button>
+                                    @role('admin|amministratore')
                                     <flux:button icon="pencil" size="sm" variant="filled" wire:navigate
                                         href="/admin/payments/{{ $payment->id }}/edit">Modifica
                                     </flux:button>
@@ -164,6 +167,7 @@
                                             </div>
                                         </div>
                                     </flux:modal>
+                                    @endrole
                                 </div>
                             </td>
                         </tr>

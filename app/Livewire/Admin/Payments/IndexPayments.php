@@ -3,6 +3,8 @@
 namespace App\Livewire\Admin\Payments;
 
 use App\Models\Payment;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -132,6 +134,7 @@ class IndexPayments extends Component
 
     public function render()
     {
+        $user = auth()->user();
         $payments = Payment::query();
 
         if ($this->search) {
@@ -149,7 +152,31 @@ class IndexPayments extends Component
             $payments = $payments->where('date', 'like', '%' . $this->dateSearch . '%');
         }
 
-        $payments = $payments->paginate(10);
+
+        if ($user->hasRole('condomino')) {
+            $payments = $payments->where('resident_id', Auth::id())->paginate(10);
+        } elseif ($user->hasRole('amministratore')) {
+
+            $residentIds = $user->condominiums()
+                ->with('apartments.resident')
+                ->get()
+                ->pluck('apartments.*.resident.id')
+                ->filter()
+                ->flatten()
+                ->toArray();
+
+            if (!empty($residentIds)) {
+                $payments = $payments->whereIn('resident_id', $residentIds);
+            } else {
+                $payments = $payments->whereRaw('1 = 0');
+            }
+
+            $payments = $payments->paginate(10);
+        }
+
+   /*      $payments = $payments->paginate(10); */
+
+
 
         // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
         $this->currentPageIds = $payments->pluck('id')->toArray();

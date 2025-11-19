@@ -73,6 +73,15 @@
                         -
                         @endif
                     </div>
+                    <div class="text-sm">
+                        <div class="font-medium">Cap:</div>
+                        @if($payment->resident && $payment->resident->apartment &&
+                        $payment->resident->apartment->condominium->administrator)
+                        {{ $payment->resident->apartment->condominium->administrator->getFullName() }}
+                        @else
+                        -
+                        @endif
+                    </div>
                 </div>
                 <div class="text-2xl text-end">
                     <div class="font-medium">Totale:</div>

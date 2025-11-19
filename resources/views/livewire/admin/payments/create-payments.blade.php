@@ -23,11 +23,11 @@
                         @endforeach
                     </flux:select>
                     <flux:input type="number" wire:model="price" label="Quota" />
-                    <flux:input type="date" wire:model="date" label="data" />
+                    <flux:input type="date" wire:model="date" label="Data Pagamento" />
                 </div>
                 <flux:textarea wire:model="note" label="Nota" />
                 <div class="space-y-5 mt-5">
-                    <x-input-file model="url_pdf" />
+                    <x-input-file model="url_pdf" text="Carica Fattura" />
                     <flux:checkbox wire:model="is_pay" label="Pagato" />
                 </div>
 

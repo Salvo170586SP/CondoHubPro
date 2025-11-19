@@ -83,9 +83,9 @@
 
 
             <div class="w-full p-5 rounded-lg shadow border dark:border-zinc-600 bg-zinc-100/50 dark:bg-zinc-700/50">
-                @if($payment->url_pdf)
+                @if($payment->document && $payment->document->url_pdf)
                 <div class="w-full h-full">
-                    <embed src="{{asset('storage/'.$payment->url_pdf )}}" type="application/pdf"
+                    <embed src="{{asset('storage/'.$payment->document->url_pdf )}}" type="application/pdf"
                         class="w-full h-full rounded-lg" frameborder="0"></embed>
                 </div>
                 @else

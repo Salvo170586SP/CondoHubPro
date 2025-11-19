@@ -28,6 +28,11 @@ class Payment extends Model
         return  $this->belongsTo(User::class, 'resident_id');
     }
 
+    public function document()
+    {
+        return  $this->hasOne(Document::class);
+    }
+
     public function getDate($date)
     {
         if (!$date) {

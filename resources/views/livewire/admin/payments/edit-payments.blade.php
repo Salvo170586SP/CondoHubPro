@@ -23,22 +23,21 @@
                         @endforeach
                     </flux:select>
                     <flux:input type="number" wire:model="price" label="Quota" />
-                    <flux:input type="date" wire:model="date" label="data" />
+                    <flux:input type="date" wire:model="date" label="Data Pagamento" />
                 </div>
                 <flux:textarea wire:model="note" label="Nota" />
                 <div class="space-y-5 mt-5">
 
                     <div class="font-medium text-sm">
-                        @if($payment->url_pdf)
+                        @if($payment->document && $payment->document->url_pdf)
                         Fattura Attuale:
                         <a class="text-blue-800 dark:text-blue-300 font-bold ms-2 underline"
-                            href="{{asset('storage/'.$payment->url_pdf)}}" target="_blanc">{{$payment->name_file}}</a>
+                            href="{{asset('storage/'.$payment->document->url_pdf)}}" target="_blanc">{{$payment->document->name_file}}</a>
                         @else
                         Nessuna Fattura Caricata
                         @endif
                     </div>
-                    <x-input-file model="url_pdf" />
-
+                    <x-input-file model="url_pdf" text="Carica Fattura" />
                     <flux:checkbox wire:model="is_pay" label="Pagato" />
 
                 </div>

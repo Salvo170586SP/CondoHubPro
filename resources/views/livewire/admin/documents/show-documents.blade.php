@@ -37,6 +37,8 @@
                             <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Inserito da</th>
                             <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
+                                Residente di riferimento</th>
+                            <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Formato</th>
                             <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 Inserito il</th>
@@ -54,6 +56,13 @@
                             <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 @if($document->uploader)
                                 {{ $document->uploader->getFullName() }}
+                                @else
+                                -
+                                @endif
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap capitalize">
+                                @if($document->payment && $document->payment->resident)
+                                {{ $document->payment->resident->getFullName() }}
                                 @else
                                 -
                                 @endif

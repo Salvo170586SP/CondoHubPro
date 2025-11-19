@@ -99,9 +99,9 @@
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 {{ $payment->resident->apartment->condominium->name ?? '-' }}
-                            </td>
+                             </td>
                             <td class="px-4 py-4 whitespace-nowrap">
-                                @if($payment->url_pdf)
+                                @if($payment->document && $payment->document->url_pdf)
                                 <span class="px-3 py-1 bg-green-500 text-white font-medium rounded-lg">Emanata</span>
                                 @else
                                 <span class="px-3 py-1 bg-red-400 text-white font-medium rounded-lg">Non Presente</span>
@@ -139,7 +139,7 @@
                                         href="/admin/payments/{{ $payment->id }}/edit">Modifica
                                     </flux:button>
                                     <flux:modal.trigger name="delete-payment-[{{ $payment->id }}]">
-                                        <flux:button icon="trash" size="sm" variant="primary" color="red">
+                                        <flux:button icon="trash" size="sm" variant="danger">
                                             Elimina
                                         </flux:button>
                                     </flux:modal.trigger>

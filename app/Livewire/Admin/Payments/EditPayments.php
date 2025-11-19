@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Admin\Payments;
 
+use App\Models\Document;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -57,31 +59,54 @@ class EditPayments extends Component
         $this->validate();
 
         try {
-
-            $url = $this->payment->url_pdf;
-            $nameFile =  $this->payment->name_file;
-
-            // SE è arrivato un nuovo file
-            if ($this->url_pdf instanceof TemporaryUploadedFile) {
-
-                // Cancello il vecchio (se esiste)
-                if ($url && Storage::disk('public')->exists($url)) {
-                    Storage::disk('public')->delete($url);
-                }
-
-                $nameFile = $this->url_pdf->getClientOriginalName();
-                $url = $this->url_pdf->store('pdfsPayment', 'public');
-            }
-
             $this->payment->update([
                 'resident_id' => $this->resident_id,
-                'url_pdf' => $url ?? null,
-                'name_file' => $nameFile ?? null,
                 'note' => $this->note,
                 'price' => $this->price,
                 'date' => $this->date,
                 'is_pay' => $this->is_pay,
             ]);
+
+            $resident = User::find($this->resident_id);
+            $resident_condominium_id  = $resident?->apartment?->condominium?->id ?? null;
+            
+            $document = $this->payment->document;
+            // SE è arrivato un nuovo file
+            if ($this->url_pdf instanceof TemporaryUploadedFile) {
+                if ($document  && Storage::disk('public')->exists($document->url_pdf)) {
+                    Storage::disk('public')->delete($document->url_pdf);
+                }
+
+                $nameFile = $this->url_pdf->getClientOriginalName();
+                $mimeType = $this->url_pdf->getMimeType();
+                $url = $this->url_pdf->store('pdfsPayment', 'public');
+
+                if ($document) {
+                    $document->update([
+                        'uploaded_by' => Auth::id(),
+                        'condominium_id' => $resident_condominium_id  ?? null,
+                        'name_file' => $nameFile,
+                        'url_pdf' => $url,
+                        'mime_type' => $mimeType,
+                    ]);
+                } else {
+                    Document::create([
+                        'uploaded_by' => Auth::id(),
+                        'condominium_id' => $resident_condominium_id  ?? null,
+                        'payment_id' => $this->payment->id,
+                        'name_file' => $nameFile,
+                        'url_pdf' => $url,
+                        'mime_type' => $mimeType,
+                    ]);
+                }
+            } else {
+                // Se non c’è nuovo file, aggiorno comunque il condominium_id
+                if ($document) {
+                    $document->update([
+                        'condominium_id' => $resident_condominium_id,
+                    ]);
+                }
+            }
 
             session()->flash('message', 'Elemento modificato con successo!');
             Log::info('Modifica Pagamento - Operazione completata con successo');

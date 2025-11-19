@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     protected $fillable = [
+        'payment_id',
         'notice_board_id',
         'condominium_id',
         'name_file',
@@ -38,6 +39,11 @@ class Document extends Model
     public function uploader()
     {
         return $this->belongsTo(User::class, 'uploaded_by');
+    }
+
+    public function payment()
+    {
+        return  $this->belongsTo(Payment::class, 'payment_id');
     }
 
     public function getDate($date)

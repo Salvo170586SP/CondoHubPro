@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Admin\Payments;
 
+use App\Models\Document;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,7 +13,7 @@ use Livewire\WithFileUploads;
 class CreatePayments extends Component
 {
     use WithFileUploads;
-    
+
     public $resident_id = null;
     public $url_pdf = null;
     public $name_file = null;
@@ -42,22 +44,32 @@ class CreatePayments extends Component
         $this->validate();
 
         try {
-            $url = null;
-            $nameFile = null;
-            if ($this->url_pdf) {
-                $nameFile = $this->url_pdf->getClientOriginalName();
-                $url = $this->url_pdf->store('pdfsPayment', 'public');
-            }
 
-            Payment::create([
+            $payment = Payment::create([
                 'resident_id' => $this->resident_id,
-                'url_pdf' => $url,
-                'name_file' => $nameFile,
                 'note' => $this->note,
                 'price' => $this->price,
                 'date' => $this->date,
                 'is_pay' => $this->is_pay,
             ]);
+
+            $url = null;
+            $nameFile = null;
+            $mimeType = null;
+            if ($this->url_pdf) {
+                $nameFile = $this->url_pdf->getClientOriginalName();
+                $url = $this->url_pdf->store('pdfsPayment', 'public');
+                $mimeType = $this->url_pdf->getMimeType();
+
+                Document::create([
+                    'uploaded_by' => Auth::id(),
+                    'condominium_id' => $payment->resident->apartment->condominium->id ?? null,
+                    'payment_id' => $payment->id,
+                    'name_file' => $nameFile,
+                    'url_pdf' => $url,
+                    'mime_type' => $mimeType,
+                ]);
+            }
 
             session()->flash('message', 'Elemento creato con successo!');
             Log::info('Creazione Pagamento - Operazione completata con successo');

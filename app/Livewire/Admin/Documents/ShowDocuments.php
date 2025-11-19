@@ -50,13 +50,14 @@ class ShowDocuments extends Component
     public function render()
     {
 
-        $query = $this->condominium->documents();
+        $docs = $this->condominium->documents();
+  /*       dd($docs); */
 
         if (!empty($this->search)) {
-            $query->where('name_file', 'like', '%' . $this->search . '%');
+          $docs =  $docs->where('name_file', 'like', '%' . $this->search . '%');
         }
 
-        $docs = $query->paginate(10);
+        $docs = $docs->paginate(10);
 
         return view('livewire.admin.documents.show-documents', compact('docs'));
     }

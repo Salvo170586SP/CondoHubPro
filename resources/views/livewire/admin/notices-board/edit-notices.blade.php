@@ -23,18 +23,19 @@
                     @endforeach
                 @endif
             </flux:select>
-            <flux:input type="file" label="Carica file" wire:model="url_pdf" />
+              <x-input-file model="url_pdf" text="Carica File" />
+ 
             @if (optional($notice->document)->url_pdf)
-                <div class="mt-2 text-sm text-gray-600">
+                <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                     File attuale:
-                    <div class="underline text-blue-600 hover:text-blue-800">
+                    <div class="underline text-blue-600 dark:text-blue-300">
                         {{ $notice->document->name_file ?? basename($notice->document->url_pdf) }}
                     </div>
                 </div>
             @endif
             <div class="flex">
                 <flux:spacer />
-                <flux:button type="submit" variant="primary" wire:click="submit">Modifica</flux:button>
+                <flux:button type="submit" variant="filled" wire:click="submit">Modifica</flux:button>
             </div>
         </div>
     </flux:modal>

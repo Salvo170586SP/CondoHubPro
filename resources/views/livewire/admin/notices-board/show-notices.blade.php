@@ -6,14 +6,15 @@
     </flux:modal.trigger>
     <flux:modal name="detail-notice-[{{ $notice->id }}]" class="md:w-96">
         <div class="space-y-6">
-            <div>
-                <flux:heading size="lg">
+            <div class="space-y-6 max-h-100 overflow-y-auto ">
+                <flux:heading size="md">
                     {{ $notice->title }}
                 </flux:heading>
-
-                <flux:text size="sm">
-                    {{ $notice->description }}
-                </flux:text>
+                <div class="break-words whitespace-normal my-5">
+                    <flux:text size="sm">
+                        {{ $notice->description }}
+                    </flux:text>
+                </div>
             </div>
             <div class="flex">
                 <flux:spacer />

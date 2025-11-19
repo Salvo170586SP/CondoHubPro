@@ -1,6 +1,6 @@
 <div>
     <flux:modal.trigger name="delete-notice-[{{ $notice->id }}]">
-        <flux:button icon="trash" size="sm" variant="primary" color="red">
+        <flux:button icon="trash" size="sm" variant="danger">
             Elimina
         </flux:button>
     </flux:modal.trigger>

@@ -27,19 +27,20 @@
                 </div>
                 <flux:textarea wire:model="note" label="Nota" />
                 <div class="space-y-5 mt-5">
+
                     <div class="font-medium text-sm">
-                        Fattura Attuale:
                         @if($payment->url_pdf)
-                        <a class="text-blue-800 font-bold ms-2 underline" href="{{asset('storage/'.$payment->url_pdf)}}"
-                            target="_blanc">{{$payment->name_file}}</a>
+                        Fattura Attuale:
+                        <a class="text-blue-800 dark:text-blue-300 font-bold ms-2 underline"
+                            href="{{asset('storage/'.$payment->url_pdf)}}" target="_blanc">{{$payment->name_file}}</a>
                         @else
                         Nessuna Fattura Caricata
                         @endif
                     </div>
-                    <div class="border dark:border-zinc-600 w-[250px] p-2 rounded-lg bg-zinc-200 dark:bg-zinc-600">
-                        <flux:input type="file" wire:model="url_pdf" label="Carica o Sostituisci Fattura" />
-                    </div>
+                    <x-input-file model="url_pdf" />
+
                     <flux:checkbox wire:model="is_pay" label="Pagato" />
+
                 </div>
 
                 <div class="flex justify-end mt-10">

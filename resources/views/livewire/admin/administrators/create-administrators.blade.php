@@ -22,7 +22,7 @@
                     <flux:input wire:model="administratorsStep1.surname" label="Cognome" />
                     <flux:input wire:model="administratorsStep1.phone_number" label="Telefono" />
                     <flux:input wire:model="administratorsStep1.email" label="Email" />
-                    <flux:input type="file" wire:model="administratorsStep1.img_user" label="Allega Foto" />
+                    <x-input-file model="administratorsStep1.img_user" text="Allega Foto" />
                     <div class="flex justify-end mt-10">
                         <flux:button icon:trailing="arrow-right" variant="filled" wire:click="addStep">
                             Avanti

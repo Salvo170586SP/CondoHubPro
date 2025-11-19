@@ -47,7 +47,7 @@
                 <flux:button href="{{ asset('/storage/' . $notice->document->url_pdf) }}"
                     download="{{$notice->document->name_file}}" icon="arrow-down-tray" variant="filled">
                     Scarica Allegato: <span
-                        class="inline-block ms-2 text-blue-600">{{$notice->document->name_file}}</span>
+                        class="inline-block ms-2 text-blue-600 dark:text-blue-300">{{$notice->document->name_file}}</span>
                 </flux:button>
                 @endif
             </div>
@@ -67,7 +67,7 @@
                     :condominium="$condominium" />
             </div>
         </div>
-        <span class="text-sm text-zinc-500">Creato da
+        <span class="text-sm text-zinc-500 dark:text-zinc-300">Creato da
             @if($notice->creator)
             {{ $notice->creator->getFullName() }}
             @else
@@ -75,7 +75,7 @@
             @endif
         </span>
 
-        <div class="w-full flex justify-between items-center border-t pt-3">
+        <div class="w-full flex justify-between items-center border-t dark:border-t-zinc-500 pt-3">
             <div class="w-full flex items-center ">
                 <span class="text-sm">Avviso del {{ $notice->getDate($notice->created_at) }}</span>
                 @foreach ($types as $type)

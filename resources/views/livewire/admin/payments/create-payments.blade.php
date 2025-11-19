@@ -27,9 +27,7 @@
                 </div>
                 <flux:textarea wire:model="note" label="Nota" />
                 <div class="space-y-5 mt-5">
-                    <div class="border dark:border-zinc-600 w-[250px] p-2 rounded-lg bg-zinc-200 dark:bg-zinc-600">
-                        <flux:input type="file" wire:model="url_pdf" label="Carica Fattura" />
-                    </div>
+                    <x-input-file model="url_pdf" />
                     <flux:checkbox wire:model="is_pay" label="Pagato" />
                 </div>
 

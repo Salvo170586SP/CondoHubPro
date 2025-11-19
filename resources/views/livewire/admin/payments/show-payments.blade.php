@@ -27,26 +27,11 @@
                     </div>
 
                     <div class="text-sm my-3">
-                        <flux:modal.trigger name="note-payment-[{{ $payment->id }}]">
-                            <flux:button icon="chat-bubble-left-ellipsis" size="sm" variant="filled">
-                            </flux:button>
-                        </flux:modal.trigger>
-                        <flux:modal name="note-payment-[{{ $payment->id }}]" class="md:w-96">
-                            <div class="space-y-6">
-                                <div>
-                                    <flux:text size="md"> {{$payment->note}}
-                                    </flux:text>
-                                </div>
-                                <div class="flex">
-                                    <flux:spacer />
-                                    <div class="space-x-3">
-                                        <flux:modal.close>
-                                            <flux:button variant="ghost">Cancel</flux:button>
-                                        </flux:modal.close>
-                                    </div>
-                                </div>
-                            </div>
-                        </flux:modal>
+                        @if($payment->note)
+                        <x-modal-note :item="$payment" />
+                        @else
+                        <flux:button size="sm" icon="no-symbol" variant="filled"></flux:button>
+                        @endif
                     </div>
                 </div>
                 <div class="my-3 border-b ">

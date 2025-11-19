@@ -22,9 +22,8 @@
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <flux:input wire:model="phone_number" label="Telefono" />
-
-                        <flux:input type="file" wire:model="img_user" label="Allega Foto" />
                     </div>
+                    <x-input-file model="img_user" text="Allega Foto" />
                 </div>
 
                 {{-- dati catastali --}}
@@ -45,7 +44,8 @@
 
                     {{-- Lista Appartamenti --}}
                     @if(count($newApartment) > 0)
-                    <div class="h-[330px] border bg-white dark:bg-zinc-800 dark:border-zinc-500 p-5 mt-3 rounded-lg overflow-y-auto">
+                    <div
+                        class="h-[330px] border bg-white dark:bg-zinc-800 dark:border-zinc-500 p-5 mt-3 rounded-lg overflow-y-auto">
                         @foreach($newApartment as $index => $apartment)
                         <div wire:key="apartment-{{ $index }}-{{ $apartment['id'] ?? 'new' }}"
                             class="w-full border dark:border-zinc-600  rounded-lg p-5 my-3 space-y-5 bg-white dark:bg-zinc-700/50 border-zinc-300">

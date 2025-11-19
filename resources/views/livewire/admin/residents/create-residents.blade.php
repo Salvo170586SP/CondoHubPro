@@ -26,7 +26,7 @@
                     <div class="grid grid-cols-2 gap-3">
                         <flux:input wire:model="residentStep1.phone_number" label="Telefono" />
                         <flux:input wire:model="residentStep1.email" label="Email" />
-                        <flux:input type="file" wire:model="residentStep1.img_user" label="Allega Foto" />
+                        <x-input-file model="residentStep1.img_user" text="Allega Foto" />
                     </div>
                 </div>
                 <div class="flex justify-end mt-10">
@@ -51,7 +51,8 @@
                     </div>
                     {{-- Lista Appartamenti --}}
                     @if(count($residentStep2->newApartment) > 0)
-                    <div class="h-[330px] border bg-white dark:bg-zinc-800 dark:border-zinc-500 p-5 rounded-lg overflow-y-auto">
+                    <div
+                        class="h-[330px] border bg-white dark:bg-zinc-800 dark:border-zinc-500 p-5 rounded-lg overflow-y-auto">
                         @foreach($residentStep2->newApartment as $index => $apartment)
                         <div wire:key="newApartment-{{$index}}-{{str()->random(10)}}"
                             class="w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50 mt-3 border-zinc-300 ">

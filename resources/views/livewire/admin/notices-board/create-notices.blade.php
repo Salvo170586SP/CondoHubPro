@@ -23,10 +23,10 @@
                     @endforeach
                 @endif
             </flux:select>
-            <flux:input type="file" label="Carica file" wire:model="url_pdf" />
+            <x-input-file model="url_pdf" text="Carica File" />
             <div class="flex">
                 <flux:spacer />
-                <flux:button type="submit" variant="primary" wire:click="submit">Salva</flux:button>
+                <flux:button type="submit" variant="filled" wire:click="submit">Salva</flux:button>
             </div>
         </div>
     </flux:modal>

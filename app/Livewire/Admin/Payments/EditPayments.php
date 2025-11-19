@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 class EditPayments extends Component
@@ -56,12 +57,16 @@ class EditPayments extends Component
         $this->validate();
 
         try {
+
             $url = $this->payment->url_pdf;
             $nameFile =  $this->payment->name_file;
 
-            if ($this->url_pdf) {
-                if ($this->payment->url_pdf && Storage::disk('public')->exists($this->payment->url_pdf)) {
-                    Storage::disk('public')->delete($this->payment->url_pdf);
+            // SE è arrivato un nuovo file
+            if ($this->url_pdf instanceof TemporaryUploadedFile) {
+
+                // Cancello il vecchio (se esiste)
+                if ($url && Storage::disk('public')->exists($url)) {
+                    Storage::disk('public')->delete($url);
                 }
 
                 $nameFile = $this->url_pdf->getClientOriginalName();
@@ -70,8 +75,8 @@ class EditPayments extends Component
 
             $this->payment->update([
                 'resident_id' => $this->resident_id,
-                'url_pdf' => $url,
-                'name_file' => $nameFile,
+                'url_pdf' => $url ?? null,
+                'name_file' => $nameFile ?? null,
                 'note' => $this->note,
                 'price' => $this->price,
                 'date' => $this->date,

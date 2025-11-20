@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Admin\Payments;
 
+use App\Mail\MailRicezioneQuota;
 use App\Models\Document;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -44,7 +46,6 @@ class CreatePayments extends Component
         $this->validate();
 
         try {
-
             $payment = Payment::create([
                 'resident_id' => $this->resident_id,
                 'note' => $this->note,
@@ -71,11 +72,19 @@ class CreatePayments extends Component
                 ]);
             }
 
+            //invio mail al residente per ricevuta quota pagamento
+            Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment));
+            
             session()->flash('message', 'Elemento creato con successo!');
+            session()->flash('messageMail', 'Mail inviata inviata con successo!');
+            
             Log::info('Creazione Pagamento - Operazione completata con successo');
+            Log::info('Invio Mail - Operazione completata con successo');
         } catch (\Throwable $th) {
             Log::error('Creazione Pagamento - Errore di creazione');
+            Log::error('Invio Mail  - Errore invio Mail');
             session()->flash('error', 'Errore di creazione. Riprova.');
+            session()->flash('errorMail', 'Errore invio Mail');
         }
 
         return $this->redirect('/admin/payments', navigate: true);

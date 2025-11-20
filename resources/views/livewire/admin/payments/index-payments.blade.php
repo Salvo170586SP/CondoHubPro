@@ -4,15 +4,20 @@
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Pagamenti</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-        <div class="w-full h-[30px]">
+        <div class="w-full h-[30px] space-y-1">
             @if (session('message'))
             <flux:badge color="zinc" class="w-full">{{ session('message') }}</flux:badge>
             @elseif(session('error'))
             <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
             @endif
+            @if (session('messageMail'))
+            <flux:badge color="zinc" class="w-full">{{ session('messageMail') }}</flux:badge>
+            @elseif(session('errorMail'))
+            <flux:badge color="red" class="w-full">{{ session('errorMail') }}</flux:badge>
+            @endif
         </div>
 
-        <div class="w-full flex justify-between items-center my-5">
+        <div class="w-full flex justify-between items-center my-10">
             <h2 class="w-full text-xl font-medium">Quote Pagamenti</h2>
             @role('admin|amministratore')
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/payments/create">

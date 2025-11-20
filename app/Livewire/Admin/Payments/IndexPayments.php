@@ -167,14 +167,15 @@ class IndexPayments extends Component
 
             if (!empty($residentIds)) {
                 $payments = $payments->whereIn('resident_id', $residentIds);
+                $payments = $payments->paginate(10);
             } else {
                 $payments = $payments->whereRaw('1 = 0');
+                $payments = $payments->paginate(10);
             }
 
-            $payments = $payments->paginate(10);
         }
 
-   /*      $payments = $payments->paginate(10); */
+        $payments = $payments->paginate(10);
 
 
 

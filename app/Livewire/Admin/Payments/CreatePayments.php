@@ -72,18 +72,19 @@ class CreatePayments extends Component
                 ]);
             }
 
-            //invio mail al residente per ricevuta quota pagamento
-            Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment));
-            
-            session()->flash('message', 'Elemento creato con successo!');
-            session()->flash('messageMail', 'Mail inviata inviata con successo!');
-            
+            // invio mail al residente per ricevuta quota pagamento
+         /*    Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment)); */
+
+            // invio notifica broadcast al residente
+            $payment->resident->notify(new \App\Notifications\NotificatePayment($payment));
+
+            session()->flash('message', 'Elemento creato con successo, Email inviata!');
             Log::info('Creazione Pagamento - Operazione completata con successo');
             Log::info('Invio Mail - Operazione completata con successo');
         } catch (\Throwable $th) {
             Log::error('Creazione Pagamento - Errore di creazione');
             Log::error('Invio Mail  - Errore invio Mail');
-            session()->flash('error', 'Errore di creazione. Riprova.');
+            session()->flash('error', 'Errore di creazione - errore invio mail. Riprova.');
             session()->flash('errorMail', 'Errore invio Mail');
         }
 

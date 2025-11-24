@@ -1,14 +1,5 @@
 <div>
-    <div class="w-full h-[20px]">
-        @if (!empty($flashMessage))
-        <flux:badge color="zinc" class="w-full p-2">{{ $flashMessage }}</flux:badge>
-        @elseif (session('messageNotice'))
-        <flux:badge color="zinc" class="w-full p-2">{{ session('messageNotice') }}</flux:badge>
-        @elseif(session('errorNotice'))
-        <flux:badge color="red" class="w-full p-2">{{ session('errorNotice') }}</flux:badge>
-        @endif
-    </div>
-    <div class="w-full h-[80px] flex justify-between items-center">
+    <div class="w-full h-[50px] flex justify-between items-center">
         <div class="w-100">
             <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
         </div>
@@ -21,7 +12,7 @@
         @endif
     </div>
 
-    <div class="mb-5">
+    <div class="my-3">
         {{ $noticesBoard->links('vendor.livewire.tailwind') }}
     </div>
     @forelse ($noticesBoard as $notice)

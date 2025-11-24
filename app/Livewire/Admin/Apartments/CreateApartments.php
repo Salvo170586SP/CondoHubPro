@@ -39,14 +39,15 @@ class CreateApartments extends Component
                 $apartment->update(['condominium_id' => $this->condominium->id]);
             }
 
-            session()->flash('messageApartment', 'Elemento creato con successo!');
+            session()->flash('message', 'Elemento creato con successo!');
             Log::info('Creazione Appartamento - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorApartment', 'Errore di creazione. Riprova.');
+            session()->flash('error', 'Errore di creazione. Riprova.');
             Log::error('Creazione Appartamento - Errore di creazione');
         }
 
         $condominium_id = $this->condominium->id;
+        
         return $this->redirect("/admin/condominiums/$condominium_id/show", navigate: true);
     }
 

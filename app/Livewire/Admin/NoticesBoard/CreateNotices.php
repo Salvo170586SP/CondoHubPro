@@ -67,10 +67,10 @@ class CreateNotices extends Component
                 ]);
             }
 
-            session()->flash('messageNotice', 'Elemento creato con successo!');
+            session()->flash('message', 'Elemento creato con successo!');
             Log::info('Creazione Nota Bacheca - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorNotice', 'Errore di creazione. Riprova.');
+            session()->flash('error', 'Errore di creazione. Riprova.');
             Log::error('Creazione Nota Bacheca - Errore di creazione');
         }
 

@@ -12,10 +12,10 @@
         @endrole
     </div>
     @if ($apartments->count() > 0)
+    <div class="mb-3">
+        {{ $apartments->links('vendor.livewire.tailwind') }}
+    </div>
     <div class="overflow-x-auto">
-        <div class="mb-3">
-            {{ $apartments->links('vendor.livewire.tailwind') }}
-        </div>
         <div class="min-w-full border dark:border-zinc-600 rounded-lg">
             <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                 <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">

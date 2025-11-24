@@ -44,10 +44,10 @@ class EditFeedbacks extends Component
                 'priority' => $this->priority
             ]);
 
-            session()->flash('messageFeedback', 'Elemento modificato con successo!');
+            session()->flash('message', 'Elemento modificato con successo!');
             Log::info('Modifica Segnalazione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorFeedback', 'Errore di modifica. Riprova.');
+            session()->flash('error', 'Errore di modifica. Riprova.');
             Log::error('Modifica Segnalazione - Errore di modifica'); 
         }
         

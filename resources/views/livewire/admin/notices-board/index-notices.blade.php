@@ -1,6 +1,6 @@
 <div>
 
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item wire:navigate href="/admin/condominiums">Condomini</flux:breadcrumbs.item>
@@ -15,7 +15,7 @@
                 Torna Indietro
             </flux:button>
         </div>
-              <div class="w-full grid grid-cols-3 gap-5 mb-5">
+              <div class="w-full grid grid-cols-3 gap-3 mb-3">
             <div
                 class="h-full p-5 flex-col items-center space-y-3 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
                 <div class="flex justify-between">

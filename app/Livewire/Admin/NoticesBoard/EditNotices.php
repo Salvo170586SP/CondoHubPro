@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\NoticesBoard;
 
+use App\Models\Document;
 use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -18,8 +19,10 @@ class EditNotices extends Component
     public $title = '';
     public $description = '';
     public $type = '';
-    public $url_pdf = null;
     public $is_important = false;
+
+    public $url_pdf;
+    public $new_file;
 
     public function mount(NoticeBoard $notice)
     {
@@ -28,11 +31,9 @@ class EditNotices extends Component
         $this->title = $notice->title;
         $this->description = $notice->description;
         $this->type = $notice->type;
-
-        $this->url_pdf = optional($notice->document)->url_pdf ?? null;
         $this->is_important = (bool) $notice->is_important;
+        $this->url_pdf = optional($notice->document)->url_pdf ?? null;
     }
-
 
     public function submit()
     {
@@ -41,66 +42,41 @@ class EditNotices extends Component
             'description' => 'required|string',
             'type' => 'required',
             'is_important' => 'boolean',
-        ], [
-            'title.required' => 'il campo è obbligatorio',
-            'title.max' => 'max 50 caratteri',
-            'description.required' => 'il campo è obbligatorio',
-            'type.required' => 'il campo è obbligatorio',
+            'new_file' => 'nullable|file',
         ]);
 
         try {
-
-            $currentUrl = $this->notice->document->url_pdf ?? null;
-            $nameFile = $this->notice->document->name_file ?? null;
-            $mimeType = $this->notice->document->mime_type ?? null;
-
-            // Gestione upload nuovo file
-            if ($this->url_pdf && !is_string($this->url_pdf)) {
-                $newUrl = $this->url_pdf->store('pdfsNotice', 'public');
-                $newNameFile = $this->url_pdf->getClientOriginalName();
-                $newMimeType = $this->url_pdf->getMimeType();
-
-                // Elimina il file precedente se esiste
-                if ($currentUrl && Storage::disk('public')->exists($currentUrl)) {
-                    Storage::disk('public')->delete($currentUrl);
-                }
-
-                $url = $newUrl;
-                $nameFile = $newNameFile;
-                $mimeType = $newMimeType;
-            } else {
-                $url = $currentUrl;
-            }
-
             $this->notice->update([
                 'condominium_id' => $this->condominium_id,
                 'title' => $this->title,
                 'description' => $this->description,
                 'type' => $this->type,
-                'url_pdf' => $url,
                 'is_important' => $this->is_important,
             ]);
 
-            // Aggiorna o crea il documento solo se esiste un file
-            if ($url && $nameFile && $mimeType) {
-                $document = $this->notice->document;
+            $document = $this->notice->document;
+
+            if ($this->new_file) {
+
+                $nameFile = $this->new_file->getClientOriginalName();
+                $mimeType = $this->new_file->getMimeType();
+                $url = $this->new_file->store('pdfsNotice', 'public');
 
                 if ($document) {
+                    if (Storage::disk('public')->exists($document->url_pdf)) {
+                        Storage::disk('public')->delete($document->url_pdf);
+                    }
 
                     $document->update([
-                        'notice_board_id' => $this->notice->id,
-                        'condominium_id' => $this->condominium_id,
-                        'uploaded_by' => Auth::id(),
                         'name_file' => $nameFile,
                         'url_pdf' => $url,
                         'mime_type' => $mimeType,
                     ]);
                 } else {
-
-                    $this->notice->document()->create([
-                        'notice_board_id' => $this->notice->id,
-                        'condominium_id' => $this->condominium_id,
+                    Document::create([
                         'uploaded_by' => Auth::id(),
+                        'condominium_id' => $this->condominium_id,
+                        'notice_board_id' => $this->notice->id,
                         'name_file' => $nameFile,
                         'url_pdf' => $url,
                         'mime_type' => $mimeType,
@@ -108,16 +84,14 @@ class EditNotices extends Component
                 }
             }
 
-            session()->flash('messageNotice', 'Elemento modificato con successo!');
-            Log::info('Modifica Nota Bacheca - Operazione completata con successo');
+            session()->flash('message', 'Elemento modificato con successo!');
         } catch (\Throwable $th) {
-            Log::error('Modifica Nota Bacheca - Errore di modifica');
-            session()->flash('errorNotice', 'Errore di creazione. Riprova.');
+            Log::error('Errore edit: ' . $th->getMessage());
+            session()->flash('error', 'Errore generico.');
         }
 
         return $this->redirect("/admin/notices-board/$this->condominium_id", navigate: true);
     }
-
     public function render()
     {
         $types = config('Condo.types');

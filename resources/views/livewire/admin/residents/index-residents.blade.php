@@ -1,18 +1,11 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Residenti</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-        <div class="w-full h-[30px]">
-            @if (session('message'))
-            <flux:badge color="zinc" class="w-full">{{ session('message') }}</flux:badge>
-            @elseif(session('error'))
-            <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
-            @endif
-        </div>
 
-        <div class="w-full flex justify-between items-center my-5">
+        <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Residenti</h2>
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/residents/create">
                 Crea
@@ -20,7 +13,6 @@
         </div>
 
         <div class="flex items-center justify-between my-3 h-15">
-
             <div class="w-100">
                 <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
             </div>
@@ -31,6 +23,9 @@
         </div>
 
         @if ($residents->count() > 0)
+        <div class="my-3">
+            {{ $residents->links('vendor.livewire.tailwind') }}
+        </div>
         <div class="overflow-x-auto">
             <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
@@ -102,9 +97,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mx-1 mt-5">
+           {{--  <div class="mx-1 mt-5">
                 {{ $residents->links('vendor.livewire.tailwind') }}
-            </div>
+            </div> --}}
         </div>
         @else
         <div

@@ -37,10 +37,10 @@ class CreateFeedbacks extends Component
                 'priority' => $this->priority
             ]);
 
-            session()->flash('messageFeedback', 'Elemento creato con successo!');
+            session()->flash('message', 'Elemento creato con successo!');
             Log::info('Creazione Segnalazione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorFeedback', 'Errore di creazione. Riprova.');
+            session()->flash('error', 'Errore di creazione. Riprova.');
             Log::error('Creazione Segnalazione - Errore di creazione');
         }
 

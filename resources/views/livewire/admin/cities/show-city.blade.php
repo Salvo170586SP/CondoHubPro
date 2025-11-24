@@ -1,5 +1,5 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item wire:navigate href="/admin/cities">Città</flux:breadcrumbs.item>

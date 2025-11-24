@@ -1,23 +1,16 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Città</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-        <div class="w-full h-[30px]">
-            @if (session('message'))
-            <flux:badge color="zinc" class="w-full">{{ session('message') }}</flux:badge>
-            @elseif(session('error'))
-            <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
-            @endif
-        </div>
-        <div class="w-full flex justify-between items-center my-5">
+
+        <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Città</h2>
             <livewire:admin.cities.create-city />
         </div>
 
         <div class="flex items-center justify-between my-3 h-15">
-
             <div class="w-100">
                 <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
             </div>
@@ -28,10 +21,10 @@
         </div>
 
         @if ($cities->count() > 0)
+        <div class="mb-3">
+            {{ $cities->links('vendor.livewire.tailwind') }}
+        </div>
         <div class="overflow-x-auto">
-            <div class="mb-5">
-                {{ $cities->links('vendor.livewire.tailwind') }}
-            </div>
             <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
@@ -46,7 +39,8 @@
                             <th class="px-4 py-3  text-xs text-center tracking-wider uppercase">
                                 <div class="flex justify-center">
                                     Condomini
-                                    <button wire:click="setOrder" class="bg-zinc-200 dark:bg-zinc-500 rounded-full h-5 w-5 flex justify-center items-center ms-2 cursor-pointer">
+                                    <button wire:click="setOrder"
+                                        class="bg-zinc-200 dark:bg-zinc-500 rounded-full h-5 w-5 flex justify-center items-center ms-2 cursor-pointer">
                                         @if($orderByCondos)
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="2.5" stroke="currentColor" class="size-3">
@@ -97,7 +91,7 @@
                             <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex justify-end gap-2">
                                     <flux:button icon="eye" size="sm" variant="filled" wire:navigate
-                                        href="/admin/cities/{{ $city->id }}/show">Dettagli</flux:button> 
+                                        href="/admin/cities/{{ $city->id }}/show">Dettagli</flux:button>
                                     <livewire:admin.cities.edit-city :city="$city"
                                         wire:key="city-edit-{{ $city->id }}-{{ str()->random(10) }}" />
                                     <livewire:admin.cities.delete-city :city="$city"

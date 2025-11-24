@@ -24,10 +24,10 @@ class DeleteFeedbacks extends Component
                 $this->feedback->delete();
             }
 
-            session()->flash('messageFeedback', 'Elemento eliminato con successo!');
+            session()->flash('message', 'Elemento eliminato con successo!');
             Log::info('Eliminazione Segnalazione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorFeedback', 'Errore di eliminazione. Riprova.');
+            session()->flash('error', 'Errore di eliminazione. Riprova.');
             Log::error('Eliminazione Segnalazione - Errore di eliminazione');
         }
 

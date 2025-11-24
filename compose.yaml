@@ -10,6 +10,7 @@ services:
             - 'host.docker.internal:host-gateway'
         ports:
             - '8080:80'
+            - '8085:8080'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
             WWWUSER: '${WWWUSER}'
@@ -22,7 +23,8 @@ services:
         networks:
             - sail
         depends_on:
-            - mysql
+            mysql:
+                condition: service_healthy
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:

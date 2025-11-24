@@ -24,18 +24,18 @@ class DeleteNotices extends Component
         try {
             if ($this->notice) {
                 // Elimina il file se esiste
-                if ($this->notice->document->url_pdf && Storage::disk('public')->exists($this->notice->document->url_pdf)) {
+                if ($this->notice->document && $this->notice->document->url_pdf && Storage::disk('public')->exists($this->notice->document->url_pdf)) {
                     Storage::disk('public')->delete($this->notice->document->url_pdf);
                 }
 
                 $this->notice->delete();
             }
 
-            session()->flash('messageNotice', 'Elemento eliminato con successo!');
+            session()->flash('message', 'Elemento eliminato con successo!');
             Log::info('Eliminazione Nota Bacheca - Operazione completata con successo');
         } catch (\Throwable $th) {
             Log::error('Eliminazione Nota Bacheca - Errore di eliminazione');
-            session()->flash('errorNotice', 'Errore di eliminazione. Riprova.');
+            session()->flash('error', 'Errore di eliminazione. Riprova.');
         }
 
         return $this->redirect("/admin/notices-board/$this->condominium_id", navigate: true);

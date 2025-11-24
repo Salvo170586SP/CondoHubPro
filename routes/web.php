@@ -36,17 +36,18 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
+
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
-
 
 Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->prefix('/admin')->group(function () {
 
     /* DASHBOARD' */
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
-   
+
     /* LOGS' */
     Route::get('/logs', IndexLogs::class)->name('logs');
 
@@ -94,12 +95,12 @@ Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->
     Route::get('condominiums/{condominium}/feedbacks/create', CreateFeedbacks::class)->name('feedbacks.create');
     Route::get('condominiums/{condominium}/feedbacks/{feedback}/edit', EditFeedbacks::class)->name('feedbacks.edit');
     Route::get('condominiums/{condominium}/feedbacks/{feedback}/show', ShowFeedbacks::class)->name('feedbacks.show');
-    
+
     /* NOTICESBOARD */
     Route::get('/notices-board/{condominium}', IndexNotices::class)->name('noticesboard');
 });
 
- 
+
 
 Route::redirect('settings', 'settings/profile');
 Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
@@ -117,6 +118,5 @@ Volt::route('settings/two-factor', 'settings.two-factor')
         ),
     )
     ->name('two-factor.show');
-
 
 require __DIR__ . '/auth.php';

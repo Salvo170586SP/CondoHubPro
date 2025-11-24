@@ -1,23 +1,11 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Pagamenti</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-        <div class="w-full h-[30px] space-y-1">
-            @if (session('message'))
-            <flux:badge color="zinc" class="w-full">{{ session('message') }}</flux:badge>
-            @elseif(session('error'))
-            <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
-            @endif
-            @if (session('messageMail'))
-            <flux:badge color="zinc" class="w-full">{{ session('messageMail') }}</flux:badge>
-            @elseif(session('errorMail'))
-            <flux:badge color="red" class="w-full">{{ session('errorMail') }}</flux:badge>
-            @endif
-        </div>
 
-        <div class="w-full flex justify-between items-center my-10">
+        <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Quote Pagamenti</h2>
             @role('admin|amministratore')
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/payments/create">
@@ -27,7 +15,6 @@
         </div>
 
         <div class="flex items-center justify-between my-3 h-15">
-
             <div class="flex items-center justify-between">
                 <div class="w-full flex items-center gap-3">
                     <div class="w-[350px]">
@@ -51,7 +38,7 @@
         </div>
 
         @if($payments->count() > 0)
-        <div class="mb-5">
+        <div class="mb-3">
             {{ $payments->links('vendor.livewire.tailwind') }}
         </div>
         <div class="overflow-x-auto">

@@ -70,6 +70,8 @@ class IndexPayments extends Component
         } catch (\Throwable $th) {
             Log::error('Eliminazione Selettiva Pagamenti - Errore di eliminazione');
         }
+        
+        return $this->redirect('/admin/payments', navigate: true);
     }
 
     public function deletePayment($payment_id)
@@ -91,7 +93,7 @@ class IndexPayments extends Component
             Log::error('Eliminazione Agenda - Errore di eliminazione');
         }
 
-        $this->resetPage();
+        return $this->redirect('/admin/payments', navigate: true);
     }
 
     /**
@@ -152,9 +154,8 @@ class IndexPayments extends Component
             $payments = $payments->where('date', 'like', '%' . $this->dateSearch . '%');
         }
 
-
         if ($user->hasRole('condomino')) {
-            $payments = $payments->where('resident_id', Auth::id())->paginate(10);
+            $payments = $payments->where('resident_id', Auth::id());
         } elseif ($user->hasRole('amministratore')) {
 
             $residentIds = $user->condominiums()
@@ -167,17 +168,12 @@ class IndexPayments extends Component
 
             if (!empty($residentIds)) {
                 $payments = $payments->whereIn('resident_id', $residentIds);
-                $payments = $payments->paginate(10);
             } else {
                 $payments = $payments->whereRaw('1 = 0');
-                $payments = $payments->paginate(10);
             }
-
         }
 
         $payments = $payments->paginate(10);
-
-
 
         // memorizza nella cache gli ID delle pagine correnti in modo che gli hook non debbano chiamare di nuovo paginate()
         $this->currentPageIds = $payments->pluck('id')->toArray();

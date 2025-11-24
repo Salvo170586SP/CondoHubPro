@@ -1,5 +1,5 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item wire:navigate href="/admin/condominiums">Condomini</flux:breadcrumbs.item>
@@ -74,7 +74,7 @@
             <div class="w-full">
                 <div
                     class="w-full p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
-                    <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center justify-between">
                         <h2 class="text-lg font-bold flex items-center">Segnalazioni <span
                                 class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-900 text-white p-2 h-5 w-5 rounded-lg ms-2">{{
                                 $feedbacks->count() }}
@@ -86,19 +86,8 @@
                         </flux:button>
                     </div>
 
-                    <div class="w-full h-[10px] mb-7">
-                        @if (session('messageFeedback'))
-                        <flux:badge color="zinc" class="w-full p-2">{{ session('messageFeedback') }}
-                        </flux:badge>
-                        @elseif(session('errorFeedback'))
-                        <flux:badge color="red" class="w-full p-2">{{ session('errorFeedback') }}</flux:badge>
-                        @endif
-                    </div>
-
-
                     <div class="flex items-center justify-between my-3 h-15">
-
-                        <div class="flex space-x-3 my-3">
+                        <div class="flex space-x-3">
                             <div class="w-100">
                                 <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
                             </div>
@@ -115,17 +104,16 @@
                             </div>
                         </div>
 
-
                         @if (count($selected) > 0)
                         <x-modal-select :selected="$selected" />
                         @endif
                     </div>
 
                     @if ($feedbacks && $feedbacks->count() > 0)
+                    <div class="my-3">
+                        {{ $feedbacks->links('vendor.livewire.tailwind') }}
+                    </div>
                     <div class="overflow-x-auto">
-                        <div class="mb-5">
-                            {{ $feedbacks->links('vendor.livewire.tailwind') }}
-                        </div>
                         <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                             <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                                 <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
@@ -207,6 +195,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

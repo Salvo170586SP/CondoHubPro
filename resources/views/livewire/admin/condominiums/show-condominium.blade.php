@@ -1,11 +1,10 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item wire:navigate href="/admin/condominiums">Condomini</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Dettagli</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-
 
         <div class="w-full flex justify-between items-center my-5">
             <h2 class="w-full text-xl font-medium">@role('admin') Dettagli Condominio @else Il Mio Condominio @endrole</h2>
@@ -13,7 +12,6 @@
                 Torna Indietro
             </flux:button>
         </div>
-
 
         <div class="w-full h-full flex gap-3 mb-3">
             <div
@@ -82,16 +80,6 @@
                     @endrole
                 </div>
 
-                @role('admin|amministratore')
-                <div class="w-full h-[10px] mb-7">
-                    @if (session('messageApartment'))
-                    <flux:badge color="zinc" class="w-full p-2">{{ session('messageApartment') }}
-                    </flux:badge>
-                    @elseif(session('errorApartment'))
-                    <flux:badge color="red" class="w-full p-2">{{ session('errorApartment') }}</flux:badge>
-                    @endif
-                </div>
-                @endrole
                 <livewire:admin.condominiums.table-apartments :condominium="$condominium" />
             </div>
         </div>

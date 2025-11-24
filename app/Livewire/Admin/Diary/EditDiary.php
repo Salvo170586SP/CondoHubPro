@@ -29,14 +29,13 @@ class EditDiary extends Component
     {
         $this->validate([
             'title' => 'required|max:20|string',
-            'content' => 'required|min:5|max:255|string',
+            'content' => 'required|min:5|string',
             'date' => 'required'
         ], [
             'date.required' => 'il campo è obbligatorio',
             'title.required' => 'il campo è obbligatorio',
             'title.max' => 'max 20 caratteri',
             'content.required' => 'il campo è obbligatorio',
-            'content.max' => 'max 255 caratteri',
             'content.min' => 'min 5 caratteri',
         ]);
 

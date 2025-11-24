@@ -6,7 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800/80">
-    <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-100  dark:border-zinc-700 dark:bg-zinc-900">
+    <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
             <figure class="w-11 h-11 rounded-lg overflow-hidden">
@@ -188,7 +188,7 @@
     </flux:header>
 
     {{ $slot }}
-
+    
     @fluxScripts
 </body>
 

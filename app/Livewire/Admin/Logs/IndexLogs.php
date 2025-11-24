@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Logs;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class IndexLogs extends Component
@@ -94,12 +95,14 @@ class IndexLogs extends Component
 
             if (File::exists($logFile)) {
                 File::put($logFile, '');
-                session()->flash('message', 'Logs svuotati con successo');
             }
 
-            /*  $this->loadLogs(); */
+            $this->loadLogs();
+            session()->flash('message', 'Logs svuotati con successo');
+            Log::info('Eliminazione Logs - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('message', 'Errore di eliminazione. Riprova.');
+            session()->flash('error', 'Errore di eliminazione. Riprova.');
+            Log::error('Eliminazione Logs - Errore di eliminazione');
         }
 
         return $this->redirect('/admin/logs', navigate: true);

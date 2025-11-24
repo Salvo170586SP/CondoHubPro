@@ -50,8 +50,7 @@ class ShowDocuments extends Component
     public function render()
     {
         $docs = $this->condominium->documents();
-        /*       dd($docs); */
-
+ 
         if (!empty($this->search)) {
             $docs =  $docs->where('name_file', 'like', '%' . $this->search . '%');
         }

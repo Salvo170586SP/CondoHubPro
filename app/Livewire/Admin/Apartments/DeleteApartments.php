@@ -27,10 +27,10 @@ class DeleteApartments extends Component
                 ]);
             }
 
-            session()->flash('messageApartment', 'Elemento eliminato con successo!');
+            session()->flash('message', 'Elemento eliminato con successo!');
             Log::info('Eliminazione Appartamento - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorApartment', 'Errore di eliminazione. Riprova.');
+            session()->flash('error', 'Errore di eliminazione. Riprova.');
             Log::error('Eliminazione Appartamento - Errore di eliminazione');
         }
 

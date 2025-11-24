@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Feedbacks;
 
 use App\Models\Condominium;
 use App\Models\Feedback;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -56,11 +57,11 @@ class IndexFeedbacks extends Component
             $this->selected = [];
             $this->areAllSelected = false;
 
-            session()->flash('messageFeedback', "Elementi selezionati eliminati");
-
-            $this->resetPage();
+            session()->flash('message', "Elementi selezionati eliminati");
+            Log::info('Eliminazione Segnalazione Selezione - Operazione completata con successo');
         } catch (\Throwable $th) {
-            session()->flash('errorFeedback', 'Errore di eliminazione. Riprova.');
+            session()->flash('error', 'Errore di eliminazione. Riprova.');
+            Log::error('Eliminazione Segnalazione Selezione - Errore di eliminazione');
         }
     }
 
@@ -145,7 +146,7 @@ class IndexFeedbacks extends Component
         }
 
         $feedbacks = $feedbacks->where('condominium_id', $this->condominium->id)->latest()->paginate(5);
-        
+
         $this->currentPageIds = $feedbacks->pluck('id')->toArray();
 
         return view('livewire.admin.feedbacks.index-feedbacks', compact('feedbacks', 'priorities'));

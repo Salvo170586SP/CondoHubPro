@@ -1,24 +1,15 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Mia Agenda</flux:breadcrumbs.item>
         </flux:breadcrumbs>
 
-
-        <div class="w-full flex justify-between items-center my-5">
+        <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Mia Agenda</h2>
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/diary/create">
                 Scrivi Nota
             </flux:button>
-        </div>
-
-        <div class="w-full h-[30px]">
-            @if (session('message'))
-            <flux:badge color="zinc" class="w-full">{{ session('message') }}</flux:badge>
-            @elseif(session('error'))
-            <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
-            @endif
         </div>
 
         <div class="w-full h-[70px] flex items-center justify-between">
@@ -43,7 +34,7 @@
             <flux:button wire:click="resetFilter" variant="filled">Reset filtri</flux:button>
         </div>
 
-        <div class="mb-5">
+        <div class="my-3">
             {{ $diaries->links('vendor.livewire.tailwind') }}
         </div>
         @forelse ($diaries as $d)

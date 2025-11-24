@@ -1,25 +1,18 @@
 <div>
-    <div class="container mx-auto relative h-full flex-1 p-2">
+    <div class="container mx-auto relative h-full flex-1">
         <flux:breadcrumbs class="-mt-5 mb-5">
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Amministratori</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-        <div class="w-full h-[30px]">
-            @if (session('message'))
-            <flux:badge color="zinc" class="w-full">{{ session('message') }}</flux:badge>
-            @elseif(session('error'))
-            <flux:badge color="red" class="w-full">{{ session('error') }}</flux:badge>
-            @endif
-        </div>
 
-        <div class="w-full flex justify-between items-center my-5">
+        <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Amministratori</h2>
             <flux:button icon="plus" variant="filled" wire:navigate href="/admin/administrators/create">
                 Crea
             </flux:button>
         </div>
-        <div class="flex items-center justify-between my-3 h-15">
 
+        <div class="flex items-center justify-between my-3 h-15">
             <div class="w-100">
                 <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
             </div>
@@ -27,13 +20,13 @@
             @if (count($selected) > 0)
             <x-modal-select :selected="$selected" />
             @endif
-
         </div>
+
         @if ($administrators->count() > 0)
+        <div class="my-3">
+            {{ $administrators->links('vendor.livewire.tailwind') }}
+        </div>
         <div class="overflow-x-auto">
-            <div class="my-5">
-                {{ $administrators->links('vendor.livewire.tailwind') }}
-            </div>
             <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">

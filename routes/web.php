@@ -32,6 +32,7 @@ use App\Livewire\Admin\Residents\CreateResidents;
 use App\Livewire\Admin\Residents\EditResidents;
 use App\Livewire\Admin\Residents\IndexResidents;
 use App\Livewire\Admin\Residents\ShowResidents;
+use App\Livewire\Admin\Settings;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
@@ -47,6 +48,9 @@ Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->
 
     /* DASHBOARD' */
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+ 
+    /* SETTINGS' */
+    Route::get('/settings', Settings::class)->name('settings');
 
     /* LOGS' */
     Route::get('/logs', IndexLogs::class)->name('logs');

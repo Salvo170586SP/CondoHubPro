@@ -34,13 +34,13 @@ class Notifications extends Component
         $this->notifications = $user->notifications;
         $this->unreadCount = $user->unreadNotifications->count();
     }
-
+    
     public function markAsRead()
     {
         Auth::user()->unreadNotifications->markAsRead();
         $this->unreadCount = 0;
     }
-
+    
     public function destroy($notificationId)
     {
         $notification = Auth::user()->notifications()->findOrFail($notificationId);
@@ -48,14 +48,15 @@ class Notifications extends Component
         $this->dispatch('notification-deleted');
         $this->refreshNotifications();
     }
-
+    
     public function destroyAll()
     {
         Auth::user()->notifications()->delete();
         $this->dispatch('all-notifications-deleted');
         $this->refreshNotifications();
     }
-
+    
+    #[On('activeNotifications')]
     public function render()
     {
         return view('livewire.admin.notifications');

@@ -73,10 +73,13 @@ class CreatePayments extends Component
             }
 
             // invio mail al residente per ricevuta quota pagamento
-         /*    Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment)); */
-
-            // invio notifica broadcast al residente
-            $payment->resident->notify(new \App\Notifications\NotificatePayment($payment));
+            /*    Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment)); */
+            
+            // invio notifica se ha la notifiche abilitate
+            if ($payment->resident->is_active == true) {
+                // invio notifica al residente
+                $payment->resident->notify(new \App\Notifications\NotificatePayment($payment));
+            }
 
             session()->flash('message', 'Elemento creato con successo, Email inviata!');
             Log::info('Creazione Pagamento - Operazione completata con successo');

@@ -1,7 +1,21 @@
 <div>
     <div class="relative z-50" x-data="{ isOpen: false }" @click.away="isOpen = false">
         <div class="relative">
-            <flux:button variant="ghost" wire:click="markAsRead" @click="isOpen = !isOpen" icon="bell" />
+            <flux:button variant="ghost" wire:click="markAsRead" @click="isOpen = !isOpen" title="Notifiche">
+                @if(auth()->user()->is_active)
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                </svg>
+                @else
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9.143 17.082a24.248 24.248 0 0 0 3.844.148m-3.844-.148a23.856 23.856 0 0 1-5.455-1.31 8.964 8.964 0 0 0 2.3-5.542m3.155 6.852a3 3 0 0 0 5.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 0 0 3.536-1.003A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53" />
+                </svg>
+                @endif
+            </flux:button>
             @if ($unreadCount > 0)
             <span
                 class="absolute top-2 right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{{
@@ -15,7 +29,8 @@
             class="py-3 bg-white border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-white w-[300px] rounded-lg z-50 shadow-lg absolute top-13 right-0">
             @if (count($notifications) > 0 )
             <div class="flex justify-between items-center mb-5 px-3">
-                <span class="inline-block w-6 h-6 rounded-full bg-gray-400 dark:bg-white dark:text-black text-center font-bold text-white">{{
+                <span
+                    class="inline-flex w-5 h-5 justify-center items-center rounded-full bg-gray-400 dark:bg-white dark:text-black text-center font-bold text-white">{{
                     count($notifications) }}</span>
                 <button wire:click="destroyAll"
                     class="text-red-50 bg-red-500 hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800 text-sm flex rounded px-2 py-1 font-medium">
@@ -32,7 +47,8 @@
                 <div wire:key="notification-{{$notification->id}}"
                     class="border-b last:border-b-0 py-2 flex justify-between items-start">
                     <div>
-                        <p class="font-bold text-sm"> <span class="text-xs text-zinc-400 dark:text-white font-medium me-2">ID
+                        <p class="font-bold text-sm"> <span
+                                class="text-xs text-zinc-400 dark:text-white font-medium me-2">ID
                                 pagamento:</span>{{ $notification->data['payment_id'] }}</p>
                         <p class="text-sm">{{ $notification->data['message'] }}</p>
                     </div>

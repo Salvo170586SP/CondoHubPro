@@ -191,12 +191,11 @@
                 </div>
 
                 <div
-                    class="w-full p-5 rounded-lg shadow border dark:border-zinc-600 bg-zinc-100/50 dark:bg-zinc-700/50">
+                    class="w-full p-5 rounded-lg shadow border dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-700/50">
                     <div>
                         <div class="mb-5">
                             <h2 class="w-full text-lg font-medium">Quote Condominiali</h2>
                         </div>
-                        @if($resident->payments->count() > 0)
                         <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                             <thead
                                 class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
@@ -224,7 +223,7 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                                @foreach($resident->payments as $payment)
+                                @forelse($resident->payments as $payment)
                                 <tr wire:key="payment-{{ $payment->id }}-{{ str()->random(10) }}"
                                     class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                                     <td class="px-4 py-4 whitespace-nowrap capitalize">
@@ -254,7 +253,8 @@
                                         <span
                                             class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Pagato</span>
                                         @else
-                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">Non
+                                        <span
+                                            class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">Non
                                             Pagato</span>
                                         @endif
                                     </td>
@@ -266,14 +266,16 @@
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="8"
+                                        class="px-4 py-5 text-center text-sm italic bg-zinc-50 text-gray-400 dark:text-gray-400 font-medium">
+                                        Nessun pagamento registrato
+                                    </td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
-                        @else
-                        <div class="text-center py-8 text-zinc-500 dark:text-zinc-400">
-                            <p>Nessuna quota condominiale.</p>
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>

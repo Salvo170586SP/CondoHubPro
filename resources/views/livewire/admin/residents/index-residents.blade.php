@@ -22,7 +22,6 @@
             @endif
         </div>
 
-        @if ($residents->count() > 0)
         <div class="my-3">
             {{ $residents->links('vendor.livewire.tailwind') }}
         </div>
@@ -53,7 +52,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                        @foreach ($residents as $resident)
+                        @forelse ($residents as $resident)
                         <tr wire:key="resident-{{ $resident->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                             <td class="px-4 py-4 whitespace-nowrap text-sm">
@@ -93,18 +92,17 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="8"
+                                class="px-4 py-5 text-center text-sm italic bg-zinc-50 text-gray-400 dark:text-gray-400 font-medium">
+                                Nessun residente registrato
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
-           {{--  <div class="mx-1 mt-5">
-                {{ $residents->links('vendor.livewire.tailwind') }}
-            </div> --}}
         </div>
-        @else
-        <div
-            class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-            Non ci sono elementi</div>
-        @endif
     </div>
 </div>

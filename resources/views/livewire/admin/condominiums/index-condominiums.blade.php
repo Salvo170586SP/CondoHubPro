@@ -4,7 +4,7 @@
             <flux:breadcrumbs.item wire:navigate href="/admin/dashboard" icon="home" />
             <flux:breadcrumbs.item>Condomini</flux:breadcrumbs.item>
         </flux:breadcrumbs>
- 
+
         <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Condomini</h2>
             @role('admin|amministratore')
@@ -30,7 +30,7 @@
                     </flux:select>
                 </div>
             </div>
-            
+
             @role('admin|amministratore')
             @if (count($selected) > 0)
             <x-modal-select :selected="$selected" />
@@ -38,7 +38,6 @@
             @endrole
         </div>
 
-        @if ($condominiums->count() > 0)
         <div class="mb-3">
             {{ $condominiums->links('vendor.livewire.tailwind') }}
         </div>
@@ -48,10 +47,12 @@
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
                             @role('admin|amministratore')
+                            @if ($condominiums->count() > 0)
                             <th class="px-4 py-3 text-left text-xs tracking-wider">
                                 <flux:checkbox type="checkbox" wire:model.live="areAllSelected"
                                     class="form-checkbox h-4 w-4" />
                             </th>
+                            @endif
                             @endrole
                             <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
                                 Nome</th>
@@ -72,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                        @foreach ($condominiums as $condominium)
+                        @forelse ($condominiums as $condominium)
                         <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                             @role('admin|amministratore')
@@ -116,21 +117,23 @@
                                         href="/admin/condominiums/{{ $condominium->id }}/edit">Modifica
                                     </flux:button>
                                     <livewire:admin.condominiums.delete-condominium :condominium="$condominium"
-                                    wire:key="condominium-delete-{{ $condominium->id }}-{{ str()->random(10) }}" />
+                                        wire:key="condominium-delete-{{ $condominium->id }}-{{ str()->random(10) }}" />
                                     @endrole
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="8"
+                                class="px-4 py-5 text-center text-sm italic bg-zinc-50 text-gray-400 dark:text-gray-400 font-medium">
+                                Nessun condominio registrato
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
 
         </div>
-        @else
-        <div
-            class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-            Non ci sono elementi</div>
-        @endif
     </div>
 </div>

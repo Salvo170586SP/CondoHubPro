@@ -25,13 +25,8 @@
                         <div class="font-medium">Data pagamento:</div>
                         {{ $payment->getDate($payment->date) }}
                     </div>
-
                     <div class="text-sm my-3">
-                        @if($payment->note)
                         <x-modal-note :item="$payment" />
-                        @else
-                        <flux:button size="sm" icon="no-symbol" variant="filled"></flux:button>
-                        @endif
                     </div>
                 </div>
                 <div class="my-3 border-b ">
@@ -83,9 +78,8 @@
                         @endif
                     </div>
                 </div>
-                <div class="text-2xl text-end">
-                    <div class="font-medium">Totale:</div>
-                    {{ $payment->price }}€
+                <div class="text-xl text-end">Totale:
+                    <div class="font-bold text-3xl">€ {{ $payment->price }}</div>
                 </div>
 
             </div>

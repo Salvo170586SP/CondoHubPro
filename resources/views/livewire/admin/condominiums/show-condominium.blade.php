@@ -7,7 +7,8 @@
         </flux:breadcrumbs>
 
         <div class="w-full flex justify-between items-center my-5">
-            <h2 class="w-full text-xl font-medium">@role('admin') Dettagli Condominio @else Il Mio Condominio @endrole</h2>
+            <h2 class="w-full text-xl font-medium">@role('admin') Dettagli Condominio @else Il Mio Condominio @endrole
+            </h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/condominiums">
                 Torna Indietro
             </flux:button>
@@ -64,23 +65,30 @@
                             $noticesBoardCount }}</span></flux:button>
                 </div>
             </div>
+            <div class="w-full space-y-3">
 
-            <div
-                class="w-full h-[700px] p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-lg font-bold mb-5 flex items-center">Appartamenti <span
-                            class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">{{
-                            $apartmentsCount }}</span>
-                    </h2>
-                    @role('admin|amministratore')
-                    <flux:button icon="plus" variant="filled" wire:navigate
-                        href="/admin/condominiums/{{ $condominium->id }}/apartments/add">
-                        Crea
-                    </flux:button>
-                    @endrole
+                <div
+                    class="w-full max-h-[700px] p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold flex items-center">Appartamenti <span
+                                class="inline-flex items-center justify-center font-medium text-sm bg-black dark:bg-zinc-600 text-white h-5 w-5 rounded-lg ms-2">{{
+                                $apartmentsCount }}</span>
+                        </h2>
+                        @role('admin|amministratore')
+                        <flux:button icon="plus" variant="filled" wire:navigate
+                            href="/admin/condominiums/{{ $condominium->id }}/apartments/add">
+                            Aggiungi
+                        </flux:button>
+                        @endrole
+                    </div>
+
+                    <livewire:admin.condominiums.table-apartments :condominium="$condominium" />
                 </div>
 
-                <livewire:admin.condominiums.table-apartments :condominium="$condominium" />
+                <div
+                    class="w-full max-h-[700px] p-5 rounded-lg shadow text-gray-900 dark:text-white bg-zinc-100/50 border dark:border-zinc-600 dark:bg-zinc-700/50">
+                     <livewire:admin.condominiums.table-payments :condominium="$condominium" />
+                </div>
             </div>
         </div>
     </div>

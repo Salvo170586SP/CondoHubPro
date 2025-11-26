@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Payments;
 
 use App\Mail\MailRicezioneQuota;
+use App\Models\Condominium;
 use App\Models\Document;
 use App\Models\Payment;
 use App\Models\User;
@@ -16,6 +17,7 @@ class CreatePayments extends Component
 {
     use WithFileUploads;
 
+    public $condominium_id = null; // <--- NUOVA PROPRIETÀ
     public $resident_id = null;
     public $url_pdf = null;
     public $name_file = null;
@@ -25,6 +27,7 @@ class CreatePayments extends Component
     public $is_pay = false;
 
     protected $rules = [
+        'condominium_id' => 'nullable', // Opzionale, ma utile per validazione
         'resident_id' => 'required',
         'url_pdf' => 'nullable',
         'name_file' => 'nullable',
@@ -40,6 +43,12 @@ class CreatePayments extends Component
         'date.required' => 'il campo è obbligatorio',
         'date.date' => 'inserisci data valida',
     ];
+
+    // Reset del residente se cambia il condominio
+    public function updatedCondominiumId()
+    {
+        $this->resident_id = null;
+    }
 
     public function submit()
     {
@@ -74,7 +83,7 @@ class CreatePayments extends Component
 
             // invio mail al residente per ricevuta quota pagamento
             /*    Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment)); */
-            
+
             // invio notifica se ha la notifiche abilitate
             if ($payment->resident->is_active == true) {
                 // invio notifica al residente
@@ -96,7 +105,22 @@ class CreatePayments extends Component
 
     public function render()
     {
-        $residents = User::role('condomino')->get();
-        return view('livewire.admin.payments.create-payments', compact('residents'));
+        /* $residents = User::role('condomino')->get(); */
+
+      // Recuperiamo tutti i condomini per la prima select
+    $condominiums = Condominium::all();
+
+    // Inizializziamo i residenti come array vuoto
+    $residents = [];
+
+    // SE E SOLO SE è stato selezionato un condominio, cerchiamo i residenti
+    if ($this->condominium_id) {
+        $residents = User::role('condomino')
+            ->whereHas('apartment', function($query) {
+                $query->where('condominium_id', $this->condominium_id);
+            })
+            ->get();
+    }
+        return view('livewire.admin.payments.create-payments', compact('residents', 'condominiums'));
     }
 }

@@ -15,13 +15,23 @@
             <div
                 class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-3 bg-zinc-100/50 dark:bg-zinc-700/50">
                 <div class="grid grid-cols-3 gap-3">
-                    <flux:select wire:model="resident_id" label="Residente">
-                        <flux:select.option>-</flux:select.option>
-                        @foreach ($residents as $resident)
-                        <flux:select.option value="{{ $resident->id }}" wire:key="{{ $resident->id }}">
-                            {{ $resident->getFullname()}}</flux:select.option>
+
+                    <flux:select wire:model.live="condominium_id" label="Filtra per Condominio">
+                        <flux:select.option value="">-</flux:select.option>
+                        @foreach ($condominiums as $condo)
+                        <flux:select.option value="{{ $condo->id }}">{{ $condo->name }}</flux:select.option>
                         @endforeach
                     </flux:select>
+
+                    <flux:select :disabled="!$condominium_id" wire:model="resident_id" label="Residente">
+                        <flux:select.option value="">- Seleziona Residente -</flux:select.option>
+                        @foreach ($residents as $resident)
+                        <flux:select.option value="{{ $resident->id }}" wire:key="{{ $resident->id }}">
+                            {{ $resident->getFullname() }}
+                        </flux:select.option>
+                        @endforeach
+                    </flux:select>
+
                     <flux:input type="number" wire:model="price" label="Quota" />
                     <flux:input type="date" wire:model="date" label="Data Pagamento" />
                 </div>

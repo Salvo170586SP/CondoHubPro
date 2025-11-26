@@ -15,24 +15,42 @@
         <x-step-form :steps="['Dati Anagrafici', 'Dati Catastali', 'Recap']" :currentStep="$currentStep" />
 
         <div class="overflow-x-auto">
-            <div wire:key="currentStep-{{$currentStep}}-{{ now() }}"
+            <div
                 class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
                 @if($currentStep == 1)
-                <div class="pb-5 space-y-5">
-                    <div class="grid grid-cols-2 gap-3">
-                        <flux:input wire:model="residentStep1.name" label="Nome" />
-                        <flux:input wire:model="residentStep1.surname" label="Cognome" />
+                <div wire:key="currentStep-{{$currentStep}}-{{ now() }}">
+                    <div class="flex gap-10">
+                        <div class="space-y-1">
+                            <div class="text-sm font-medium">Foto:</div>
+                            <x-input-file model="residentStep1.img_user" text="Allega Foto" />
+                            <div class="mt-2">
+                                @if ($residentStep1->img_user)
+                                <img src="{{ $residentStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
+                                    class="h-37 w-37 rounded-lg object-cover border" />
+                                @else
+                                <div
+                                    class="h-37 w-37 bg-zinc-200 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
+                                    NO IMG
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <flux:input wire:model="residentStep1.name" label="Nome" />
+                                <flux:input wire:model="residentStep1.surname" label="Cognome" />
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <flux:input wire:model="residentStep1.phone_number" label="Telefono" />
+                                <flux:input wire:model="residentStep1.email" label="Email" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <flux:input wire:model="residentStep1.phone_number" label="Telefono" />
-                        <flux:input wire:model="residentStep1.email" label="Email" />
-                        <x-input-file model="residentStep1.img_user" text="Allega Foto" />
+                    <div class="flex justify-end mt-10">
+                        <flux:button icon="arrow-right" variant="filled" wire:click="addStep">
+                            Avanti
+                        </flux:button>
                     </div>
-                </div>
-                <div class="flex justify-end mt-10">
-                    <flux:button icon="arrow-right" variant="filled" wire:click="addStep">
-                        Avanti
-                    </flux:button>
                 </div>
                 @elseif($currentStep == 2)
                 <div wire:key="currentStep-{{$currentStep}}-{{ now() }}">
@@ -102,19 +120,25 @@
                 @else
                 <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
                     <h3 class="text-xl font-semibold mb-4">Riepilogo dati residente</h3>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div><strong>Nome:</strong> {{ $residentStep1->name }}</div>
-                        <div><strong>Cognome:</strong> {{ $residentStep1->surname }}</div>
-                        <div><strong>Telefono:</strong> {{ $residentStep1->phone_number }}</div>
-                        <div><strong>Email:</strong> {{ $residentStep1->email }}</div>
-
-                        @if ($residentStep1->img_user)
+                    <div class="flex items-center gap-3 text-sm">
                         <div class="col-span-2">
+                            @if ($residentStep1->img_user)
                             <strong>Foto:</strong>
                             <img src="{{ $residentStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
-                                class="h-24 w-24 rounded-full mt-2 object-cover border" />
+                                class="h-24 w-24 rounded-lg mt-2 object-cover border" />
+                            @else
+                            <div
+                                class="h-24 w-24 bg-zinc-200 rounded-lg mt-2 border flex justify-center items-center font-bold text-xl uppercase">
+                                NO IMG
+                            </div>
+                            @endif
                         </div>
-                        @endif
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><strong>Nome:</strong> {{ $residentStep1->name }}</div>
+                            <div><strong>Cognome:</strong> {{ $residentStep1->surname }}</div>
+                            <div><strong>Telefono:</strong> {{ $residentStep1->phone_number }}</div>
+                            <div><strong>Email:</strong> {{ $residentStep1->email }}</div>
+                        </div>
                     </div>
 
                     <h3 class="text-xl font-semibold mt-8 mb-4">Appartamenti associati</h3>

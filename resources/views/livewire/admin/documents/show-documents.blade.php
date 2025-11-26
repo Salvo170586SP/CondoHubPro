@@ -5,7 +5,7 @@
             <flux:breadcrumbs.item wire:navigate href="/admin/archive">Archivio</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Archivi del condominio {{$condominium->name}}</flux:breadcrumbs.item>
         </flux:breadcrumbs>
- 
+
         <div class="w-full flex justify-between items-center">
             <h2 class="w-full text-xl font-medium">Archivio del Condominio {{$condominium->name}}</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/archive">
@@ -19,7 +19,9 @@
             </div>
         </div>
 
-        @if ($docs->count() > 0)
+        <div class="mt-5">
+            {{ $docs->links('vendor.livewire.tailwind') }}
+        </div>
         <div class="overflow-x-auto">
             <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
@@ -40,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                        @foreach ($docs as $document)
+                        @forelse ($docs as $document)
                         <tr wire:key="apartment-{{ $document->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                             <td class="px-4 py-4 whitespace-nowrap capitalize">
@@ -115,20 +117,17 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="8"
+                                class="px-4 py-5 text-center text-sm italic bg-zinc-50 text-gray-400 dark:text-gray-400 font-medium">
+                                Nessun documento registrato
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
-            <div class="mx-1 mt-5">
-                {{ $docs->links('vendor.livewire.tailwind') }}
-            </div>
         </div>
-        @else
-        <div
-            class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-            Non ci sono elementi
-        </div>
-        @endif
-
     </div>
 </div>

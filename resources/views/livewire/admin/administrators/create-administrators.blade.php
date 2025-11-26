@@ -14,164 +14,184 @@
 
         <x-step-form :steps="['Dati Anagrafici', 'Condomini Associati', 'Recap']" :currentStep="$currentStep" />
 
-        <div class="overflow-x-auto bg-zinc-100/30 dark:bg-zinc-700/50 rounded-lg">
+        <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
             @if ($currentStep == 1)
             <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-3">
-                    <flux:input wire:model="administratorsStep1.name" label="Nome" />
-                    <flux:input wire:model="administratorsStep1.surname" label="Cognome" />
-                    <flux:input wire:model="administratorsStep1.phone_number" label="Telefono" />
-                    <flux:input wire:model="administratorsStep1.email" label="Email" />
-                    <x-input-file model="administratorsStep1.img_user" text="Allega Foto" />
-                    <div class="flex justify-end mt-10">
-                        <flux:button icon:trailing="arrow-right" variant="filled" wire:click="addStep">
-                            Avanti
-                        </flux:button>
+                <div class="flex gap-10">
+                    <div class="space-y-1">
+                        <div class="text-sm font-medium">Foto:</div>
+                        <x-input-file model="administratorsStep1.img_user" text="Allega Foto" />
+                        <div class="mt-2">
+                            @if ($administratorsStep1->img_user)
+                            <img src="{{ $administratorsStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
+                                class="h-37 w-37 rounded-lg object-cover border" />
+                            @else
+                            <div
+                                class="h-37 w-37 text-zinc-500 bg-zinc-200 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
+                                NO IMG
+                            </div>
+                            @endif
+                        </div>
                     </div>
+                    <div class="w-full flex flex-col space-y-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            <flux:input wire:model="administratorsStep1.name" label="Nome" />
+                            <flux:input wire:model="administratorsStep1.surname" label="Cognome" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <flux:input wire:model="administratorsStep1.phone_number" label="Telefono" />
+                            <flux:input wire:model="administratorsStep1.email" label="Email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end mt-10">
+                    <flux:button icon:trailing="arrow-right" variant="filled" wire:click="addStep">
+                        Avanti
+                    </flux:button>
                 </div>
             </div>
             @elseif($currentStep == 2)
             <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-3">
-                    <div>
-                        @error('selectedCondominiums')
-                        <div class="text-red-500 text-sm my-2">{{ $message }}</div>
-                        @enderror
-                        @if ($condominiums->count() > 0)
-                        <div class="overflow-x-auto">
-                            <div class="min-w-full border dark:border-zinc-600 rounded-lg">
-                                <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
-                                    <thead
-                                        class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Aggiungi
-                                            </th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Nome
-                                            </th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Indirizzo</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Cap</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Città</th>
-                                            <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
-                                                Creato il
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                                        @foreach ($condominiums as $condominium)
-                                        <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
-                                            class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <flux:checkbox wire:model="selectedCondominiums"
-                                                    value="{{ $condominium->id }}" />
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $condominium->name }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-smuppercase">
-                                                {{ $condominium->address }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $condominium->cap }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $condominium->city->name_city }}
-                                            </td>
-
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $condominium->getDate($condominium->created_at) }}
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="mx-1 mt-5">
-                                {{ $condominiums->links('vendor.livewire.tailwind') }}
-                            </div>
-                        </div>
-                        @else
-                        <div
-                            class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-                            Non ci sono elementi disponibili. Vai avanti</div>
-                        @endif
-                    </div>
-                    <div class="flex justify-end gap-3 mt-10">
-                        <flux:button icon="arrow-left" variant="filled" wire:click="backStep">
-                            Indietro
-                        </flux:button>
-                        <flux:button icon:trailing="arrow-right" variant="filled" wire:click="addStep">
-                            Avanti
-                        </flux:button>
-                    </div>
-                </div>
-            </div>
-            @elseif($currentStep == 3)
-            <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5">
-
-                    <h3 class="text-xl font-semibold mb-4">Riepilogo dati amministratore</h3>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div><strong>Nome:</strong> {{ $administratorsStep1->name }}</div>
-                        <div><strong>Cognome:</strong> {{ $administratorsStep1->surname }}</div>
-                        <div><strong>Telefono:</strong> {{ $administratorsStep1->phone_number }}</div>
-                        <div><strong>Email:</strong> {{ $administratorsStep1->email }}</div>
-
-                        @if ($administratorsStep1->img_user)
-                        <div class="col-span-2">
-                            <strong>Foto:</strong>
-                            <img src="{{ $administratorsStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
-                                class="h-24 w-24 rounded-full mt-2 object-cover border" />
-                        </div>
-                        @endif
-                    </div>
-
-                    <h3 class="text-xl font-semibold mt-8 mb-4">Condomìni selezionati</h3>
-
-                    @if ($selectedCondominiumList && $selectedCondominiumList->count() > 0)
-                    <div class="overflow-x-auto">
+                @error('selectedCondominiums')
+                <div class="text-red-500 text-sm my-2">{{ $message }}</div>
+                @enderror
+                @if ($condominiums->count() > 0)
+                <div class="overflow-x-auto">
+                    <div class="min-w-full border dark:border-zinc-600 rounded-lg">
                         <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                             <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                                 <tr>
-                                    <th class="px-4 py-2 text-left">Nome</th>
-                                    <th class="px-4 py-2 text-left">Indirizzo</th>
-                                    <th class="px-4 py-2 text-left">Città</th>
-                                    <th class="px-4 py-2 text-left">Cap</th>
+                                    <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        Aggiungi
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        Nome
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        Indirizzo</th>
+                                    <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        Cap</th>
+                                    <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        Città</th>
+                                    <th class="px-6 py-3 text-left text-xs uppercase tracking-wider">
+                                        Creato il
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                                @foreach ($selectedCondominiumList as $condominium)
-                                <tr>
-                                    <td class="px-4 py-2">{{ $condominium->name }}</td>
-                                    <td class="px-4 py-2">{{ $condominium->address }}</td>
-                                    <td class="px-4 py-2">{{ $condominium->city->name_city }}</td>
-                                    <td class="px-4 py-2">{{ $condominium->cap }}</td>
+                                @foreach ($condominiums as $condominium)
+                                <tr wire:key="condominium-{{ $condominium->id }}-{{ str()->random(10) }}"
+                                    class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <flux:checkbox wire:model="selectedCondominiums"
+                                            value="{{ $condominium->id }}" />
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $condominium->name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-smuppercase">
+                                        {{ $condominium->address }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $condominium->cap }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $condominium->city->name_city }}
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $condominium->getDate($condominium->created_at) }}
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                    @else
-                    <div
-                        class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-                        Nessun condominio selezionato</div>
-                    @endif
-
-                    <div class="flex justify-end gap-3 mt-10">
-                        <flux:button icon="arrow-left" variant="filled" wire:click="backStep">
-                            Indietro
-                        </flux:button>
-                        <flux:button icon="check" variant="filled" wire:click="submit">
-                            Crea
-                        </flux:button>
+                    <div class="mx-1 mt-5">
+                        {{ $condominiums->links('vendor.livewire.tailwind') }}
                     </div>
+                </div>
+                @else
+                <div
+                    class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
+                    Non ci sono elementi disponibili. Vai avanti</div>
+                @endif
+
+                <div class="flex justify-end gap-3 mt-10">
+                    <flux:button icon="arrow-left" variant="filled" wire:click="backStep">
+                        Indietro
+                    </flux:button>
+                    <flux:button icon:trailing="arrow-right" variant="filled" wire:click="addStep">
+                        Avanti
+                    </flux:button>
+                </div>
+            </div>
+            @elseif($currentStep == 3)
+            <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
+                <h3 class="text-xl font-semibold mb-4">Riepilogo dati amministratore</h3>
+                <div class="flex items-center gap-3 text-sm">
+                    <div class="col-span-2">
+                        @if ($administratorsStep1->img_user)
+                        <strong>Foto:</strong>
+                        <img src="{{ $administratorsStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
+                            class="h-24 w-24 rounded-full mt-2 object-cover border" />
+                        @else
+                        <div
+                            class="h-24 w-24 bg-zinc-200 text-zinc-500 rounded-lg mt-2 border flex justify-center items-center font-bold text-lg uppercase">
+                            NO IMG
+                        </div>
+                        @endif
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><strong>Nome:</strong> {{ $administratorsStep1->name }}</div>
+                        <div><strong>Cognome:</strong> {{ $administratorsStep1->surname }}</div>
+                        <div><strong>Telefono:</strong> {{ $administratorsStep1->phone_number }}</div>
+                        <div><strong>Email:</strong> {{ $administratorsStep1->email }}</div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">Condomìni selezionati</h3>
+
+                @if ($selectedCondominiumList && $selectedCondominiumList->count() > 0)
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
+                        <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Nome</th>
+                                <th class="px-4 py-2 text-left">Indirizzo</th>
+                                <th class="px-4 py-2 text-left">Città</th>
+                                <th class="px-4 py-2 text-left">Cap</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
+                            @foreach ($selectedCondominiumList as $condominium)
+                            <tr>
+                                <td class="px-4 py-2">{{ $condominium->name }}</td>
+                                <td class="px-4 py-2">{{ $condominium->address }}</td>
+                                <td class="px-4 py-2">{{ $condominium->city->name_city }}</td>
+                                <td class="px-4 py-2">{{ $condominium->cap }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @else
+                <div
+                    class="w-full text-center font-medium text-sm text-zinc-500 dark:text-white dark:bg-zinc-500/40 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
+                    Nessun condominio selezionato</div>
+                @endif
+
+                <div class="flex justify-end gap-3 mt-10">
+                    <flux:button icon="arrow-left" variant="filled" wire:click="backStep">
+                        Indietro
+                    </flux:button>
+                    <flux:button icon="check" variant="filled" wire:click="submit">
+                        Crea
+                    </flux:button>
                 </div>
             </div>
             @endif
         </div>
     </div>
+</div>
 </div>

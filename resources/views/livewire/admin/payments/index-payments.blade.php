@@ -37,7 +37,6 @@
             @endrole
         </div>
 
-        @if($payments->count() > 0)
         <div class="mb-3">
             {{ $payments->links('vendor.livewire.tailwind') }}
         </div>
@@ -47,19 +46,18 @@
                     <thead class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
                             @role('admin|amministratore')
+                            @if($payments->count())
                             <th class="px-4 py-3 text-left text-xs uppercase tracking-wider">
                                 <flux:checkbox type="checkbox" wire:model.live="areAllSelected"
                                     class="form-checkbox h-4 w-4" />
                             </th>
+                            @endif
                             @endrole
                             <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Residente
                             </th>
                             <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Condominio
-                            </th>
-                            <th class="px-4 py-3 text-left tracking-wider uppercase">
-                                Fattura
                             </th>
                             <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Quota
@@ -70,6 +68,9 @@
                             <th class="px-4 py-3 text-left tracking-wider uppercase">
                                 Data Pagamento
                             </th>
+                            <th class="px-4 py-3 text-left tracking-wider uppercase">
+                                Fattura
+                            </th>
                             <th class="px-4 py-3 text-cenyter tracking-wider uppercase">
                                 Pagato
                             </th>
@@ -78,7 +79,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                        @foreach($payments as $payment)
+                        @forelse($payments as $payment)
                         <tr wire:key="payment-{{ $payment->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                             @role('admin|amministratore')
@@ -94,15 +95,8 @@
                             <td class="px-4 py-4 whitespace-nowrap capitalize">
                                 {{ $payment->resident->apartment->condominium->name ?? '-' }}
                             </td>
-                            <td class="px-4 py-4 whitespace-nowrap">
-                                @if($payment->document && $payment->document->url_pdf)
-                                <span class="px-3 py-1 bg-green-500 text-white font-medium rounded-lg">Emanata</span>
-                                @else
-                                <span class="px-3 py-1 bg-red-400 text-white font-medium rounded-lg">Non Presente</span>
-                                @endif
-                            </td>
-                            <td class="px-4 py-4 whitespace-nowrap">
-                                {{ $payment->price }}€
+                            <td class="px-4 py-4 whitespace-nowrap font-bold">
+                                € {{ $payment->price }}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap">
                                 @if($payment->note)
@@ -115,11 +109,23 @@
                                 {{ $payment->getDate($payment->date) }}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap">
+                                @if($payment->document && $payment->document->url_pdf)
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Emessa</span>
+                                @else
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">Non
+                                    Presente</span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex justify-center">
                                     @if($payment->is_pay)
-                                    <span class="px-3 py-1 bg-slate-400 text-white font-medium rounded-lg">Pagato</span>
+                                    <span
+                                        class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Pagato</span>
                                     @else
-                                    <span class="px-3 py-1 bg-red-400 text-white font-medium rounded-lg">Non
+                                    <span
+                                        class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">Non
                                         Pagato</span>
                                     @endif
                                 </div>
@@ -163,15 +169,17 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="8"
+                                class="px-4 py-5 text-center text-sm italic bg-zinc-50 text-gray-400 dark:text-gray-400 font-medium">
+                                Nessun pagamento registrato
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
-        @else
-        <div class="text-center py-8 text-zinc-500 dark:text-zinc-400">
-            <p>Nessuna quota condominiale.</p>
-        </div>
-        @endif
     </div>
 </div>

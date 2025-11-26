@@ -44,11 +44,17 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->prefix('/admin')->group(function () {
 
+
+Route::middleware(['auth', 'verified', 'role:admin|condomino|amministratore'])->prefix('/admin')->group(function () {
+    /* pdf' */
+    Route::get('/pdfs', function () {
+        return view('admin.pdfs.invoice');
+    })->name('pdfs.invoice');
+    
     /* DASHBOARD' */
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
- 
+
     /* SETTINGS' */
     Route::get('/settings', Settings::class)->name('settings');
 

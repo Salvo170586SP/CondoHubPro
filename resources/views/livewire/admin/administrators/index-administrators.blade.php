@@ -22,7 +22,6 @@
             @endif
         </div>
 
-        @if ($administrators->count() > 0)
         <div class="my-3">
             {{ $administrators->links('vendor.livewire.tailwind') }}
         </div>
@@ -31,9 +30,13 @@
                 <table class="min-w-full bg-white rounded-lg overflow-hidden dark:bg-zinc-900">
                     <thead class="bg-gray-100 dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                         <tr>
+                            @role('admin|amministratore')
+                            @if($administrators->count())
                             <th class="px-4 py-3 text-left text-xs tracking-wider">
                                 <flux:checkbox type="checkbox" wire:model.live="areAllSelected" />
                             </th>
+                            @endif
+                            @endrole
                             <th class="px-2 py-3 text-left text-xs tracking-wider uppercase">
                             </th>
                             <th class="px-4 py-3 text-left text-xs tracking-wider uppercase">
@@ -52,7 +55,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-600">
-                        @foreach ($administrators as $administrator)
+                        @forelse ($administrators as $administrator)
                         <tr wire:key="administrator-{{ $administrator->id }}-{{ str()->random(10) }}"
                             class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
                             <td class="px-4 py-4 whitespace-nowrap text-sm">
@@ -101,15 +104,18 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="8"
+                                class="px-4 py-5 text-center text-sm italic bg-zinc-50 text-gray-400 dark:text-gray-400 font-medium">
+                                Nessun amministratore registrato
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
-        @else
-        <div
-            class="w-full text-center font-medium text-sm dark:text-white dark:bg-zinc-500/40 text-zinc-500 bg-zinc-200/40 p-3 border dark:border-zinc-600 rounded-lg">
-            Non ci sono elementi</div>
-        @endif
+
     </div>
 </div>

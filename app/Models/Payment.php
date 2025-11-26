@@ -32,7 +32,7 @@ class Payment extends Model
     {
         return  $this->hasOne(Document::class);
     }
-
+    
     public function getDate($date)
     {
         if (!$date) {

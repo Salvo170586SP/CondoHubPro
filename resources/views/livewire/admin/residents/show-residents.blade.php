@@ -152,10 +152,14 @@
                                                             {{ $apartment->condominium->name }}
                                                         </td>
                                                         <td class="px-4 py-4 whitespace-nowrap capitalize">
-                                                            {{ $apartment->condominium->administrator->getFullName() }}
+                                                            {{$apartment->condominium &&
+                                                            $apartment->condominium->administrator ?
+                                                            $apartment->condominium->administrator->getFullName() :
+                                                            '-'}}
                                                         </td>
                                                         <td class="px-4 py-4 whitespace-nowrap">
-                                                            {{ $apartment->condominium->city->name_city }}
+                                                            {{$apartment->condominium && $apartment->condominium->city ?
+                                                            $apartment->condominium->city->name_city : '-'}}
                                                         </td>
                                                         <td class="px-4 py-4 whitespace-nowrap">
                                                             {{ $apartment->condominium->address }}
@@ -198,9 +202,6 @@
                                 class="bg-gray-100 text-xs dark:bg-zinc-700 text-gray-500 dark:text-white font-medium">
                                 <tr>
                                     <th class="px-4 py-3 text-left tracking-wider">
-                                        Fattura
-                                    </th>
-                                    <th class="px-4 py-3 text-left tracking-wider">
                                         Condominio
                                     </th>
                                     <th class="px-4 py-3 text-left tracking-wider">
@@ -208,6 +209,9 @@
                                     </th>
                                     <th class="px-4 py-3 text-left tracking-wider">
                                         Note
+                                    </th>
+                                    <th class="px-4 py-3 text-left tracking-wider">
+                                        Fattura
                                     </th>
                                     <th class="px-4 py-3 text-left tracking-wider">
                                         Data
@@ -223,39 +227,23 @@
                                 @foreach($resident->payments as $payment)
                                 <tr wire:key="payment-{{ $payment->id }}-{{ str()->random(10) }}"
                                     class="bg-white hover:bg-gray-50 dark:bg-zinc-800 hover:dark:bg-zinc-900 text-gray-900 dark:text-white text-sm">
-                                    <td class="px-4 py-4 whitespace-nowrap">
-                                        {{ $payment->name_file ?? '-' }}
-                                    </td>
                                     <td class="px-4 py-4 whitespace-nowrap capitalize">
                                         {{ $payment->resident->apartment->condominium->name ?? '-' }}
                                     </td>
-                                    <td class="px-4 py-4 whitespace-nowrap">
-                                        {{ $payment->price }}€
+                                    <td class="px-4 py-4 whitespace-nowrap font-bold">
+                                        € {{ $payment->price }}
                                     </td>
                                     <td class="px-4 py-4 whitespace-nowrap">
-                                        @if($payment->note)
-                                        <flux:modal.trigger name="note-payment-[{{ $payment->id }}]">
-                                            <flux:button icon="chat-bubble-left-ellipsis" size="sm" variant="filled">
-                                            </flux:button>
-                                        </flux:modal.trigger>
-                                        <flux:modal name="note-payment-[{{ $payment->id }}]" class="md:w-96">
-                                            <div class="space-y-6">
-                                                <div>
-                                                    <flux:text size="md"> {{$payment->note}}
-                                                    </flux:text>
-                                                </div>
-                                                <div class="flex">
-                                                    <flux:spacer />
-                                                    <div class="space-x-3">
-                                                        <flux:modal.close>
-                                                            <flux:button variant="ghost">Cancel</flux:button>
-                                                        </flux:modal.close>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </flux:modal>
+                                        <x-modal-note :item="$payment" />
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        @if($payment->url_file)
+                                        <span
+                                            class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Emessa</span>
                                         @else
-                                        <flux:button size="sm" icon="no-symbol" variant="filled"></flux:button>
+                                        <span
+                                            class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">Non
+                                            Presente</span>
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -264,9 +252,9 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if($payment->is_pay)
                                         <span
-                                            class="px-3 py-1 bg-slate-400 text-white font-medium rounded-lg">Pagato</span>
+                                            class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Pagato</span>
                                         @else
-                                        <span class="px-3 py-1 bg-red-400 text-white font-medium rounded-lg">Non
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">Non
                                             Pagato</span>
                                         @endif
                                     </td>

@@ -1,5 +1,5 @@
 @props([
-    'item',
+'item',
 ])
 
 <flux:modal.trigger name="note-payment-[{{ $item->id }}]">
@@ -10,7 +10,11 @@
     <div class="space-y-6 max-h-100 overflow-y-auto ">
         <div class="break-words whitespace-normal my-5">
             <flux:text size="md">
+                @if($item->note)
                 {{ $item->note }}
+                @else
+                Nessuna nota
+                @endif
             </flux:text>
         </div>
         <div class="flex">

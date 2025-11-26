@@ -12,6 +12,7 @@ CondoHubPro è pensata per la gestione di condomini, appartamenti, documenti e c
 - Livewire
 - Vite, Node/NPM 
 - Spatie Permission / Role
+- Reverb (notifiche real-time)
 
 ## Requisiti
 
@@ -68,7 +69,29 @@ npm install
 npm run dev
 ```
 
-7. Avvia il server locale
+7. Configura e avvia Laravel Reverb per le notifiche in tempo reale
+
+```bash
+# Installa Reverb (se non già incluso)
+php artisan reverb:install
+
+# Avvia il server Reverb in una nuova finestra terminale
+php artisan reverb:start
+```
+
+Assicurati di configurare correttamente le variabili di Reverb nel file `.env`:
+
+```env
+BROADCAST_CONNECTION=reverb
+REVERB_APP_ID=your-app-id
+REVERB_APP_KEY=your-app-key
+REVERB_APP_SECRET=your-app-secret
+REVERB_HOST=localhost
+REVERB_PORT=8080
+REVERB_SCHEME=http
+```
+
+8. Avvia il server locale (in un'altra finestra terminale)
 
 ```bash
 php artisan serve
@@ -83,9 +106,10 @@ php artisan serve
 - Gestione dei documenti.
 - Gestione della propria agenda.
 - Visualizzazione dei log di sistema.
+- Invio automatico notifica su avvisi pagamenti (real-time con Reverb).
+- Invio automatico email su avvisi pagamenti.
 
 ## Prossime funzionalità in arrivo
-- Invio automatico email su avvisi in bacheca e segnalazioni.
 - Chat in real time per comunicare tra condomini e amministratore.
 - Bot AI.
 

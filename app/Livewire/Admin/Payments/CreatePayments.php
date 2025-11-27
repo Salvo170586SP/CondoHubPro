@@ -82,22 +82,35 @@ class CreatePayments extends Component
             }
 
             // invio mail al residente per ricevuta quota pagamento
-            /*    Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment)); */
+            try {
+                if ($payment->resident->is_active_mail == true) {
+                    Mail::to($payment->resident->email)->send(new MailRicezioneQuota($payment));
 
-            // invio notifica se ha la notifiche abilitate
-            if ($payment->resident->is_active == true) {
-                // invio notifica al residente
-                $payment->resident->notify(new \App\Notifications\NotificatePayment($payment));
+                    Log::info('Creazione Pagamento - Email inviata con successo al residente');
+                    session()->flash('messageMail', 'Email inviata con successo al residente!');
+                }else{
+                    session()->flash('errorMail', 'Email non inviata, l\'utente potrebbe aver disabilitato la ricezione della mail');
+                }
+                
+            } catch (\Exception $e) {
+                Log::error('Creazione Pagamento - Errore invio email: ' . $e->getMessage());
             }
 
-            session()->flash('message', 'Elemento creato con successo, Email inviata!');
+            // invio notifica se ha la notifiche abilitate
+            try {
+                if ($payment->resident->is_active == true) {
+                    $payment->resident->notify(new \App\Notifications\NotificatePayment($payment));
+                    Log::info('Creazione Pagamento -Notifica inviata con successo al residente');
+                }
+            } catch (\Exception $e) {
+                Log::error('Creazione Pagamento - Errore invio notifica: ' . $e->getMessage());
+            }
+
+            session()->flash('message', 'Elemento creato con successo!');
             Log::info('Creazione Pagamento - Operazione completata con successo');
-            Log::info('Invio Mail - Operazione completata con successo');
         } catch (\Throwable $th) {
             Log::error('Creazione Pagamento - Errore di creazione');
-            Log::error('Invio Mail  - Errore invio Mail');
-            session()->flash('error', 'Errore di creazione - errore invio mail. Riprova.');
-            session()->flash('errorMail', 'Errore invio Mail');
+            session()->flash('error', 'Errore di creazione - Errore di creazione');
         }
 
         return $this->redirect('/admin/payments', navigate: true);
@@ -107,20 +120,20 @@ class CreatePayments extends Component
     {
         /* $residents = User::role('condomino')->get(); */
 
-      // Recuperiamo tutti i condomini per la prima select
-    $condominiums = Condominium::all();
+        // Recuperiamo tutti i condomini per la prima select
+        $condominiums = Condominium::all();
 
-    // Inizializziamo i residenti come array vuoto
-    $residents = [];
+        // Inizializziamo i residenti come array vuoto
+        $residents = [];
 
-    // SE E SOLO SE è stato selezionato un condominio, cerchiamo i residenti
-    if ($this->condominium_id) {
-        $residents = User::role('condomino')
-            ->whereHas('apartment', function($query) {
-                $query->where('condominium_id', $this->condominium_id);
-            })
-            ->get();
-    }
+        // SE E SOLO SE è stato selezionato un condominio, cerchiamo i residenti
+        if ($this->condominium_id) {
+            $residents = User::role('condomino')
+                ->whereHas('apartment', function ($query) {
+                    $query->where('condominium_id', $this->condominium_id);
+                })
+                ->get();
+        }
         return view('livewire.admin.payments.create-payments', compact('residents', 'condominiums'));
     }
 }

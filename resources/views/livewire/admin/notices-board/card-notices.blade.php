@@ -48,14 +48,17 @@
                 <livewire:admin.noticesBoard.show-notices
                     wire:key="{{ $notice->id }}-{{ $condominium->id }}-{{ str()->random(10) }}" :notice="$notice"
                     :condominium="$condominium" />
-                @if($notice->creator && auth()->id() == $notice->creator->id || auth()->user()->hasRole('admin'))
+                {{-- @if($notice->creator && auth()->id() == $notice->creator->id || auth()->user()->hasRole('admin'))
+                --}}
+                @role('admin|amministratore')
                 <livewire:admin.noticesBoard.edit-notices
                     wire:key="{{ $notice->id }}-{{ $condominium->id }}-{{ str()->random(10) }}" :notice="$notice"
                     :condominium="$condominium" />
-                @endif
                 <livewire:admin.noticesBoard.delete-notices
                     wire:key="{{ $notice->id }}-{{ $condominium->id }}-{{ str()->random(10) }}" :notice="$notice"
                     :condominium="$condominium" />
+                @endrole
+                {{-- @endif --}}
             </div>
         </div>
         <span class="text-sm text-zinc-500 dark:text-zinc-300">Creato da
@@ -76,6 +79,7 @@
                 @endif
                 @endforeach
             </div>
+            @role('admin|amministratore')
             @if (! $is_favorite)
             <flux:button variant="filled" wire:click="changeActive({{ $notice->id }})" title="Aggiungi ai preferiti">
                 @if (!$notice->is_active)
@@ -92,6 +96,7 @@
                 </svg>
                 @endif
             </flux:button>
+            @endrole
             @endif
         </div>
     </div>

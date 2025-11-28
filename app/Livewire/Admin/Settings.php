@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Admin;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rules;
 
 class Settings extends Component
 {
@@ -30,7 +30,7 @@ class Settings extends Component
         return [
             'name' => 'required',
             'surname' => 'required',
-            'password' => $this->change_password ? 'required|min:8' : 'nullable',
+            'password' => ['string', Rules\Password::defaults(), $this->change_password ? 'required' : 'nullable'],
             'img_user' => 'nullable',
         ];
     }

@@ -52,6 +52,7 @@ class CreateAdministrators extends Component
                 'name' => $this->administratorsStep1->name,
                 'surname' => $this->administratorsStep1->surname,
                 'is_active' => false,
+                'is_active_mail' => false,
                 'phone_number' => $this->administratorsStep1->phone_number,
                 'img_user' => $url,
                 'email' => $this->administratorsStep1->email,

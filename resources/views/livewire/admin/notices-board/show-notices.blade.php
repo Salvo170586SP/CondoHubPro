@@ -4,7 +4,7 @@
             Leggi
         </flux:button>
     </flux:modal.trigger>
-    <flux:modal name="detail-notice-[{{ $notice->id }}]" class="md:w-96">
+    <flux:modal name="detail-notice-[{{ $notice->id }}]" class="md:w-96 bg-white/80 backdrop-blur-lg">
         <div class="space-y-6">
             <div class="space-y-6 max-h-100 overflow-y-auto ">
                 <flux:heading size="md">

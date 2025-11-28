@@ -6,7 +6,7 @@
     <flux:button icon="chat-bubble-left-ellipsis" size="sm" variant="filled">
     </flux:button>
 </flux:modal.trigger>
-<flux:modal name="note-payment-[{{ $item->id }}]" class="md:w-96">
+<flux:modal name="note-payment-[{{ $item->id }}]" class="md:w-96 bg-white/80 backdrop-blur-lg ">
     <div class="space-y-6 max-h-100 overflow-y-auto ">
         <div class="break-words whitespace-normal my-5">
             <flux:text size="md">

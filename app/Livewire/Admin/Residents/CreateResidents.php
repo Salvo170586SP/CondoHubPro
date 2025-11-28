@@ -60,6 +60,7 @@ class CreateResidents extends Component
                 'name' => $this->residentStep1->name,
                 'surname' => $this->residentStep1->surname,
                 'is_active' => false,
+                'is_active_mail' => false,
                 'phone_number' => $this->residentStep1->phone_number,
                 'img_user' => $url,
                 'email' => $this->residentStep1->email,

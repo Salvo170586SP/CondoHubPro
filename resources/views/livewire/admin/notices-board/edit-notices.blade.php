@@ -4,7 +4,7 @@
             Modifica
         </flux:button>
     </flux:modal.trigger>
-    <flux:modal name="edit-notice-[{{ $notice->id }}]" class="md:w-96">
+    <flux:modal name="edit-notice-[{{ $notice->id }}]" class="md:w-96 bg-white/80 backdrop-blur-lg">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">Modifica Nota</flux:heading>

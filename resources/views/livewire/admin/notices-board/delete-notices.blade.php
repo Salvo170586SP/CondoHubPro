@@ -4,7 +4,7 @@
             Elimina
         </flux:button>
     </flux:modal.trigger>
-    <flux:modal name="delete-notice-[{{ $notice->id }}]" class="md:w-96">
+    <flux:modal name="delete-notice-[{{ $notice->id }}]" class="md:w-96 bg-white/80 backdrop-blur-lg">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">Attenzione!

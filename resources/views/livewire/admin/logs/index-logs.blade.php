@@ -27,7 +27,7 @@
                         Svuota
                     </flux:button>
                 </flux:modal.trigger>
-                <flux:modal name="delete-logs" class="md:w-96">
+                <flux:modal name="delete-logs" class="md:w-96 bg-white/80 backdrop-blur-lg">
                     <div class="space-y-6">
                         <div>
                             <flux:heading size="lg">Attenzione!

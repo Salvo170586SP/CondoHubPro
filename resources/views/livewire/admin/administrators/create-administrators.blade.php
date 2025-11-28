@@ -5,7 +5,7 @@
             <flux:breadcrumbs.item wire:navigate href="/admin/administrators">Amminsitratori</flux:breadcrumbs.item>
             <flux:breadcrumbs.item>Crea</flux:breadcrumbs.item>
         </flux:breadcrumbs>
-        <div class="w-full flex justify-between items-center my-5">
+        <div class="w-full flex justify-between items-center mt-5 mb-10 md:my-5">
             <h2 class="w-full text-xl font-medium">Crea Amminsitratore</h2>
             <flux:button icon="arrow-left" variant="filled" wire:navigate href="/admin/administrators">
                 Torna Indietro
@@ -17,7 +17,7 @@
         <div class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
             @if ($currentStep == 1)
             <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
-                <div class="flex gap-10">
+                <div class="flex flex-col-reverse md:flex-row gap-10">
                     <div class="space-y-1">
                         <div class="text-sm font-medium">Foto:</div>
                         <x-input-file model="administratorsStep1.img_user" text="Allega Foto" />
@@ -129,7 +129,7 @@
             @elseif($currentStep == 3)
             <div wire:key="currentStep-{{ $currentStep }}-{{ now() }}">
                 <h3 class="text-xl font-semibold mb-4">Riepilogo dati amministratore</h3>
-                <div class="flex items-center gap-3 text-sm">
+                <div class="flex  items-center gap-3 text-sm">
                     <div class="col-span-2">
                         @if ($administratorsStep1->img_user)
                         <strong>Foto:</strong>

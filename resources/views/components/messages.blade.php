@@ -1,7 +1,7 @@
 @role('admin|amministratore')
 @if (session('message') || session('error'))
 <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show" x-transition.duration.500ms
-    class="fixed bottom-10 right-10 p-5 bg-zinc-100 dark:bg-zinc-700 border dark:border-zinc-500 shadow-lg rounded-lg w-[350px] h-[100px] flex items-center">
+    class="fixed bottom-10 right-10 p-5 bg-white/80 backdrop-blur-lg dark:bg-zinc-700 border dark:border-zinc-500 shadow-lg rounded-lg w-[350px] h-[100px] flex items-center">
     @if (session('message'))
     <div class="w-full text-zinc-500 dark:text-white text-medium text-sm flex flex-col justify-center items-center ">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

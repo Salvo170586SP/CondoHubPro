@@ -83,7 +83,7 @@
                         </div>
                         @if($change_password)
                         <div class="h-25">
-                            <flux:input type="password" label="Password" wire:model="password" viewable />
+                            <flux:input type="password" autocomplete="password" label="Password" wire:model="password" viewable />
                             <span class="text-xs">*La password recedente verrà sovrascritta</span>
                         </div>
                         @endif

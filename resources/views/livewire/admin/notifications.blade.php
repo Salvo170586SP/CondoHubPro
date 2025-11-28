@@ -26,7 +26,7 @@
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-50" x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="py-3 bg-white border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-white w-[300px] rounded-lg z-50 shadow-lg absolute top-13 right-0">
+            class="py-3 bg-white/80 border backdrop-blur-lg border-zinc-300  dark:border-zinc-600 dark:bg-zinc-700 dark:text-white w-[300px] rounded-lg z-50 shadow-lg absolute top-13 right-0">
             @if (count($notifications) > 0 )
             <div class="flex justify-between items-center mb-5 px-3">
                 <span

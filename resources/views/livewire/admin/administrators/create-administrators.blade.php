@@ -29,7 +29,7 @@
                             <div
                                 class="h-37 w-37 text-zinc-500 bg-zinc-200 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
                                 NO IMG
-                            </div>
+                            </div> 
                             @endif
                         </div>
                     </div>

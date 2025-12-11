@@ -15,7 +15,4 @@
         <input type="file" class="hidden" id="{{$model}}" wire:model="{{$model}}"
             @change="fileName = $event.target.files[0]?.name || ''" />
     </label>
-    <!-- Mostra il nome del file selezionato -->
-    <p x-show="fileName" x-text="fileName" class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-    </p>
 </div>

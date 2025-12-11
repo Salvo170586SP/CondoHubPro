@@ -18,8 +18,8 @@
             @foreach ($condominiums as $condominium)
             <div wire:key="archiveCodn-{{ $condominium->id }}-{{ str()->random(10) }}" class="h-[180px]">
                 <button wire:navigate href="/admin/archive/{{ $condominium->id }}/show"
-                    class="w-full h-full rounded-lg border bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-600/50 dark:hover:bg-zinc-600/60 dark:border-zinc-600 cursor-pointer">
-                    <div class="w-full h-[130px] flex justify-center items-center">
+                    class="w-full h-full rounded-lg border bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-600/50 dark:hover:bg-zinc-600/60 dark:border-zinc-600 border-zinc-300 cursor-pointer">
+                    <div class="w-full h-[130px] flex justify-center items-center border-b border-zinc-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-20 text-zinc-600 dark:text-zinc-500">
                             <path stroke-linecap="round" stroke-linejoin="round"

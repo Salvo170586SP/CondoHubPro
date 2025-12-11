@@ -14,10 +14,12 @@
         <div class="overflow-x-auto">
             <div
                 class="min-w-full border dark:border-zinc-600 bg-zinc-100/30 dark:bg-zinc-700/50 rounded-lg p-5 space-y-3">
+
+                <x-input-file-img model="img_user" existingImage="{{ $administrator->img_user ? asset('/storage/'. $administrator->img_user) : '' }}" text="Allega Foto" />
+
                 <flux:input wire:model="name" label="Nome" />
                 <flux:input wire:model="surname" label="Cognome" />
                 <flux:input wire:model="phone_number" label="Telefono" />
-                <x-input-file model="img_user" text="Allega Foto" />
 
                 <div class="flex justify-end mt-10">
                     <flux:button icon="check" variant="filled" wire:click="editAdministrator">

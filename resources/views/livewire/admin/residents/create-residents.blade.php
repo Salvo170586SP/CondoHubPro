@@ -20,20 +20,19 @@
                 @if($currentStep == 1)
                 <div wire:key="currentStep-{{$currentStep}}-{{ now() }}">
                     <div class="flex gap-10">
-                        <div class="space-y-1">
-                            <div class="text-sm font-medium">Foto:</div>
-                            <x-input-file model="residentStep1.img_user" text="Allega Foto" />
-                            <div class="mt-2">
+                        <div class="space-y-2 flex flex-col items-center">
+                            <figure class="mt-2 h-50 w-50">
                                 @if ($residentStep1->img_user)
                                 <img src="{{ $residentStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
-                                    class="h-37 w-37 rounded-lg object-cover border" />
+                                    class="h-full w-full rounded-lg object-cover border border-zinc-400" />
                                 @else
                                 <div
-                                    class="h-37 w-37 bg-zinc-200 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
+                                    class="h-full w-full bg-zinc-200 border-zinc-400 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
                                     NO IMG
                                 </div>
                                 @endif
-                            </div>
+                            </figure>
+                            <x-input-file model="residentStep1.img_user" text="Allega Foto" />
                         </div>
                         <div class="w-full flex flex-col space-y-3">
                             <div class="grid grid-cols-2 gap-3">

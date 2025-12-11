@@ -17,9 +17,9 @@
         {{$condominiums->links('vendor.livewire.tailwind')}}
         <div class="w-full my-5 grid grid-cols-6 gap-2">
             @foreach ($condominiums as $condominium)
-            <div wire:key="archiveCodn-{{ $condominium->id }}-{{ str()->random(10) }}" class="h-[180px] ">
+            <div wire:key="archiveCodn-{{ $condominium->id }}-{{ str()->random(10) }}" class="h-[180px]">
                 <button wire:navigate href="/admin/archive/{{ $condominium->id }}/show"
-                    class="w-full h-full rounded-lg border bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-600/50 dark:hover:bg-zinc-600/60 border-zinc-300 dark:border-zinc-600 cursor-pointer">
+                    class="w-full h-full rounded-lg border bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-600/50 dark:hover:bg-zinc-600/60 dark:border-zinc-600 cursor-pointer">
                     <div class="w-full h-[130px] flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-20 text-zinc-600 dark:text-zinc-500">
@@ -28,7 +28,7 @@
                         </svg>
                     </div>
                     <div
-                        class="w-full p-2 border-t text-sm border-zinc-300 dark:border-zinc-600 flex justify-center items-center">
+                        class="w-full p-2 border-t text-sm border-white dark:border-zinc-600 flex justify-center items-center">
                         {{ $condominium->name }}
                     </div>
                 </button>

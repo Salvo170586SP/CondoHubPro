@@ -15,7 +15,6 @@
         <div class="overflow-x-auto">
             <div
                 class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
-                <x-input-file-img model="img_user" existingImage="{{ $resident->img_user ? asset('/storage/'. $resident->img_user) : '' }}" text="Allega Foto" />
                 <div class="border-b dark:border-zinc-600 pb-5 space-y-5">
                     <div class="grid grid-cols-2 gap-3">
                         <flux:input wire:model="name" label="Nome" />
@@ -24,6 +23,7 @@
                     <div class="grid grid-cols-2 gap-3">
                         <flux:input wire:model="phone_number" label="Telefono" />
                     </div>
+                    <x-input-file model="img_user" text="Allega Foto" />
                 </div>
 
                 {{-- dati catastali --}}

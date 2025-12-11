@@ -26,13 +26,8 @@
                             <div class="mt-2">
                                 @if ($residentStep1->img_user)
                                 <img src="{{ $residentStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
-<<<<<<< HEAD
                                     class="h-37 w-37 rounded-lg object-cover border" />
-                                @else
-=======
-                                    class="h-full w-full rounded-lg object-cover border border-zinc-400" />
                                 @else 
->>>>>>> staging
                                 <div
                                     class="h-37 w-37 bg-zinc-200 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
                                     NO IMG

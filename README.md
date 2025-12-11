@@ -13,6 +13,7 @@ CondoHubPro è pensata per la gestione di condomini, appartamenti, documenti e c
 - Vite, Node/NPM 
 - Spatie Permission / Role
 - Reverb (notifiche real-time)
+- gemini-2.5-flash-lite
 
 ## Requisiti
 
@@ -20,6 +21,7 @@ CondoHubPro è pensata per la gestione di condomini, appartamenti, documenti e c
 - Composer
 - Node.js + npm (per asset)
 - MySQL / MariaDB o altro DB supportato da Laravel
+- Creare ApiKey gemini-2.5-flash-lite
 
 ## Credenziali Admin (fare prima i seeder)
 
@@ -90,6 +92,15 @@ REVERB_HOST=localhost
 REVERB_PORT=8080
 REVERB_SCHEME=http
 ```
+7. Configura ApyKey Gemini 
+
+```creare ApiKey su aistudio.google.com 
+
+Assicurati di configurare correttamente le variabili per Gemini nel file `.env`:
+
+```env
+GEMINI_API_KEY=tua-api-key
+```
 
 8. Avvia il server locale (in un'altra finestra terminale)
 
@@ -108,10 +119,10 @@ php artisan serve
 - Visualizzazione dei log di sistema.
 - Invio automatico notifica su avvisi pagamenti (real-time con Reverb).
 - Invio automatico email su avvisi pagamenti.
+- Bot AI ('il bot è funzionante, potete addestrarlo come meglio credete tramite lo script').
 
 ## Prossime funzionalità in arrivo
 - Chat in real time per comunicare tra condomini e amministratore.
-- Bot AI.
 
 ## Anteprima
 

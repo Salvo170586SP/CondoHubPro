@@ -13,7 +13,6 @@
                 <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="Cerca..." />
             </div>
         </div>
-
         {{$condominiums->links('vendor.livewire.tailwind')}}
         <div class="w-full my-5 grid grid-cols-6 gap-2">
             @foreach ($condominiums as $condominium)

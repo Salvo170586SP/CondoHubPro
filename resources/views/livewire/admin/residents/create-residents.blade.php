@@ -25,7 +25,7 @@
                                 @if ($residentStep1->img_user)
                                 <img src="{{ $residentStep1->img_user->temporaryUrl() }}" alt="Anteprima foto"
                                     class="h-full w-full rounded-lg object-cover border border-zinc-400" />
-                                @else
+                                @else 
                                 <div
                                     class="h-full w-full bg-zinc-200 border-zinc-400 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
                                     NO IMG

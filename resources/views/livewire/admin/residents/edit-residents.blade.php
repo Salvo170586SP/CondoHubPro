@@ -12,7 +12,7 @@
             </flux:button>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto"> 
             <div
                 class="min-w-full border dark:border-zinc-600 rounded-lg p-5 space-y-5 bg-zinc-100/50 dark:bg-zinc-700/50">
                 <x-input-file-img model="img_user" existingImage="{{ $resident->img_user ? asset('/storage/'. $resident->img_user) : '' }}" text="Allega Foto" />

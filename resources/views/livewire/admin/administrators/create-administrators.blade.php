@@ -27,7 +27,7 @@
                             <div
                                 class="h-full w-full text-zinc-500 bg-zinc-200 border-zinc-400 rounded-lg border flex justify-center items-center font-bold text-xl uppercase">
                                 NO IMG
-                            </div>
+                            </div> 
                             @endif
                         </figure>
                         <x-input-file model="administratorsStep1.img_user" text="Allega Foto" />

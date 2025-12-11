@@ -36,7 +36,6 @@
         </template>
     </figure>
 
-
     <!-- Upload Button -->
     <label for="{{$model}}"
         class="flex items-center justify-center gap-2 border border-zinc-400 dark:border-zinc-600 w-[150px] p-2 rounded-lg bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 cursor-pointer font-medium text-sm">
